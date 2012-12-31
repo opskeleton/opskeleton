@@ -1,0 +1,43 @@
+#!/usr/bin/env ruby
+
+require 'rubygems'
+require 'thor'
+require 'thor/group'
+
+module  Opsk 
+  class Generate < Thor::Group
+    include Thor::Actions
+
+    argument :name, :type => :string, :desc => "project name"
+    argument :box, :type => :string, :desc => "Vagrant box type"
+
+    desc "Generate a Vagrant, Puppet librarian and fpm project"
+
+
+    def self.source_root
+	File.dirname(".")
+    end
+
+    def create_vagrant_file
+	empty_directory(name)
+	template('templates/vagrant.erb', "#{name}/Vagrantfile")
+    end
+
+    def create_git_ignore
+	copy_file('templates/gitignore.tt', "#{name}/.gitignore")
+    end
+
+    def create_gemfile
+	copy_file('templates/gemfile.tt', "#{name}/Gemfile")
+    end
+  end
+end
+
+
+module Opsk
+  class Root < Thor
+    register Opsk::Generate, 'generate', 'generate [name] [box]', 'generates opskelaton project structure'
+  end 
+end
+
+Opsk::Root.start ARGV
