@@ -1,0 +1,11 @@
+forge "http://forge.puppetlabs.com"
+
+mod 'puppetlabs/stdlib'
+
+
+<% if(box.include?('ubuntu')) %>
+mod 'puppetlabs/apt'
+<% end %>
+
+mod 'editfile', 
+   :git => 'git://github.com/mstrauss/puppet-editfile.git'
