@@ -2,14 +2,16 @@
 # vi: set ft=ruby :
 
 Vagrant::Config.run do |config|
-  
+
   config.vm.define :core do |core|
     core.vm.box = <%= box %>
     core.vm.network :bridged
     core.vm.customize ['modifyvm', :id, '--memory', 1024, '--cpus', 2]
-    core.vm.host_name = 'core'
+    core.vm.host_name = <%= name %>
+    <% if(box.include?('centos')) %>
     # https://github.com/mitchellh/vagrant/issues/713
     config.vm.customize ['setextradata', :id, 'VBoxInternal2/SharedFoldersEnableSymlinksCreate/v-root', '1']
+  <% end %>
   end
 
 end

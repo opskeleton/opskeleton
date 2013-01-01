@@ -15,20 +15,29 @@ module  Opsk
 
 
     def self.source_root
-	File.dirname(".")
+	# during dev time
+	if(File.dirname(__FILE__) == './bin')
+	  File.dirname('.')
+	else 
+	  "#{File.dirname(__FILE__)}/../"
+	end
+    end
+
+    def path 
+	"#{name}-sandbox"
     end
 
     def create_vagrant_file
-	empty_directory(name)
-	template('templates/vagrant.erb', "#{name}/Vagrantfile")
+	empty_directory(path)
+	template('templates/vagrant.erb', "#{path}/Vagrantfile")
     end
 
     def create_git_ignore
-	copy_file('templates/gitignore.tt', "#{name}/.gitignore")
+	copy_file('templates/gitignore', "#{path}/.gitignore")
     end
 
     def create_gemfile
-	copy_file('templates/gemfile.tt', "#{name}/Gemfile")
+	copy_file('templates/gemfile', "#{path}/Gemfile")
     end
   end
 end
