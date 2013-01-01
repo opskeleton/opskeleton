@@ -7,10 +7,11 @@ Vagrant::Config.run do |config|
     <%= name%>.vm.box = '<%= box %>'
     <%= name%>.vm.network :bridged
     <%= name%>.vm.customize ['modifyvm', :id, '--memory', 2048, '--cpus', 4]
-    <%= name%>.vm.host_name = <%= name %>
+    <%= name%>.vm.host_name = '<%= name %>'
     <%= name%>.vm.provision :puppet, :options => ["--modulepath=/vagrant/modules:/vagrant/static-modules"]<% if(box.include?('centos')) %>
     # https://github.com/mitchellh/vagrant/issues/713
     config.vm.customize ['setextradata', :id, 'VBoxInternal2/SharedFoldersEnableSymlinksCreate/v-root', '1']
-<% end %>end
+  <% end %>
+  end
 
 end
