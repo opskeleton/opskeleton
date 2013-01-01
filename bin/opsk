@@ -32,8 +32,11 @@ module  Opsk
 	template('templates/vagrant.erb', "#{path}/Vagrantfile")
     end
 
-    def create_git_ignore
+    def git
 	copy_file('templates/gitignore', "#{path}/.gitignore")
+	inside(path) do
+	  run('git init .')
+	end
     end
 
     def create_gemfile
@@ -50,6 +53,7 @@ module  Opsk
 	template('templates/puppetfile.erb', "#{path}/Puppetfile")
 	template('templates/default.erb', "#{path}/manifests/default.pp")
 	copy_file('templates/run.sh', "#{path}/run.sh")
+	chmod("#{path}/run.sh", 0755)
     end
 
     def readme
