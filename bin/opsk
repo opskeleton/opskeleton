@@ -49,6 +49,11 @@ module  Opsk
 	empty_directory("#{path}/manifests/")
 	template('templates/puppetfile.erb', "#{path}/Puppetfile")
 	template('templates/default.erb', "#{path}/manifests/default.pp")
+	copy_file('templates/run.sh', "#{path}/run.sh")
+    end
+
+    def readme
+	template('templates/README.erb', "#{path}/README.md")
     end
   end
 end
