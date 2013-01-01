@@ -39,6 +39,10 @@ module  Opsk
     def create_gemfile
 	copy_file('templates/gemfile', "#{path}/Gemfile")
     end
+
+    def create_rvmrc
+	template('templates/rvmrc.erb', "#{path}/.rvmrc")
+    end
   end
 end
 
