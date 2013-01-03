@@ -58,6 +58,7 @@ module  Opsk
 
     def readme
 	template('templates/README.erb', "#{path}/README.md")
+	copy_file('templates/LICENSE-2.0.txt',"#{path}/LICENSE-2.0.txt")
     end
   end
 end
