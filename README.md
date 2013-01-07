@@ -1,8 +1,9 @@
 Intro
 ==========
 
-Opskelaton is an opinionated bootstrap tool local sandboxe project generator that uses/creates:
+Opskelaton is an opinionated bootstrap tool for local sandboxes project that uses/creates:
 
+ * A vagrant file matching OS
  * RVM (creates an .rvmrc with a matching gemset) 
  * bundler (with dependencies defined)
  * librarian-puppet for puppet module depdency managment
