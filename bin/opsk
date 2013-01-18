@@ -56,6 +56,16 @@ module  Opsk
 	chmod("#{path}/run.sh", 0755)
     end
 
+    def create_heira
+	hieradata = "#{path}/hieradata/"
+	empty_directory(hieradata)
+	%w(common virtualbox physical).each do |env|
+	  copy_file('templates/clean.yaml', "#{hieradata}/#{env}.yaml")
+	end
+
+	copy_file('templates/hiera.yaml', "#{path}/hiera.yaml")
+    end
+
     def readme
 	template('templates/README.erb', "#{path}/README.md")
 	copy_file('templates/LICENSE-2.0.txt',"#{path}/LICENSE-2.0.txt")
