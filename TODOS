@@ -1,0 +1,2 @@
+* Add testing support, both smoke and rspec
+* Add travis.ci support
