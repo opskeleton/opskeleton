@@ -38,4 +38,7 @@ Opsk defines a simple module life cycle:
 
 Life cycle scheme:
 
-<img src="https://raw.github.com/narkisr/vagrant-sketching-board/master/images/module-lifecycle.png" alt="" style='box-shadow: 0 0 0 0;border:0;' />
+<div style='box-shadow: 0 0 0 0;border:0;'>
+  ![]("https://raw.github.com/narkisr/vagrant-sketching-board/master/images/module-lifecycle.png")
+</div>
+
