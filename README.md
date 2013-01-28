@@ -30,3 +30,12 @@ Folder layout:
 ![](https://raw.github.com/narkisr/vagrant-sketching-board/master/images/opsk-folders.png)
 
 
+Opsk defines a simple module life cycle:
+
+ 1. Internal non reusable modules (usually specific to a client site) go under static-modules
+ 2. Once a module it made general enought its pulled out to a new git repo
+ 3. The extraced module is added back as a third party (using [librarian-puppet](https://github.com/rodjek/librarian-puppet) module which reside under module folder.
+
+Life cycle scheme:
+
+<img src="https://raw.github.com/narkisr/vagrant-sketching-board/master/images/module-lifecycle.png" alt="" style='box-shadow: 0 0 0 0;border:0;' />
