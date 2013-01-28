@@ -12,6 +12,8 @@ Opskelaton is an opinionated bootstrap tool for local sandboxes project that use
   * run.sh (for simple running of puppet within the sandbox)
   * License and README
 
+See it in action [here](https://www.youtube.com/watch?v=LNlHC54Ej8c).
+
 Usage
 =========
 
