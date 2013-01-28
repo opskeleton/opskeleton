@@ -1,5 +1,7 @@
-Intro
-==========
+
+<img src="https://raw.github.com/narkisr/vagrant-sketching-board/master/images/opskeleton.png" width='30%' hight='50%'  alt="" />
+
+# Intro
 
 Opskelaton is an opinionated bootstrap tool for local Sandbox projects.
 
@@ -10,9 +12,6 @@ Opsk aims to solve the following common issues:
  * Non standard layout, projects missing README and LICENSE files, no clear seperation between developed and depdendant code.
  * No clear development guidelines, for example extracting general modules and exporting them.
  
-
-
-
 
 See it in action [here](https://www.youtube.com/watch?v=LNlHC54Ej8c).
 
