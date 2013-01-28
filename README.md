@@ -1,5 +1,5 @@
 
-<img src="https://raw.github.com/narkisr/vagrant-sketching-board/master/images/opskeleton.png" width='30%' hight='50%'  alt="" />
+<img src="https://raw.github.com/narkisr/vagrant-sketching-board/master/images/opskeleton.png" width='100%' hight='100%'  alt="" />
 
 # Intro
 
