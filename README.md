@@ -27,7 +27,7 @@ Opskelaton creates the complete folder structure fine tuned to match best practi
 
 Folder layout:
 
-![](https://raw.github.com/narkisr/vagrant-sketching-board/master/images/opsk-folders.png)
+<img src="https://raw.github.com/narkisr/vagrant-sketching-board/master/images/opsk-folders.png" width='50%' hight='50%'  alt="" />
 
 
 Opsk defines a simple module life cycle:
