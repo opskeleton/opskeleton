@@ -39,6 +39,6 @@ Opsk defines a simple module life cycle:
 Life cycle scheme:
 
 <div style='box-shadow: 0 0 0 0;border:0;'>
-  ![]("https://raw.github.com/narkisr/vagrant-sketching-board/master/images/module-lifecycle.png")
+  ![](https://raw.github.com/narkisr/vagrant-sketching-board/master/images/module-lifecycle.png)
 </div>
 
