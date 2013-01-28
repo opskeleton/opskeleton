@@ -23,6 +23,9 @@ Usage
  $ opsk generate name box-type
 ```
 
+
+## Layout
+
 Opskelaton creates the complete folder structure fine tuned to match best practices:
 
 Folder layout:
@@ -30,7 +33,8 @@ Folder layout:
 <img src="https://raw.github.com/narkisr/vagrant-sketching-board/master/images/opsk-folders.png" width='30%' hight='50%'  alt="" />
 
 
-Opsk defines a simple module life cycle:
+## Lifecycle
+Opskelaton defines a simple module life cycle:
 
  1. Internal non reusable modules (usually specific to a client site) go under static-modules
  2. Once a module it made general enought its pulled out to a new git repo
@@ -39,4 +43,5 @@ Opsk defines a simple module life cycle:
 Life cycle scheme:
 
 <img src="https://raw.github.com/narkisr/vagrant-sketching-board/master/images/module-lifecycle-black.png" width='30%' hight='50%'  alt="" />
+
 
