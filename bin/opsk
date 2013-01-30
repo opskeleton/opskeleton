@@ -7,6 +7,33 @@ require 'thor/group'
 require 'opskeleton/version'
 
 module  Opsk 
+  class Specgen < Thor::Group
+    include Thor::Actions
+
+    argument :name, :type => :string, :desc => "static module name"
+
+    def self.source_root
+	# during dev time
+	if(File.dirname(__FILE__) == './bin')
+	  File.dirname('.')
+	else 
+	  "#{File.dirname(__FILE__)}/../"
+	end
+    end
+
+    def create_spec_folders
+	%w(classes defines functions hosts).each do |t|
+	  empty_directory("static-modules/#{name}/spec/#{t}")
+	end
+	template('templates/vagrant.erb', "#{path}/Vagrantfile")
+    end
+
+    def create_class_spec
+    	
+    end
+
+  end
+
   class Generate < Thor::Group
     include Thor::Actions
 
@@ -85,6 +112,8 @@ end
 module Opsk
   class Root < Thor
     register Opsk::Generate, 'generate', 'generate [name] [box]', 'generates opskelaton project structure'
+    register Opsk::Specgen, 'specgen', 'specgen [module]', 'generates rspec-puppet for static-modules/module'
+
     desc 'version', 'print opsk version'  
     def version
 	puts Opskeleton::VERSION    
