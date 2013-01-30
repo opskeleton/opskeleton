@@ -38,6 +38,10 @@ module  Opsk
 	copy_file('templates/gemfile', "#{path}/Gemfile")
     end
 
+    def create_rakefile
+	copy_file('templates/Rakefile', "#{path}/Rakefile")
+    end
+
     def create_rvmrc
 	template('templates/rvmrc.erb', "#{path}/.rvmrc")
     end
