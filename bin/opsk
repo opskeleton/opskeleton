@@ -1,8 +1,10 @@
 #!/usr/bin/env ruby
 
+$:.push 'lib'
 require 'rubygems'
 require 'thor'
 require 'thor/group'
+require 'opskeleton/version'
 
 module  Opsk 
   class Generate < Thor::Group
@@ -30,13 +32,6 @@ module  Opsk
     def create_vagrant_file
 	empty_directory(path)
 	template('templates/vagrant.erb', "#{path}/Vagrantfile")
-    end
-
-    def git
-	copy_file('templates/gitignore', "#{path}/.gitignore")
-	inside(path) do
-	  run('git init .')
-	end
     end
 
     def create_gemfile
@@ -70,6 +65,15 @@ module  Opsk
 	template('templates/README.erb', "#{path}/README.md")
 	copy_file('templates/LICENSE-2.0.txt',"#{path}/LICENSE-2.0.txt")
     end
+
+    def git
+	copy_file('templates/gitignore', "#{path}/.gitignore")
+	inside(path) do
+	  run('git init .')
+	  run('git add -A')
+	  run("git commit -m 'initial sandbox import'")
+	end
+    end
   end
 end
 
@@ -77,6 +81,10 @@ end
 module Opsk
   class Root < Thor
     register Opsk::Generate, 'generate', 'generate [name] [box]', 'generates opskelaton project structure'
+    desc 'version', 'print opsk version'  
+    def version
+	puts Opskeleton::VERSION    
+    end
   end 
 end
 
