@@ -7,6 +7,29 @@ require 'thor/group'
 require 'opskeleton/version'
 
 module  Opsk 
+  class Package < Thor::Group
+    include Thor::Actions
+
+    def self.source_root
+	# during dev time
+	if(File.dirname(__FILE__) == './bin')
+	  File.dirname('.')
+	else 
+	  "#{File.dirname(__FILE__)}/../"
+	end
+    end
+
+    def create_pkg
+       empty_directory('pkg')
+    end
+
+    def package
+	run("tar --exclude=pkg --exclude='.vendor' --exclude-vcs -czf pkg/#{File.basename(Dir.getwd)}.tar.gz .")
+    end
+
+  end
+
+
   class Specgen < Thor::Group
     include Thor::Actions
 
@@ -112,6 +135,7 @@ module Opsk
   class Root < Thor
     register Opsk::Generate, 'generate', 'generate [name] [box]', 'generates opskelaton project structure'
     register Opsk::Specgen, 'specgen', 'specgen [module]', 'generates rspec-puppet for static-modules/module'
+    register Opsk::Package, 'package', 'package', 'packages current module for celestial'
 
     desc 'version', 'print opsk version'  
     def version
