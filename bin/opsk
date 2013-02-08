@@ -25,11 +25,10 @@ module  Opsk
 	%w(classes defines functions hosts).each do |t|
 	  empty_directory("static-modules/#{name}/spec/#{t}")
 	end
-	template('templates/vagrant.erb', "#{path}/Vagrantfile")
     end
 
     def create_class_spec
-    	
+	template('templates/spec.erb', "static-modules/#{name}/spec/classes/")
     end
 
   end
