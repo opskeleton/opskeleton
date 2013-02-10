@@ -24,7 +24,8 @@ module  Opsk
     end
 
     def package
-	run("tar --exclude=pkg --exclude='.vendor' --exclude-vcs -czf pkg/#{File.basename(Dir.getwd)}.tar.gz .")
+      name = File.basename(Dir.getwd)
+	run("tar --exclude=pkg  --exclude-backups  --exclude-vcs -czf pkg/#{name}.tar.gz ../#{name} > /dev/null")
     end
 
   end
