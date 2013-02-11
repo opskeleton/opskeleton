@@ -25,7 +25,10 @@ module  Opsk
 
     def package
       name = File.basename(Dir.getwd)
-	run("tar --exclude=pkg  --exclude-backups  --exclude-vcs -czf pkg/#{name}.tar.gz ../#{name} > /dev/null")
+      ignored = IO.readlines('.gitignore').map(&:chomp)
+	ignored.delete('modules')
+	excludes = ignored.map{|f| "'#{f}'"}.join(" --exclude=") << ' --exclude-backups --exclude-vcs --exclude=pkg'
+	run("tar --exclude=#{excludes} -czf pkg/#{name}.tar.gz ../#{name} > /dev/null", :verbose => false)
     end
 
   end
