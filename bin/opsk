@@ -25,8 +25,8 @@ module  Opsk
 
     def create_scripts
 	empty_directory('scripts')
-	template('templates/scripts/lookup.sh', "scripts/")
-	template('templates/scripts/run.sh', "scripts/")
+	template('templates/scripts/lookup.sh', "scripts/lookup.sh")
+	template('templates/scripts/run.sh', "scripts/run.sh")
     end
 
     def package
