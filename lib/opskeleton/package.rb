@@ -16,7 +16,7 @@ module  Opsk
 
     def create_build
 	empty_directory(artifact)
-	path = File.basename(Dir.getwd)
+	path = Dir.getwd
 	directory path , artifact
     end
 
