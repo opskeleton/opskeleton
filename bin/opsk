@@ -23,6 +23,12 @@ module  Opsk
        empty_directory('pkg')
     end
 
+    def create_scripts
+	empty_directory('scripts')
+	template('templates/scripts/lookup.sh', "scripts/")
+	template('templates/scripts/run.sh', "scripts/")
+    end
+
     def package
       name = File.basename(Dir.getwd)
       ignored = IO.readlines('.gitignore').map(&:chomp)
