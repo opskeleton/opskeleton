@@ -2,15 +2,25 @@ module  Opsk
   class Package < Thor::Group
     include Thorable, Thor::Actions
 
-    argument :version, :type => :string, :desc => "package version"
+    def meta 
+	 OpenStruct.new(YAML.load_file('opsk.yml'))
+    end
 
-    # def create_build
-	# empty_directory('build')
-	# directory ".", "build"
-    # end
+    def name 
+     	File.basename(Dir.getwd)
+    end
+
+    def artifact
+    	"#{name}-#{meta.version}"
+    end
+
+    def create_build
+	empty_directory(artifact)
+	path = File.basename(Dir.getwd)
+	directory path , artifact
+    end
 
     def create_pkg
-	puts "here"
 	empty_directory('pkg')
     end
 
@@ -24,11 +34,10 @@ module  Opsk
     end
 
     def package
-	name = File.basename(Dir.getwd)
 	ignored = IO.readlines('.gitignore').map(&:chomp)
 	ignored.delete('modules')
 	excludes = ignored.map{|f| "'#{f}'"}.join(" --exclude=") << ' --exclude-backups --exclude-vcs --exclude=pkg'
-	run("tar --exclude=#{excludes} -czf pkg/#{name}.tar.gz ../#{name} > /dev/null", :verbose => false)
+	run("tar --exclude=#{excludes} -czf pkg/#{artifact}.tar.gz #{artifact} > /dev/null", :verbose => false)
     end
 
   end

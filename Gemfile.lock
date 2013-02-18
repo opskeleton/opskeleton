@@ -1,10 +1,12 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    thor (0.16.0)
+    map (6.3.0)
+    thor (0.17.0)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
+  map
   thor
