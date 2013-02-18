@@ -1,1 +1,1 @@
-wget -q -O -  "http://$0:8080/registry/profile/$1"
+wget -q -O -  "http://$1:8080/registry/profile/$2"
