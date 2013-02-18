@@ -25,7 +25,7 @@ module  Opsk
 
     def create_scripts
 	empty_directory('scripts')
-	%(lookup.sh run.sh).each |s| do
+	%w(lookup.sh run.sh).each  do |s|
 	  template("templates/scripts/#{s}", "scripts/#{s}")
 	  chmod("scripts/#{s}", 0755)
 	end
