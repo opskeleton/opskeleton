@@ -11,6 +11,9 @@ class PackageTest < MiniTest::Unit::TestCase
     Opsk::Root.start ['generate', 'foo', 'bar']
   end
 
+  def teardown 
+    rm_rf 'foo-sandbox'
+  end
 
   def with_cwd dir
     Dir.chdir dir do
