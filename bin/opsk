@@ -4,45 +4,9 @@ $:.push 'lib'
 require 'rubygems'
 require 'thor'
 require 'thor/group'
-require 'opskeleton/version'
+require 'opskeleton'
 
-module  Opsk 
-  class Package < Thor::Group
-    include Thor::Actions
-
-    def self.source_root
-	# during dev time
-	if(File.dirname(__FILE__) == './bin')
-	  File.dirname('.')
-	else 
-	  "#{File.dirname(__FILE__)}/../"
-	end
-    end
-
-    def create_pkg
-       empty_directory('pkg')
-    end
-
-    def create_scripts
-	empty_directory('scripts')
-	%w(lookup.sh run.sh).each  do |s|
-	  template("templates/scripts/#{s}", "scripts/#{s}")
-	  chmod("scripts/#{s}", 0755)
-	end
-     
-    end
-
-    def package
-      name = File.basename(Dir.getwd)
-      ignored = IO.readlines('.gitignore').map(&:chomp)
-	ignored.delete('modules')
-	excludes = ignored.map{|f| "'#{f}'"}.join(" --exclude=") << ' --exclude-backups --exclude-vcs --exclude=pkg'
-	run("tar --exclude=#{excludes} -czf pkg/#{name}.tar.gz ../#{name} > /dev/null", :verbose => false)
-    end
-
-  end
-
-
+module Opsk
   class Specgen < Thor::Group
     include Thor::Actions
 
@@ -65,80 +29,6 @@ module  Opsk
 
     def create_class_spec
 	template('templates/spec.erb', "static-modules/#{name}/spec/classes/")
-    end
-
-  end
-
-  class Generate < Thor::Group
-    include Thor::Actions
-
-    argument :name, :type => :string, :desc => "project name"
-    argument :box, :type => :string, :desc => "Vagrant box type"
-
-    desc "Generate a Vagrant, Puppet librarian and fpm project"
-
-
-    def self.source_root
-	# during dev time
-	if(File.dirname(__FILE__) == './bin')
-	  File.dirname('.')
-	else 
-	  "#{File.dirname(__FILE__)}/../"
-	end
-    end
-
-    def path 
-	"#{name}-sandbox"
-    end
-
-    def create_vagrant_file
-	empty_directory(path)
-	template('templates/vagrant.erb', "#{path}/Vagrantfile")
-    end
-
-    def create_gemfile
-	copy_file('templates/gemfile', "#{path}/Gemfile")
-    end
-
-    def create_rakefile
-	copy_file('templates/Rakefile', "#{path}/Rakefile")
-    end
-
-    def create_rvmrc
-	template('templates/rvmrc.erb', "#{path}/.rvmrc")
-    end
-
-    def create_puppet_base
-	empty_directory("#{path}/static-modules/")
-	empty_directory("#{path}/manifests/")
-	template('templates/puppetfile.erb', "#{path}/Puppetfile")
-	template('templates/default.erb', "#{path}/manifests/default.pp")
-	copy_file('templates/run.sh', "#{path}/run.sh")
-	chmod("#{path}/run.sh", 0755)
-    end
-
-    def create_heira
-	hieradata = "#{path}/hieradata/"
-	empty_directory(hieradata)
-	%w(common virtualbox physical).each do |env|
-	  copy_file('templates/clean.yaml', "#{hieradata}/#{env}.yaml")
-	end
-
-	copy_file('templates/hiera.yaml', "#{path}/hiera.yaml")
-    end
-
-    def readme
-	template('templates/README.erb', "#{path}/README.md")
-	copy_file('templates/LICENSE-2.0.txt',"#{path}/LICENSE-2.0.txt")
-    end
-
-    def git
-	copy_file('templates/gitignore', "#{path}/.gitignore")
-	inside(path) do
-	  run('git init .')
-	  run('git add -A')
-	  run("git commit -m 'initial sandbox import'")
-	end
     end
   end
 end
