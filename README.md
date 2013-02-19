@@ -9,7 +9,7 @@ Opsk aims to solve the following common issues:
  * Devops develop Puppet modules on master machines which results with 'It works on my (machine) master' approach.
  * Implicit/Missing dependencies, like ruby version used, operating system, gems, third party puppet module
  * Manual steps in setting up puppet modules and local sandboxes (like installing third party code).
- * Non standard layout, projects missing README and LICENSE files, no clear seperation between developed and depdendant code.
+ * Non standard layout, projects missing README and LICENSE files, no clear separation between developed and dependant code.
  * No clear development guidelines, for example extracting general modules and exporting them.
  
 
@@ -18,10 +18,28 @@ See it in action [here](https://www.youtube.com/watch?v=LNlHC54Ej8c).
 Usage
 =========
 
-```bash
- $ opsk generate name box-type
-```
+Installing perquisites (on Ubuntu)
 
+```bash 
+ $ sudo aptitude install ruby1.9.1 ruby1.9.1-dev
+ # see https://rvm.io/rvm/install/
+ $ curl -L https://get.rvm.io | bash -s stable --ruby
+ # re-launch current terminal session, the following should work
+ $ rvm use system
+ $ sudo gem install opskeleton
+``` 
+
+Creating out first sandbox
+
+```bash
+ $ rvm use system 
+ # parameters include name vagrant-box
+ $ opsk generate redis ubuntu-12.10
+ $ cd redis-sandbox
+ # bundle installs gems in the background
+ $ librarian-puppet install 
+ $ vagrant up 
+```
 
 ## Layout
 
