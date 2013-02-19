@@ -18,19 +18,15 @@ module  Opsk
 	empty_directory(artifact)
 	path = Dir.getwd
 	directory path , artifact
+	empty_directory("#{artifact}/scripts")
+	%w(lookup.sh run.sh).each  do |s|
+	  template("templates/scripts/#{s}", "#{artifact}/scripts/#{s}")
+	  chmod("#{artifact}/scripts/#{s}", 0755)
+	end
     end
 
     def create_pkg
 	empty_directory('pkg')
-    end
-
-    def create_scripts
-	empty_directory('scripts')
-	%w(lookup.sh run.sh).each  do |s|
-	  template("templates/scripts/#{s}", "scripts/#{s}")
-	  chmod("scripts/#{s}", 0755)
-	end
-
     end
 
     def package
