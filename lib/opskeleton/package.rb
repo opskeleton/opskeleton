@@ -23,6 +23,7 @@ module  Opsk
 	  template("templates/scripts/#{s}", "#{artifact}/scripts/#{s}")
 	  chmod("#{artifact}/scripts/#{s}", 0755)
 	end
+	template('templates/puppet/site.erb', "#{artifact}/manifests/site.pp")
     end
 
     def create_pkg

@@ -26,8 +26,8 @@ class PackageTest < MiniTest::Unit::TestCase
      Opsk::Root.start ['package']
    end
    assert File.exists?('foo-sandbox/foo-sandbox-0.0.1/Puppetfile')
+   assert File.exists?('foo-sandbox/foo-sandbox-0.0.1/manifests/site.pp')
    assert File.exists?('foo-sandbox/foo-sandbox-0.0.1/scripts/run.sh')
-
    assert File.exists?('foo-sandbox/pkg/foo-sandbox-0.0.1.tar.gz')
   end
 
