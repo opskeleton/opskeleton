@@ -1,4 +1,4 @@
 #!/bin/sh
 
 export ip=`echo $SSH_CONNECTION |  cut -d  ' ' -f 1`
-wget -q -O -  "http://$ip:8080/registry/host/type/$1"
+wget --header "Accept: application/x-yaml" -q -O -  "http://$ip:8080/registry/host/type/$1"
