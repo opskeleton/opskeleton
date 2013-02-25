@@ -3,3 +3,4 @@
 * Test thor tasks using http://tinyurl.com/a7x4j8r  
 * Add optional git skip flag
 * Validate boxes agains existing vagrant boxes and issue warning
+* Validate missing site.pp on package
