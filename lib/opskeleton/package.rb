@@ -17,7 +17,7 @@ module  Opsk
     def create_build
 	empty_directory(artifact)
 	path = Dir.getwd
-	directory path , artifact
+	directory path , artifact , :verbose => false
 	empty_directory("#{artifact}/scripts")
 	%w(lookup.sh run.sh).each  do |s|
 	  template("templates/scripts/#{s}", "#{artifact}/scripts/#{s}")
