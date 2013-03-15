@@ -8,7 +8,7 @@ require 'net/http'
 node = ARGV[0]
 
 if(File.exists?("#{node}.yml"))
-  File.open('Gemfile').lines.each {|l| puts l}
+  File.open("#{node}.yml").lines.each {|l| puts l}
 else
   ip = ENV['SSH_CONNECTION'].split(' ').first
   httpcall = Net::HTTP.new(ip, 8082)
