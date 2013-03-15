@@ -6,10 +6,10 @@ require 'net/http'
 # this is used for external node lookup in celestial puppet std provider
 
 node = ARGV[0]
+host = node.split('.').first
 
-if(File.exists?("#{node}.yml"))
-  host = node.split('.').first
-  File.open("#{node}.yml").lines.each {|l| puts l}
+if(File.exists?("#{host}.yml"))
+  File.open("#{host}.yml").lines.each {|l| puts l}
 else
   ip = ENV['SSH_CONNECTION'].split(' ').first
   httpcall = Net::HTTP.new(ip, 8082)
