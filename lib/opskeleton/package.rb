@@ -19,7 +19,7 @@ module  Opsk
 	path = Dir.getwd
 	directory path , artifact , :verbose => false
 	empty_directory("#{artifact}/scripts")
-	%w(lookup.sh run.sh).each  do |s|
+	%w(lookup.rb run.sh).each  do |s|
 	  template("templates/scripts/#{s}", "#{artifact}/scripts/#{s}")
 	  chmod("#{artifact}/scripts/#{s}", 0755)
 	end
