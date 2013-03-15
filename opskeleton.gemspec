@@ -12,6 +12,7 @@ Gem::Specification.new do |gem|
   gem.summary       = %q{A generator for ops projects that include vagrant puppet and fpm}
   gem.homepage      = "https://github.com/narkisr/opskeleton"
   gem.add_dependency('thor')
+  gem.add_development_dependency('pry')
 
   gem.files         = `git ls-files`.split($/)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
