@@ -8,6 +8,7 @@ require 'net/http'
 node = ARGV[0]
 
 if(File.exists?("#{node}.yml"))
+  host = node.split('.').first
   File.open("#{node}.yml").lines.each {|l| puts l}
 else
   ip = ENV['SSH_CONNECTION'].split(' ').first
