@@ -1,17 +1,21 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
+Vagrant.configure("2") do |config|
 
-Vagrant::Config.run do |config|
+  config.vm.box = '<%=name%>' <%if(options['box_url']) %>
+  <%="config.vm.box_url = '#{options['box_url']}'"%> <%end%>
+  config.vm.network :public_network
+  config.vm.hostname = '<%=name%>.local'
 
-  config.vm.define :<%= name%> do |<%= name%>|
-    <%= name%>.vm.box = '<%= box %>'
-    <%= name%>.vm.network :bridged
-    <%= name%>.vm.customize ['modifyvm', :id, '--memory', 2048, '--cpus', 4]
-    <%= name%>.vm.host_name = '<%= name %>'
-    <%= name%>.vm.provision :puppet, :options => ["--modulepath=/vagrant/modules:/vagrant/static-modules", "--hiera_config /vagrant/hiera.yaml"]<% if(box.include?('centos')) %>
-    # https://github.com/mitchellh/vagrant/issues/713
-    config.vm.customize ['setextradata', :id, 'VBoxInternal2/SharedFoldersEnableSymlinksCreate/v-root', '1']
-  <% end %>
+  config.vm.provider :virtualbox do |vb|
+    vb.customize ['modifyvm', :id, '--memory', 2048, '--cpus', 2]
+  end
+
+  config.vm.provision :puppet do |puppet|
+    puppet.manifests_path = 'manifests'
+    puppet.manifest_file  = 'default.pp'
+    puppet.module_path = '/vagrant/modules:/vagrant/static-modules'
+    puppt.options = '--hiera_config /vagrant/hiera.yaml'
   end
 
 end

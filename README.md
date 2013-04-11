@@ -24,6 +24,11 @@ Installing perquisites (on Ubuntu)
  $ sudo aptitude install ruby1.9.1 ruby1.9.1-dev
  # see https://rvm.io/rvm/install/
  $ curl -L https://get.rvm.io | bash -s stable --ruby
+
+ # install vagrant [see](http://docs-v1.vagrantup.com/v1/docs/getting-started/) for latest package
+ $ wget http://files.vagrantup.com/packages/64e360814c3ad960d810456add977fd4c7d47ce6/vagrant_x86_64.deb
+ $ sudo dpkg -i vagrant_x86_64.deb
+
  # re-launch current terminal session, the following should work
  $ rvm use system
  $ sudo gem install opskeleton

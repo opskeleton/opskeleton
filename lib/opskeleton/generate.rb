@@ -2,10 +2,11 @@ module Opsk
   class Generate < Thor::Group
     include Thorable, Thor::Actions
 
-    argument :name, :type => :string, :desc => "project name"
-    argument :box, :type => :string, :desc => "Vagrant box type"
+    argument :name, :type => :string, :desc => 'project name'
+    argument :box, :type => :string, :desc => 'Vagrant box type'
+    class_option :box_url, :type=> :string, :desc => 'vagrant box url'
 
-    desc "Generate a Vagrant, Puppet librarian and fpm project"
+    desc 'Generate a Vagrant, Puppet librarian and fpm project'
 
     def path 
 	"#{name}-sandbox"
@@ -29,7 +30,9 @@ module Opsk
     end
 
     def create_rvmrc
-	template('templates/rvmrc.erb', "#{path}/.rvmrc")
+	remove_file("#{path}/.rvmrc")
+	template('templates/ruby-gemset.erb', "#{path}/.ruby-gemset")
+	template('templates/ruby-version.erb', "#{path}/.ruby-version")
     end
 
     def create_puppet_base

@@ -3,6 +3,7 @@
 $:.push 'lib'
 require 'rubygems'
 require 'thor'
+require 'thor/runner'
 require 'thor/group'
 require 'opskeleton'
 
@@ -36,7 +37,8 @@ end
 
 module Opsk
   class Root < Thor
-    register Opsk::Generate, 'generate', 'generate [name] [box]', 'generates opskelaton project structure'
+
+    register Opsk::Generate, 'generate', "generate [name] [box]", 'generates opskelaton project structure'
     register Opsk::Specgen, 'specgen', 'specgen [module]', 'generates rspec-puppet for static-modules/module'
     register Opsk::Package, 'package', 'package', 'packages current module for celestial'
 
@@ -46,5 +48,8 @@ module Opsk
     end
   end 
 end
+
+# not sure that this is the cleanest way
+Opsk::Root.tasks['generate'].options = Opsk::Generate.class_options 
 
 Opsk::Root.start ARGV
