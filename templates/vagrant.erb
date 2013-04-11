@@ -2,7 +2,7 @@
 # vi: set ft=ruby :
 Vagrant.configure("2") do |config|
 
-  config.vm.box = '<%=name%>' <%if(options['box_url']) %>
+  config.vm.box = '<%=box%>' <%if(options['box_url']) %>
   <%="config.vm.box_url = '#{options['box_url']}'"%> <%end%>
   config.vm.network :public_network
   config.vm.hostname = '<%=name%>.local'
