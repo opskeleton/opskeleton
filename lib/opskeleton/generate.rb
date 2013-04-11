@@ -60,11 +60,13 @@ module Opsk
     end
 
     def git
-	copy_file('templates/gitignore', "#{path}/.gitignore")
-	inside(path) do
-	  run('git init .')
-	  run('git add -A')
-	  run("git commit -m 'initial sandbox import'")
+	if(!File.exists("#{path}/.git"))
+	   copy_file('templates/gitignore', "#{path}/.gitignore")
+	   inside(path) do
+	     run('git init .')
+	     run('git add -A')
+	     run("git commit -m 'initial sandbox import'")
+	   end
 	end
     end
   end
