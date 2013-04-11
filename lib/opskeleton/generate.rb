@@ -60,7 +60,7 @@ module Opsk
     end
 
     def git
-	if(!File.exists("#{path}/.git"))
+	if(!File.exists?("#{path}/.git"))
 	   copy_file('templates/gitignore', "#{path}/.gitignore")
 	   inside(path) do
 	     run('git init .')
