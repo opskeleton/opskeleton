@@ -1,0 +1,20 @@
+
+_opsk() {
+     local cur prev opts
+     COMPREPLY=()
+     cur="${COMP_WORDS[COMP_CWORD]}"
+     prev="${COMP_WORDS[COMP_CWORD-1]}"
+     opts="generate help package specgen version"
+ 
+     if [[ ${cur} == -* || ${COMP_CWORD} -eq 1 ]] ; then
+         COMPREPLY=( $(compgen -W "${opts}" -- ${cur}) )
+         return 0
+     fi
+
+     case "${prev}" in
+          help)
+                COMPREPLY=( $(compgen -W "${opts/help/}" -- ${cur}) )
+          ;;
+     esac    
+    }
+complete -F _opsk opsk
