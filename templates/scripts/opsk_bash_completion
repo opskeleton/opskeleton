@@ -1,4 +1,3 @@
-
 _opsk() {
      local cur prev opts
      COMPREPLY=()
