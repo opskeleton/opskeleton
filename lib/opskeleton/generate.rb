@@ -52,6 +52,7 @@ module Opsk
 	end
 
 	copy_file('templates/hiera.yaml', "#{path}/hiera.yaml")
+	copy_file('templates/hiera_vagrant.yaml', "#{path}/hiera_vagrant.yaml")
     end
 
     def readme
