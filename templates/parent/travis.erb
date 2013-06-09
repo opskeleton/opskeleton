@@ -1,0 +1,8 @@
+language: ruby
+rvm:
+  - 1.9.3
+script:
+  - "librarian-puppet install"
+  - "rake lint"
+  - "rake spec"
+

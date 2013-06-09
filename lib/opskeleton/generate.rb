@@ -60,6 +60,10 @@ module Opsk
 	copy_file('templates/LICENSE-2.0.txt',"#{path}/LICENSE-2.0.txt")
     end
 
+    def travis
+	template('templates/parent/travis.erb', "#{path}/.travis.yml")
+    end
+
     def git
 	if(!File.exists?("#{path}/.git"))
 	   copy_file('templates/gitignore', "#{path}/.gitignore")
