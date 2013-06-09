@@ -25,5 +25,10 @@ module Opsk
 	template('templates/module/Rakefile.erb',rakefile)
     end
 
+   def spec_helper
+     spec_helper = "static-modules/#{name}/spec/spec_helper.rb"
+     remove_file(spec_helper)
+     template('templates/module/spec_helper.rb',spec_helper)
+   end
   end
 end
