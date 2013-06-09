@@ -20,7 +20,9 @@ module Opsk
     end
 
     def create_rakefile
-	template('templates/module/Rakefile', "static-modules/#{name}")
+      rakefile = "static-modules/#{name}/Rakefile"
+      remove_file(rakefile)
+	template('templates/module/Rakefile.erb',rakefile)
     end
 
   end
