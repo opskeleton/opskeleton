@@ -6,4 +6,5 @@ require 'ostruct'
 require 'opskeleton/thorable'
 require 'opskeleton/package'
 require 'opskeleton/generate'
+require 'opskeleton/module'
 

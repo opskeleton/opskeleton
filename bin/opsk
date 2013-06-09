@@ -8,38 +8,10 @@ require 'thor/group'
 require 'opskeleton'
 
 module Opsk
-  class Specgen < Thor::Group
-    include Thor::Actions
-
-    argument :name, :type => :string, :desc => "static module name"
-
-    def self.source_root
-	# during dev time
-	if(File.dirname(__FILE__) == './bin')
-	  File.dirname('.')
-	else 
-	  "#{File.dirname(__FILE__)}/../"
-	end
-    end
-
-    def create_spec_folders
-	%w(classes defines functions hosts).each do |t|
-	  empty_directory("static-modules/#{name}/spec/#{t}")
-	end
-    end
-
-    def create_class_spec
-	template('templates/spec.erb', "static-modules/#{name}/spec/classes/")
-    end
-  end
-end
-
-
-module Opsk
   class Root < Thor
 
     register Opsk::Generate, 'generate', "generate [name] [box]", 'generates opskelaton project structure'
-    register Opsk::Specgen, 'specgen', 'specgen [module]', 'generates rspec-puppet for static-modules/module'
+    register Opsk::Module, 'module', 'module [name]', 'generate an rspec ready Puppet module'
     register Opsk::Package, 'package', 'package', 'packages current module for celestial'
 
     desc 'version', 'print opsk version'  
