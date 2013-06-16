@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    opskeleton (0.2.1)
+    opskeleton (0.3.0)
       thor
 
 GEM
