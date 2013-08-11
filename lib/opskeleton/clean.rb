@@ -10,13 +10,9 @@ module  Opsk
      	File.basename(Dir.getwd)
     end
 
-    def artifact
-    	"#{name}-#{meta.version}"
-    end
-
-    def create_pkg
-	empty_directory('pkg')
-	empty_directory(artifact)
+    def cleanup
+	remove_dir('pkg')
+	remove_dir("#{name}-#{meta.version}")
     end
 
   end
