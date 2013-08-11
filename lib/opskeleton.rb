@@ -5,6 +5,7 @@ require 'yaml'
 require 'ostruct'
 require 'opskeleton/thorable'
 require 'opskeleton/package'
+require 'opskeleton/clean'
 require 'opskeleton/generate'
 require 'opskeleton/module'
 

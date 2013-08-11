@@ -13,6 +13,7 @@ module Opsk
     register Opsk::Generate, 'generate', "generate [name] [box]", 'generates opskelaton project structure'
     register Opsk::Module, 'module', 'module [name]', 'generate an rspec ready Puppet module'
     register Opsk::Package, 'package', 'package', 'packages current module for celestial'
+    register Opsk::Clean, 'clean', 'clean', 'cleans up packaging products'
 
     desc 'version', 'print opsk version'  
     def version
