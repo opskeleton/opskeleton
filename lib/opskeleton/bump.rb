@@ -8,19 +8,12 @@ module  Opsk
 	 OpenStruct.new(YAML.load_file('opsk.yml'))
     end
 
-    def name 
-	File.basename(Dir.getwd)
-    end
-
-    def cleanup
-	remove_dir("#{name}-#{meta.version}")
-    end
-
     def bump
       new_meta = meta
 	new_meta.version = version
-	File.open('opsk.yml', 'w') {|f| f.write(new_meta)}
+	File.open('opsk.yml', 'w') {|f| f.write(new_meta.marshal_dump.to_yaml)}
     end
+
   end
 
 end
