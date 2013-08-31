@@ -41,7 +41,7 @@ module  Opsk
 	tar = "#{artifact}.tar.gz"
 	input = artifact
 	inside('pkg') do
-	  run("tar --exclude=#{excludes} -czf #{tar} #{input}") 
+	  run("tar --exclude=#{excludes} -czf #{tar} #{input} >> /dev/null" , :verbose => false) 
 	end
     end
 
