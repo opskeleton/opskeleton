@@ -12,7 +12,6 @@ module  Opsk
 
     def cleanup
 	remove_dir('pkg')
-	remove_dir("#{name}-#{meta.version}")
     end
 
   end
