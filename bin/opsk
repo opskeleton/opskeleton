@@ -14,6 +14,7 @@ module Opsk
     register Opsk::Module, 'module', 'module [name]', 'generate an rspec ready Puppet module'
     register Opsk::Package, 'package', 'package', 'packages current module for celestial'
     register Opsk::Clean, 'clean', 'clean', 'cleans up packaging products'
+    register Opsk::Bump, 'bump', 'bump', 'bumps up version (clearing old version also)'
 
     desc 'version', 'print opsk version'  
     def version
