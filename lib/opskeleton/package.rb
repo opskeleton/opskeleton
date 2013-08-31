@@ -14,16 +14,20 @@ module  Opsk
     	"#{name}-#{meta.version}"
     end
 
+    def artifact_path
+    	"pkg/#{name}-#{meta.version}"
+    end
+
     def create_build
-	empty_directory(artifact)
-	path = Dir.getwd
-	directory path , artifact , :verbose => false
-	empty_directory("#{artifact}/scripts")
+	empty_directory(artifact_path)
+      path = Dir.getwd
+	directory path, artifact_path, :verbose => false
+	empty_directory("#{artifact_path}/scripts")
 	%w(lookup.rb run.sh).each  do |s|
-	  template("templates/scripts/#{s}", "#{artifact}/scripts/#{s}")
-	  chmod("#{artifact}/scripts/#{s}", 0755)
+	  template("templates/scripts/#{s}", "#{artifact_path}/scripts/#{s}")
+	  chmod("#{artifact_path}/scripts/#{s}", 0755)
 	end
-	template('templates/puppet/site.erb', "#{artifact}/manifests/site.pp")
+	template('templates/puppet/site.erb', "#{artifact_path}/manifests/site.pp")
     end
 
     def create_pkg
@@ -34,7 +38,11 @@ module  Opsk
 	ignored = IO.readlines('.gitignore').map(&:chomp)
 	ignored.delete('modules')
 	excludes = ignored.map{|f| "'#{f}'"}.join(" --exclude=") << ' --exclude-backups --exclude-vcs --exclude=pkg'
-	run("tar --exclude=#{excludes} -czf pkg/#{artifact}.tar.gz #{artifact} > /dev/null", :verbose => false)
+	tar = "#{artifact}.tar.gz"
+	input = artifact
+	inside('pkg') do
+	  run("tar --exclude=#{excludes} -czf #{tar} #{input}") 
+	end
     end
 
   end
