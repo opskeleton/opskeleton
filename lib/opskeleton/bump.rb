@@ -19,7 +19,7 @@ module  Opsk
     def bump
       new_meta = meta
 	new_meta.version = version
-	File.open('opsk.yaml', 'w') {|f| f.write(new_meta)}
+	File.open('opsk.yml', 'w') {|f| f.write(new_meta)}
     end
   end
 
