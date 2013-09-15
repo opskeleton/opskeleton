@@ -27,7 +27,9 @@ module  Opsk
 	  template("templates/scripts/#{s}", "#{artifact_path}/scripts/#{s}")
 	  chmod("#{artifact_path}/scripts/#{s}", 0755)
 	end
-	template('templates/puppet/site.erb', "#{artifact_path}/manifests/site.pp")
+	unless(File.exists?("#{artifact_path}/manifests/site.pp"))
+	  template('templates/puppet/site.erb', "#{artifact_path}/manifests/site.pp")
+	end
     end
 
     def create_pkg
