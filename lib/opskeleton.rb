@@ -8,5 +8,6 @@ require 'opskeleton/package'
 require 'opskeleton/clean'
 require 'opskeleton/bump'
 require 'opskeleton/generate'
+require 'opskeleton/deploy'
 require 'opskeleton/module'
 

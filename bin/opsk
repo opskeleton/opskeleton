@@ -15,6 +15,7 @@ module Opsk
     register Opsk::Package, 'package', 'package', 'packages current module for celestial'
     register Opsk::Clean, 'clean', 'clean', 'cleans up packaging products'
     register Opsk::Bump, 'bump', 'bump', 'bumps up version (clearing old version also)'
+    register Opsk::Deploy, 'deploy', 'deploy [repo]', 'deploy packge into bintray.com'
 
     desc 'version', 'print opsk version'  
     def version
