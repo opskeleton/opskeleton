@@ -10,7 +10,11 @@ module  Opsk
 
     def upload
 	pkg = Opsk::Package.new
-      BintrayDeploy::Actions.new.deploy(repo, "#{pkg.meta.name}-sandbox", pkg.meta.version, pkg.artifact_path)
+	if(File.exists?(pkg.artifact_path))
+        BintrayDeploy::Actions.new.deploy(repo, "#{pkg.meta.name}-sandbox", pkg.meta.version, pkg.artifact_path)
+	else
+	  say('package is missing please run opsk package first')
+	end
     end
 
   end
