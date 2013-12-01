@@ -10,8 +10,14 @@ module  Opsk
 
     def upload
 	pkg = Opsk::Package.new
-	if(File.exists?(pkg.artifact_path))
-        BintrayDeploy::Actions.new.deploy(repo, "#{pkg.meta.name}-sandbox", pkg.meta.version, pkg.artifact_path)
+	tar =  "#{pkg.artifact_path}.tar.gz"
+	if(File.exists?(tar))
+	  begin
+	    BintrayDeploy::Actions.new.deploy(repo, "#{pkg.meta.name}-sandbox", pkg.meta.version, tar)
+	    say("deployed #{tar} to http://dl.bintray.com/#{C.user}/#{repo}/#{tar}")
+	  rescue Exception => e
+          say("failed to deploy due to #{e}")
+	  end
 	else
 	  say('package is missing please run opsk package first')
 	end
