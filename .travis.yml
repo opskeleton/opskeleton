@@ -2,6 +2,7 @@ language: ruby
 rvm:
   - 1.9.3
 script:
+  - "touch ~/.configuration"
   - "bundle install"
   - "bundle exec rake test"
 
