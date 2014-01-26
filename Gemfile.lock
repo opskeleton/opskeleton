@@ -1,14 +1,14 @@
 PATH
   remote: .
   specs:
-    opskeleton (0.4.3)
+    opskeleton (0.4.4)
       bintray_deploy
       thor
 
 GEM
   remote: https://rubygems.org/
   specs:
-    bintray_deploy (0.0.3)
+    bintray_deploy (0.0.4)
       configuration
       rest-client
       thor
