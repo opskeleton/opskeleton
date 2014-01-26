@@ -1,4 +1,3 @@
-require 'bintray_deploy'
 
 module  Opsk
   class Deploy < Thor::Group
@@ -9,6 +8,7 @@ module  Opsk
     desc 'Deploy sandbox into bintray.com'
 
     def upload
+	require 'bintray_deploy'
 	pkg = Opsk::Package.new
 	tar =  "#{pkg.artifact_path}.tar.gz"
 	base = File.basename(tar)
