@@ -51,7 +51,7 @@ Folder layout:
 <img src="https://raw.github.com/narkisr/vagrant-sketching-board/master/images/opsk-folders.png" width='30%' hight='50%'  alt="" />
 
 
-## Lifecycle
+## Module lifecycle
 
 Opskelaton defines a simple module life cycle:
 
@@ -63,6 +63,52 @@ Life cycle scheme:
 
 <img src="https://raw.github.com/narkisr/vagrant-sketching-board/master/images/module-lifecycle-black.png" width='30%' hight='50%'  alt="" />
 
+## Packaging 
+
+Opskelaton fully supports deployment and portable execution of sandboxes on non Vagrant environments:
+
+```bash
+$ opsk generate foo ubuntu-13.10
+$ cd foo-sandbox
+# The package version file
+$ cat opsk.yaml
+--- 
+  version: '0.0.1'
+  name: foo
+# post bundle and gem install ..
+$ opsk package
+      create  pkg/foo-sandbox-0.0.1
+      create  pkg/foo-sandbox-0.0.1/scripts
+      create  pkg/foo-sandbox-0.0.1/scripts/lookup.rb
+       chmod  pkg/foo-sandbox-0.0.1/scripts/lookup.rb
+      create  pkg/foo-sandbox-0.0.1/scripts/run.sh
+       chmod  pkg/foo-sandbox-0.0.1/scripts/run.sh
+      create  pkg/foo-sandbox-0.0.1/manifests/site.pp
+       exist  pkg
+$ ls pkg
+foo-sandbox-0.0.1  foo-sandbox-0.0.1.tar.gz
+```
+The packaging process creates a portable tar file that can be run on any machine with puppet installed via the bundled run.sh:
+
+```bash 
+$ tar -xvzf foo-sandbox-0.0.1.tar.gz
+$ cd foo-sandbox-0.0.1 
+$ sudo ./run.sh
+```
+
+An external node classifier based runner is also available under scripts/run.sh, this runner expects to get a <hostname>.yaml input file with the required node classes.
+
+
+## Deployment
+
+The packaged tar files can be consumed using any tool and protocol however http is recommended, opsk has built in support for deploying public sandboxes into bintray:
+
+```bash 
+$ opsk package
+$ opsk deploy <bintray-repo>
+```
+
+Make sure to  [configure](https://github.com/narkisr/bintray-deploy#usage) configure the bintray API key.
 # Copyright and license
 
 Copyright [2013] [Ronen Narkis]
