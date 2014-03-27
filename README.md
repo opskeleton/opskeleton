@@ -14,7 +14,7 @@ Opsk aims to solve the following common issues:
 
 See it in action [here](https://www.youtube.com/watch?v=LNlHC54Ej8c).
 
-[![Build Status](https://travis-ci.org/narkisr/opskeleton.png)](https://travis-ci.org/narkisr/opskeleton)
+[![Build Status](https://travis-ci.org/opskeleton/opskeleton.png)](https://travis-ci.org/narkisr/opskeleton)
 
 Usage
 =========
