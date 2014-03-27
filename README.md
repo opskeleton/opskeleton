@@ -69,7 +69,7 @@ Creating new (static) modules is easy as:
 $ opsk module foo
 ```
 
-Each generated module will contain puppet-rspec with matching Rakefile (see [testing]()).
+Each generated module will contain puppet-rspec with matching Rakefile (see [testing](https://github.com/opskeleton/opskeleton#testing)).
 
 ## Testing
 
@@ -99,6 +99,7 @@ $ cat opsk.yaml
 --- 
   version: '0.0.1'
   name: foo
+
 # post bundle and gem install ..
 $ opsk package
       create  pkg/foo-sandbox-0.0.1
