@@ -63,6 +63,30 @@ Life cycle scheme:
 
 <img src="https://raw.github.com/narkisr/vagrant-sketching-board/master/images/module-lifecycle-black.png" width='30%' hight='50%'  alt="" />
 
+Creating new (static) modules is easy as:
+
+```bash
+$ opsk module foo
+```
+
+Each generated module will contain puppet-rspec with matching Rakefile (see [testing]()).
+
+## Testing
+
+Opskelaton supports two levels of testing:
+
+* Static module testing that includes rspec and linting.
+* Integration testing using [serverspec](http://serverspec.org/) and Vagrant.
+
+```bash
+# linting all static modules
+$ rake lint
+# rspecing 
+$ rake modspec
+# running serverspec
+$ rake spec
+```
+
 ## Packaging 
 
 Opskelaton fully supports deployment and portable execution of sandboxes on non Vagrant environments:
