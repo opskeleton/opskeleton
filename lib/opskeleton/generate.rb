@@ -74,5 +74,9 @@ module Opsk
 	   end
 	end
     end
+
+    def server_spec
+	directory('templates/parent/spec', "#{path}/spec")
+    end
   end
 end
