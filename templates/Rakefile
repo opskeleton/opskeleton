@@ -20,5 +20,5 @@ task :modspec do
 end
 
 require 'puppet-lint/tasks/puppet-lint'
-PuppetLint.configuration.ignore_paths =['modules/**/*']
+PuppetLint.configuration.ignore_paths =['modules/**/*', 'vendor/**/*']
 PuppetLint.configuration.send("disable_80chars")
