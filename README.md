@@ -57,7 +57,7 @@ Opskelaton defines a simple module life cycle:
 
  1. Internal non reusable modules (usually specific to a client site) go under static-modules
  2. If we create a general reusable module which is ready for prime time we pull out to a new git repository.
- 3. The extracted module is added back as a third party (using [librarian-puppet](https://github.com/rodjek/librarian-puppet) module which reside under module folder.
+ 3. The extracted module is added back as a third party (using [librarian-puppet](https://github.com/rodjek/librarian-puppet) module which resides under modules folder.
 
 Life cycle scheme:
 
