@@ -135,6 +135,16 @@ deployed foo-sandbox-0.0.1.tar.gz to http://dl.bintray.com/narkisr/<bintray-repo
 ```
 
 Make sure to  [configure](https://github.com/narkisr/bintray-deploy#usage) configure the bintray API key.
+
+## Updating
+You can apply latest opsk version conventions by running generate again, conflicts will be detected and resolved by answering y/n:
+```bash
+# foo box already exists
+$ opsk generate foo <vagrant-box>
+ exist  foo-sandbox
+    conflict  foo-sandbox/Vagrantfile
+Overwrite /home/ronen/code/foo-sandbox/Vagrantfile? (enter "h" for help) [Ynaqdh]
+```
 # Copyright and license
 
 Copyright [2013] [Ronen Narkis]
