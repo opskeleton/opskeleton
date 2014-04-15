@@ -88,7 +88,6 @@ $ rake spec
 ```
 
 ## Packaging 
-
 Opskelaton fully supports deployment and portable execution of sandboxes on non Vagrant environments:
 
 ```bash
@@ -137,14 +136,24 @@ deployed foo-sandbox-0.0.1.tar.gz to http://dl.bintray.com/narkisr/<bintray-repo
 Make sure to  [configure](https://github.com/narkisr/bintray-deploy#usage) configure the bintray API key.
 
 ## Updating
-You can apply latest opsk version conventions by running generate again, conflicts will be detected and resolved by answering y/n:
+Keeping you box up to date with latest opsk version is easy, just re-generate it again and resolve conflicts by answering y/n:
 ```bash
+# Moving to latest opsk
+$ gem update opskeleton
 # foo box already exists
 $ opsk generate foo <vagrant-box>
  exist  foo-sandbox
     conflict  foo-sandbox/Vagrantfile
 Overwrite /home/ronen/code/foo-sandbox/Vagrantfile? (enter "h" for help) [Ynaqdh]
 ```
+
+## Vagrant
+Opskeleton generates a Vagrant file with couple of enhancements:
+ 
+* VAGRANT_BRIDGE (default eth0) for setting up public bridge on the go.
+* PUPPET_ENV (default dev) for setting puppet environment.
+* Puppet options preset to match modules and hiera folders.
+
 # Copyright and license
 
 Copyright [2013] [Ronen Narkis]
