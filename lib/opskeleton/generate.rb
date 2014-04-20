@@ -41,6 +41,7 @@ module Opsk
 	template('templates/puppetfile.erb', "#{path}/Puppetfile")
 	template('templates/puppet/default.erb', "#{path}/manifests/default.pp")
 	copy_file('templates/run.sh', "#{path}/run.sh")
+	copy_file('templates/boot.sh', "#{path}/boot.sh")
 	chmod("#{path}/run.sh", 0755)
     end
 
