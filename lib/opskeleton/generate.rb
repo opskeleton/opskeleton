@@ -43,6 +43,7 @@ module Opsk
 	copy_file('templates/run.sh', "#{path}/run.sh")
 	copy_file('templates/boot.sh', "#{path}/boot.sh")
 	chmod("#{path}/run.sh", 0755)
+	chmod("#{path}/boot.sh", 0755)
     end
 
     def create_heira
@@ -65,6 +66,10 @@ module Opsk
 	template('templates/parent/travis.erb', "#{path}/.travis.yml")
     end
 
+    def server_spec
+	directory('templates/parent/spec', "#{path}/spec")
+    end
+
     def git
 	if(!File.exists?("#{path}/.git"))
 	   copy_file('templates/gitignore', "#{path}/.gitignore")
@@ -76,8 +81,5 @@ module Opsk
 	end
     end
 
-    def server_spec
-	directory('templates/parent/spec', "#{path}/spec")
-    end
   end
 end
