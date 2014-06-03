@@ -154,6 +154,27 @@ Opskeleton generates a Vagrant file with couple of enhancements:
 * PUPPET_ENV (default dev) for setting puppet environment.
 * Puppet options preset to match modules and hiera folders.
 
+## Boxes
+Opskeleton recommends the use of [box-cutter](https://github.com/box-cutter) in order to create Vagrant boxes in a consistent manner (as no free hosting solution currently exist):
+```bash
+# make sure to have latest packer
+$ packer version
+Packer v0.6.0
+$ git clone git@github.com:box-cutter/ubuntu-vm.git
+$ cd ubuntu-vm
+# Edit Makefile.local
+$ cat Makefile.local
+# Makefile.local
+CM := puppet
+CM_VERSION := 3.6.1
+$ make virtualbox/ubuntu1404
+```
+A useful convention for Box names:
+
+```bash
+ubuntu-14.04_puppet-3.6.1 ([os]-[version]_[provisioner]-[version])
+```
+
 # Copyright and license
 
 Copyright [2013] [Ronen Narkis]
