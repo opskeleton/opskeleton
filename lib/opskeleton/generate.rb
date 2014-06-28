@@ -5,6 +5,7 @@ module Opsk
     argument :name, :type => :string, :desc => 'project name'
     argument :box, :type => :string, :desc => 'Vagrant box type'
     class_option :box_url, :type=> :string, :desc => 'vagrant box url'
+    class_option :os_type, :type=> :string, :desc => 'Operating system type (bsd/linux)'
 
     desc 'Generate a Vagrant, Puppet librarian and fpm project'
 
@@ -14,7 +15,12 @@ module Opsk
 
     def create_vagrant_file
 	empty_directory(path)
-	template('templates/vagrant.erb', "#{path}/Vagrantfile")
+	case options['os_type'] 
+	when 'bsd'
+	  template('templates/vagrant_bsd.erb', "#{path}/Vagrantfile")
+	else
+	  template('templates/vagrant.erb', "#{path}/Vagrantfile")
+	end
     end
 
     def create_gemfile
@@ -72,12 +78,12 @@ module Opsk
 
     def git
 	if(!File.exists?("#{path}/.git"))
-	   copy_file('templates/gitignore', "#{path}/.gitignore")
-	   inside(path) do
-	     run('git init .')
-	     run('git add -A')
-	     run("git commit -m 'initial sandbox import'")
-	   end
+	  copy_file('templates/gitignore', "#{path}/.gitignore")
+	  inside(path) do
+	    run('git init .')
+	    run('git add -A')
+	    run("git commit -m 'initial sandbox import'")
+	  end
 	end
     end
 
