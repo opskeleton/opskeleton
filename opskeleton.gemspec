@@ -14,6 +14,7 @@ Gem::Specification.new do |gem|
   gem.add_dependency('thor')
   gem.add_dependency('bintray_deploy')
   gem.add_development_dependency('puppet')
+  gem.add_development_dependency('chef')
   gem.add_development_dependency('rspec-puppet')
   gem.add_development_dependency('puppetlabs_spec_helper', '>= 0.1.0')
   gem.add_development_dependency('pry')

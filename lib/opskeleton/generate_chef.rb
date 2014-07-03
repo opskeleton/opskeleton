@@ -40,7 +40,7 @@ module Opsk
 	empty_directory("#{path}/static-cookbooks/")
 	copy_file('templates/chef/Cheffile', "#{path}/Cheffile")
       empty_directory("#{path}/roles/")
-	template('templates/chef/role.erb', "#{path}/roles/#{name}.rb")
+	template('templates/chef/roles.erb', "#{path}/roles/#{name}.rb")
 	copy_file('templates/chef/run.sh', "#{path}/run.sh")
 	copy_file('templates/boot.sh', "#{path}/boot.sh")
 	chmod("#{path}/run.sh", 0755)
