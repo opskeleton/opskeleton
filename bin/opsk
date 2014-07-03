@@ -10,7 +10,8 @@ require 'opskeleton'
 module Opsk
   class Root < Thor
 
-    register Opsk::Generate, 'generate', "generate [name] [box]", 'generates opskelaton project structure'
+    register Opsk::GeneratePuppet, 'generate_puppet', "generate_puppet [name] [box]", 'generates a Puppet based project '
+    register Opsk::GenerateChef, 'generate_chef', "generate_chef [name] [box]", 'generates a Chef based project '
     register Opsk::Module, 'module', 'module [name]', 'generate an rspec ready Puppet module'
     register Opsk::Package, 'package', 'package', 'packages current module for celestial'
     register Opsk::Clean, 'clean', 'clean', 'cleans up packaging products'
@@ -25,6 +26,7 @@ module Opsk
 end
 
 # not sure that this is the cleanest way
-Opsk::Root.tasks['generate'].options = Opsk::Generate.class_options 
+Opsk::Root.tasks['generate_puppet'].options = Opsk::GeneratePuppet.class_options 
+Opsk::Root.tasks['generate_chef'].options = Opsk::GenerateChef.class_options 
 
 Opsk::Root.start ARGV

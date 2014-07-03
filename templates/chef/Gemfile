@@ -1,0 +1,13 @@
+source "https://rubygems.org"
+
+# base
+gem 'chef'
+
+# testing
+gem 'serverspec'
+gem 'test-kitchen'
+
+# build 
+gem 'rake'
+gem 'foodcritic'
+gem 'librarian-chef'

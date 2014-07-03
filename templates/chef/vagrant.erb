@@ -1,0 +1,25 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+Vagrant.configure("2") do |config|
+
+  bridge = ENV['VAGRANT_BRIDGE']
+  bridge ||= 'eth0'
+  env  = ENV['PUPPET_ENV']
+  env ||= 'dev'
+
+  config.vm.box = '<%=box%>' <%if(options['box_url']) %>
+  <%="config.vm.box_url = '#{options['box_url']}'"%> <%end%>
+  config.vm.network :public_network, :bridge => bridge
+  config.vm.hostname = '<%=name%>.local'
+
+  config.vm.provider :virtualbox do |vb|
+    vb.customize ['modifyvm', :id, '--memory', 2048, '--cpus', 2]
+  end
+
+  config.vm.provision :chef_solo do |chef|
+    chef.cookbooks_path = ['static-cookbooks', 'cookbooks']
+    chef.roles_path = 'roles'
+    chef.add_role('onering')
+  end
+
+end
