@@ -1,5 +1,5 @@
 module Opsk 
-  class Generate < Thor::Group
+  class GeneratePuppet < Thor::Group
     include Thorable, Thor::Actions
 
     argument :name, :type => :string, :desc => 'project name'
