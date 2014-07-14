@@ -4,7 +4,7 @@ require 'minitest/autorun'
 require_relative 'test_helper'
 require 'fileutils'
 
-class PackageTest < MiniTest::Unit::TestCase
+class PuppetPackageTest < MiniTest::Unit::TestCase
   include FileUtils
 
   def setup
