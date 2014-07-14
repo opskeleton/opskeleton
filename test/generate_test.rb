@@ -8,7 +8,7 @@ class GenerateTest< MiniTest::Unit::TestCase
   include FileUtils
 
   def setup
-    Opsk::Root.start ['generate', 'foo', 'bar']
+    Opsk::Root.start ['generate_puppet', 'foo', 'bar']
   end
 
   def teardown 
