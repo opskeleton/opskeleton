@@ -15,7 +15,7 @@ class PackageTest < MiniTest::Unit::TestCase
     rm_rf 'foo-sandbox'
   end
 
-  def with_cwd dir
+  def with_cwd(dir)
     Dir.chdir dir do
 	yield  
     end
