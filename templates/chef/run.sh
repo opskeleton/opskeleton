@@ -1,1 +1,1 @@
-puppet apply --modulepath=modules:static-modules manifests/default.pp --hiera_config hiera.yaml $@
+chef-solo -c solo.rb -j dna.json
