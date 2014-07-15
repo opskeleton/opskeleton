@@ -9,6 +9,9 @@ class ChefPackageTest < MiniTest::Unit::TestCase
 
   def setup
     Opsk::Root.start ['generate_chef', 'foo', 'bar']
+    Dir.mkdir('foo-sandbox/cookbooks')
+    FileUtils.touch('foo-sandbox/cookbooks/1')
+
   end
 
   def teardown 
@@ -22,13 +25,14 @@ class ChefPackageTest < MiniTest::Unit::TestCase
   end
 
   def test_build
-   with_cwd 'foo-sandbox' do
-     Opsk::Root.start ['package']
-   end
-   assert File.exists?('foo-sandbox/pkg/foo-sandbox-0.0.1/Cheffile')
-   assert File.exists?('foo-sandbox/pkg/foo-sandbox-0.0.1/roles/foo.rb')
-   assert File.exists?('foo-sandbox/pkg/foo-sandbox-0.0.1/dna.json')
-   assert File.exists?('foo-sandbox/pkg/foo-sandbox-0.0.1.tar.gz')
+    with_cwd 'foo-sandbox' do
+	Opsk::Root.start ['package']
+    end
+    assert File.exists?('foo-sandbox/pkg/foo-sandbox-0.0.1/Cheffile')
+    assert File.exists?('foo-sandbox/pkg/foo-sandbox-0.0.1/roles/foo.rb')
+    assert Dir.exists?('foo-sandbox/pkg/foo-sandbox-0.0.1/cookbooks')
+    assert File.exists?('foo-sandbox/pkg/foo-sandbox-0.0.1/dna.json')
+    assert File.exists?('foo-sandbox/pkg/foo-sandbox-0.0.1.tar.gz')
   end
 
 end
