@@ -35,7 +35,7 @@ Creating out first sandbox
 ```bash
  $ rvm use system 
  # parameters include name vagrant-box
- $ opsk generate redis ubuntu-13.10
+ $ opsk generate_puppet redis ubuntu-13.10
  $ cd redis-sandbox
  $ bundle install 
  $ librarian-puppet install 
@@ -91,7 +91,7 @@ $ rake spec
 Opskelaton fully supports deployment and portable execution of sandboxes on non Vagrant environments:
 
 ```bash
-$ opsk generate foo ubuntu-13.10
+$ opsk generate_puppet foo ubuntu-13.10
 $ cd foo-sandbox
 # The package version file
 $ cat opsk.yaml
