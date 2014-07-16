@@ -44,7 +44,7 @@ module Opsk
 	template('templates/chef/dna.json.erb', "#{path}/dna.json")
 	copy_file('templates/chef/run.sh', "#{path}/run.sh")
 	copy_file('templates/chef/solo.rb', "#{path}/solo.rb")
-	copy_file('templates/boot.sh', "#{path}/boot.sh")
+	copy_file('templates/chef/boot.sh', "#{path}/boot.sh")
 	chmod("#{path}/run.sh", 0755)
 	chmod("#{path}/boot.sh", 0755)
     end
