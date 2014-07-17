@@ -31,11 +31,14 @@ class PuppetPackageTest < MiniTest::Unit::TestCase
     assert File.exists?('foo-sandbox/pkg/foo-sandbox-0.0.1.tar.gz')
   end
 
-  # def test_script_override
-  #   with_cwd 'foo-sandbox' do  
-  #   Opsk::Root.start ['package']
-  #   end
-  #   File.open('foo-sandbox/scripts', 'w') { |f| f.write(File.read('bar.txt')) } 	
-  #   assert File.exists?('foo-sandbox/pkg/foo-sandbox-0.0.1/scripts/run.sh')
-  # end
+  def test_script_override
+    Dir.mkdir('foo-sandbox/scripts/')
+    File.open('foo-sandbox/scripts/run.sh', 'w') { |f| f.write('my script') } 	
+    with_cwd 'foo-sandbox' do  
+	Opsk::Root.start ['package']
+    end
+    File.open('foo-sandbox/pkg/foo-sandbox-0.0.1/scripts/run.sh', 'r') { |f| 
+	assert_equal(f.read , 'my script')
+    } 	
+  end
 end
