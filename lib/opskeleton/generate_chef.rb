@@ -23,7 +23,7 @@ module Opsk
     end
 
     def create_rakefile
-	copy_file('templates/Rakefile', "#{path}/Rakefile")
+	copy_file('templates/chef/Rakefile', "#{path}/Rakefile")
     end
 
     def create_version
