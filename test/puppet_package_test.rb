@@ -22,13 +22,20 @@ class PuppetPackageTest < MiniTest::Unit::TestCase
   end
 
   def test_build
-   with_cwd 'foo-sandbox' do
-     Opsk::Root.start ['package']
-   end
-   assert File.exists?('foo-sandbox/pkg/foo-sandbox-0.0.1/Puppetfile')
-   assert File.exists?('foo-sandbox/pkg/foo-sandbox-0.0.1/manifests/site.pp')
-   assert File.exists?('foo-sandbox/pkg/foo-sandbox-0.0.1/scripts/run.sh')
-   assert File.exists?('foo-sandbox/pkg/foo-sandbox-0.0.1.tar.gz')
+    with_cwd 'foo-sandbox' do
+	Opsk::Root.start ['package']
+    end
+    assert File.exists?('foo-sandbox/pkg/foo-sandbox-0.0.1/Puppetfile')
+    assert File.exists?('foo-sandbox/pkg/foo-sandbox-0.0.1/manifests/site.pp')
+    assert File.exists?('foo-sandbox/pkg/foo-sandbox-0.0.1/scripts/run.sh')
+    assert File.exists?('foo-sandbox/pkg/foo-sandbox-0.0.1.tar.gz')
   end
 
+  # def test_script_override
+  #   with_cwd 'foo-sandbox' do  
+  #   Opsk::Root.start ['package']
+  #   end
+  #   File.open('foo-sandbox/scripts', 'w') { |f| f.write(File.read('bar.txt')) } 	
+  #   assert File.exists?('foo-sandbox/pkg/foo-sandbox-0.0.1/scripts/run.sh')
+  # end
 end
