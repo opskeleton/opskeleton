@@ -3,3 +3,4 @@ cookbook_path ["#{Dir.pwd}/cookbooks","#{Dir.pwd}/static-cookbooks"]
 role_path "#{Dir.pwd}/roles/"
 log_level :info
 log_location STDOUT
+environment_path "#{Dir.pwd}/environments"

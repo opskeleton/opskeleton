@@ -20,6 +20,8 @@ Vagrant.configure("2") do |config|
     chef.cookbooks_path = ['static-cookbooks', 'cookbooks']
     chef.roles_path = 'roles'
     chef.add_role('<%=name%>')
+    chef.environment = env
+    chef.environments_path = 'environments'
   end
 
 end

@@ -36,6 +36,11 @@ module Opsk
 	template('templates/ruby-version.erb', "#{path}/.ruby-version")
     end
 
+    def create_environment
+	empty_directory("#{path}/environments")
+	copy_file('templates/chef/environments/dev.rb', "#{path}/environments/dev.rb")
+    end
+
     def create_chef_base
 	empty_directory("#{path}/static-cookbooks/")
 	copy_file('templates/chef/Cheffile', "#{path}/Cheffile")
