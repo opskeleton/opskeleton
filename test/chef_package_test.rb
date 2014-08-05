@@ -32,7 +32,9 @@ class ChefPackageTest < MiniTest::Unit::TestCase
     assert File.exists?('foo-sandbox/pkg/foo-sandbox-0.0.1/roles/foo.rb')
     assert File.exists?('foo-sandbox/pkg/foo-sandbox-0.0.1/boot.sh')
     assert Dir.exists?('foo-sandbox/pkg/foo-sandbox-0.0.1/cookbooks')
+    assert Dir.exists?('foo-sandbox/pkg/foo-sandbox-0.0.1/environments')
     assert File.exists?('foo-sandbox/pkg/foo-sandbox-0.0.1/dna.json')
+    assert File.exists?('foo-sandbox/pkg/foo-sandbox-0.0.1/environments/dev.rb')
     assert File.exists?('foo-sandbox/pkg/foo-sandbox-0.0.1.tar.gz')
   end
 
