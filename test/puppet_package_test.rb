@@ -9,6 +9,8 @@ class PuppetPackageTest < MiniTest::Unit::TestCase
 
   def setup
     Opsk::Root.start ['generate_puppet', 'foo', 'bar']
+    FileUtils.touch('foo-sandbox/Gemfile.lock')
+    FileUtils.mkdir('foo-sandbox/modules')
   end
 
   def teardown 
@@ -32,6 +34,9 @@ class PuppetPackageTest < MiniTest::Unit::TestCase
   end
 
   def test_script_override
+    File.open('foo-sandbox/opsk.yaml', 'a') do |file|
+	file.puts '    - scripts'
+    end
     Dir.mkdir('foo-sandbox/scripts/')
     File.open('foo-sandbox/scripts/run.sh', 'w') { |f| f.write('my script') } 	
     with_cwd 'foo-sandbox' do  

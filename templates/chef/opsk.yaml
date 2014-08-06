@@ -1,0 +1,18 @@
+--- 
+  version: '0.0.1'
+  name: <%= name %>
+  includes: 
+    - Cheffile
+    - cookbooks
+    - static-cookbooks
+    - dna.json
+    - environments
+    - Gemfile
+    - Gemfile.lock
+    - opsk.yaml
+    - roles
+    - LICENSE-2.0.txt
+    - run.sh
+    - boot.sh
+    - solo.rb
+

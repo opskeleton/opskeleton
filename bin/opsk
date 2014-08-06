@@ -7,6 +7,11 @@ require 'thor/runner'
 require 'thor/group'
 require 'opskeleton'
 
+if(File.exists?('opks.yml'))
+  error 'opsk.yml found please rename to opsk.yaml' 
+  exit 1
+end
+
 module Opsk
   class Root < Thor
 

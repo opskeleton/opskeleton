@@ -32,7 +32,7 @@ module Opsk
     end
 
     def create_version
-	template('templates/opsk.yml', "#{path}/opsk.yml")
+	template('templates/puppet/opsk.yaml', "#{path}/opsk.yaml")
     end
 
     def create_rvmrc

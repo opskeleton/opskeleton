@@ -11,7 +11,7 @@ class ChefPackageTest < MiniTest::Unit::TestCase
     Opsk::Root.start ['generate_chef', 'foo', 'bar']
     Dir.mkdir('foo-sandbox/cookbooks')
     FileUtils.touch('foo-sandbox/cookbooks/1')
-
+    FileUtils.touch('foo-sandbox/Gemfile.lock')
   end
 
   def teardown 

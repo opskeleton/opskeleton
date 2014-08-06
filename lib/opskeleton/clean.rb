@@ -3,7 +3,7 @@ module  Opsk
     include Thorable, Thor::Actions
 
     def meta 
-	 OpenStruct.new(YAML.load_file('opsk.yml'))
+	 OpenStruct.new(YAML.load_file('opsk.yaml'))
     end
 
     def name 

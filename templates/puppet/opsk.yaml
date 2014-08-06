@@ -1,0 +1,14 @@
+--- 
+  version: '0.0.1'
+  name: <%= name %>
+  includes: 
+    - Puppetfile
+    - modules
+    - static-modules
+    - Gemfile
+    - Gemfile.lock
+    - opsk.yaml
+    - LICENSE-2.0.txt
+    - run.sh
+    - boot.sh
+
