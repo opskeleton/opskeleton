@@ -6,7 +6,7 @@ module Opsk
 
     def create_dockerfile
 	empty_directory('docker')
-	template("templates/#{type_of}/Docker.erb", "#{path}/Dockerfile")
+	template("templates/#{type_of}/docker.erb", "docker/Dockerfile")
     end
 
   end

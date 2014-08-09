@@ -1,0 +1,11 @@
+FROM ubuntu:13.10
+
+RUN locale-gen en_US en_US.UTF-8
+
+RUN apt-get -q update
+RUN apt-mark hold initscripts udev plymouth mountall
+RUN apt-get -qy --force-yes dist-upgrade
+
+RUN apt-get install dbus avahi-daemon avahi-utils libnss-mdns wget -y
+
+
