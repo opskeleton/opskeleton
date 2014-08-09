@@ -10,5 +10,15 @@ module Opsk
 	  end
 	end
     end
+
+    def meta 
+	OpenStruct.new(YAML.load_file('opsk.yaml'))
+    end
+
+    def type_of
+	return :puppet if meta.includes.include?('Puppetfile')
+	return :chef if meta.includes.include?('Cheffile')
+	raise Exception.new('no matching provisoner type found, make sure to include Cheffile or Pupppetfile in opsk.yaml')
+    end
   end
 end

@@ -19,6 +19,7 @@ module Opsk
     register Opsk::GenerateChef, 'generate_chef', "generate_chef [name] [box]", 'generates a Chef based project '
     register Opsk::Module, 'module', 'module [name]', 'generate an rspec ready Puppet module'
     register Opsk::Package, 'package', 'package', 'packages current module for celestial'
+    register Opsk::Dockerize, 'dockerize', 'dockerize', 'Creates a docker image from the current sandbox'
     register Opsk::Clean, 'clean', 'clean', 'cleans up packaging products'
     register Opsk::Bump, 'bump', 'bump', 'bumps up version (clearing old version also)'
     register Opsk::Deploy, 'deploy', 'deploy [bintray repo]', 'deploy packge into bintray.com'
