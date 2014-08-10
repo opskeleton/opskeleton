@@ -2,18 +2,6 @@ module  Opsk
   class Package < Thor::Group
     include Thorable, Thor::Actions
 
-    def name 
-	File.basename(Dir.getwd)
-    end
-
-    def artifact
-	"#{name}-#{meta.version}"
-    end
-
-    def artifact_path
-	"pkg/#{name}-#{meta.version}"
-    end
-
     def create_build
 	empty_directory(artifact_path)
 	path = Dir.getwd

@@ -20,5 +20,19 @@ module Opsk
 	return :chef if meta.includes.include?('Cheffile')
 	raise Exception.new('no matching provisoner type found, make sure to include Cheffile or Pupppetfile in opsk.yaml')
     end
+
+    def name 
+	File.basename(Dir.getwd)
+    end
+
+    def artifact
+	"#{name}-#{meta.version}"
+    end
+
+    def artifact_path
+	"pkg/#{name}-#{meta.version}"
+    end
+
+
   end
 end
