@@ -12,5 +12,9 @@ module Opsk
 	template("templates/#{type_of}/#{os_type}_docker.erb", 'Dockerfile')
     end
 
+    def create_image
+	run("docker build . -t #{name}/#{meta.version}")
+    end
+
   end
 end
