@@ -7,4 +7,4 @@ RUN apt-mark hold initscripts udev plymouth mountall
 RUN apt-get -qy --force-yes dist-upgrade
 
 ADD pkg/<%=artifact_path%> /tmp
-RUN cd /tmp/<%=artifact%> && ./run.sh <%=env%>
+RUN cd /tmp/<%=artifact%> && ./run.sh dev
