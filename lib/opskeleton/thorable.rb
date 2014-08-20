@@ -22,7 +22,7 @@ module Opsk
     end
 
     def name 
-	File.basename(Dir.getwd)
+	"#{meta.name}-sandbox"
     end
 
     def artifact
