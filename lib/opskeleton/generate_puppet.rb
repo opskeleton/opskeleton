@@ -17,9 +17,9 @@ module Opsk
 	empty_directory(path)
 	case options['os_type'] 
 	when 'bsd'
-	  template('templates/vagrant_bsd.erb', "#{path}/Vagrantfile")
+	  template('templates/puppet/vagrant_bsd.erb', "#{path}/Vagrantfile")
 	else
-	  template('templates/vagrant.erb', "#{path}/Vagrantfile")
+	  template('templates/puppet/vagrant.erb', "#{path}/Vagrantfile")
 	end
     end
 
