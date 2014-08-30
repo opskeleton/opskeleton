@@ -4,7 +4,7 @@ source "https://rubygems.org"
 gem 'chef'
 
 # testing
-gem 'serverspec'
+gem 'serverspec', '~> 1.14.0'
 gem 'test-kitchen'
 
 # build 
