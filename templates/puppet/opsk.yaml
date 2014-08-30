@@ -4,6 +4,8 @@
   includes: 
     - Puppetfile
     - modules
+    - manifests
+    - hieradata
     - static-modules
     - Gemfile
     - Gemfile.lock
