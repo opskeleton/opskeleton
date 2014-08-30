@@ -4,7 +4,7 @@ Vagrant.configure("2") do |config|
   config.vm.define :<%=name%> do |node|
     bridge = ENV['VAGRANT_BRIDGE']
     bridge ||= 'eth0'
-    env  = ENV['PUPPET_ENV']
+    env  = ENV['CHEF_ENV']
     env ||= 'dev'
 
     node.vm.box = '<%=box%>' <%if(options['box_url']) %>
