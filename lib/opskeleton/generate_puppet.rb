@@ -24,7 +24,7 @@ module Opsk
     end
 
     def create_gemfile
-	copy_file('templates/gemfile', "#{path}/Gemfile")
+	copy_file('templates/puppet/gemfile', "#{path}/Gemfile")
     end
 
     def create_rakefile
