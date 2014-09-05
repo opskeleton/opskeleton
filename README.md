@@ -5,13 +5,15 @@
 Opskelaton is an opinionated bootstrap tool for local Sandbox projects.
 
 Opskeleton aims to solve the following common issues:
- * Devops develop Puppet modules on master machines which results with 'It works on my (machine) master' approach.
- * Implicit/Missing dependencies, like ruby version used, operating system, gems, third party puppet module
- * Manual steps in setting up puppet modules and local sandboxes (like installing third party code).
+ * Developing Puppet modules/Chef cookbooks on master machines which results with 'It works on my master/server' approach.
+ * Large monolithic Puppet/Chef code bases, code isn't modular or reusable.
+ * Implicit/Missing dependencies, like ruby version used, operating system, gems, third party modules/cookbooks.
+ * Manual steps in setting up modules/cookbooks and local sandboxes (like installing third party code).
  * Non standard layout, projects missing README and LICENSE files, no clear separation between developed and dependant code.
- * No clear development guidelines, for example extracting general modules and exporting them.
+ * No clear development guidelines, for example extracting general modules and exporting them, no deployment packaging or general testing guide.
+ * No continues build, linting and testing, provisioning code is second class citizen.
  
-Opskeleton comes to solve these issues by introducing a decentralized development workflow with pre-defined layout, packaging and dependency management.
+Opskeleton comes to solve these issues by introducing a decentralized development work flow with pre-defined layout, packaging and dependency management.
 
 See it in action [here](https://www.youtube.com/watch?v=LNlHC54Ej8c).
 
