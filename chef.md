@@ -26,7 +26,7 @@ Opskelaton defines a simple cookbook life cycle:
 
  1. Internal non reusable cookbooks (usually specific to a client site) go under static-cookbooks
  2. If we create a general reusable cookbook which is ready for prime time we pull out to a new git repository.
- 3. The extracted cookbook is added back as a third party (using [librarian-chef](https://github.com/applicationsonline/librarian-chef) cookbook which resides under cookbooks folder).
+ 3. The extracted cookbook is added back as a third party (using [librarian-chef](https://github.com/applicationsonline/librarian-chef) thatd will place them under cookbooks folder).
 
 Life cycle scheme:
 
