@@ -1,8 +1,6 @@
 # Intro
 
-Opskelaton fully supports chef based sandboxes with the same lifecycle semantics 
-
-it offers similar features to the Puppet based sandboxes with additional support for roles, environments and cookbooks.
+Opskelaton fully supports Chef based sandboxes it offers similar features to the Puppet based sandboxes with additional support for roles, environments and cookbooks.
 
 # Usage
 
