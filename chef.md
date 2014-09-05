@@ -32,7 +32,7 @@ Life cycle scheme:
 
 <img src="https://github.com/opskeleton/opskeleton/blob/master/img/chef-cycle.png" width='30%' hight='50%'  alt="" />
 
-Creating new (cookbooks) modules is easy as:
+Creating new cookbooks is easy as:
 
 ```bash
 $ opsk cookbook foo
