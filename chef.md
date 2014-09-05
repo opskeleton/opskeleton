@@ -19,7 +19,7 @@ Opskelaton creates the complete folder structure fine tuned to match best practi
 
 Folder layout:
 
-<!-- <img src="https://raw.github.com/narkisr/vagrant&#45;sketching&#45;board/master/images/opsk&#45;folders.png" width='30%' hight='50%'  alt="" /> -->
+<!-- <img src="https://github.com/opskeleton/opskeleton/blob/master/img/chef-layout.png" width='30%' hight='50%'  alt="" /> -->
 
 
 ## Cookbook lifecycle
@@ -32,7 +32,7 @@ Opskelaton defines a simple cookbook life cycle:
 
 Life cycle scheme:
 
-<img src="https://raw.github.com/narkisr/vagrant-sketching-board/master/images/module-lifecycle-black.png" width='30%' hight='50%'  alt="" />
+<img src="https://github.com/opskeleton/opskeleton/blob/master/img/chef-cycle.png" width='30%' hight='50%'  alt="" />
 
 Creating new (cookbooks) modules is easy as:
 
