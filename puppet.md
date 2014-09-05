@@ -17,7 +17,7 @@ Opskelaton creates the complete folder structure fine tuned to match best practi
 
 Folder layout:
 
-<img src="https://raw.github.com/narkisr/vagrant-sketching-board/master/images/opsk-folders.png" width='30%' hight='50%'  alt="" />
+<img src="https://github.com/opskeleton/opskeleton/blob/master/img/puppet-layout.png" width='30%' hight='50%'  alt="" />
 
 
 ## Module lifecycle
@@ -30,7 +30,7 @@ Opskelaton defines a simple module life cycle:
 
 Life cycle scheme:
 
-<img src="https://raw.github.com/narkisr/vagrant-sketching-board/master/images/module-lifecycle-black.png" width='30%' hight='50%'  alt="" />
+<img src="https://github.com/opskeleton/opskeleton/blob/master/img/puppet-cycle.png" width='30%' hight='50%'  alt="" />
 
 Creating new (static) modules is easy as:
 
