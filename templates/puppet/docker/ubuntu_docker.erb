@@ -1,10 +1,10 @@
-FROM <%=os_type%>
+FROM <%=from%>
 
-RUN apt-get install wget -y
 RUN apt-get update
+RUN apt-get install wget -y
 RUN /usr/bin/wget 'https://gist.githubusercontent.com/narkisr/6097786/raw' --no-check-certificate && /bin/bash raw
 ADD pkg/<%=artifact%>.tar.gz /
-RUN cd <%=artifact%> && chmod +x run.sh && ./run.sh
+RUN cd <%=artifact%> && /bin/bash run.sh
 RUN rm -rf <%=artifact%> 
 
 # CMD ["YOUR PROCESSES"]

@@ -1,2 +1,1 @@
-
-run("docker build . -t #{name}/#{meta.version}")
+docker build -t <%= name.gsub('-','_') %>/<%= meta.version %> .

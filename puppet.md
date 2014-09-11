@@ -123,3 +123,13 @@ Opskeleton generates a Vagrant file with couple of enhancements:
 * PUPPET_ENV (default dev) for setting puppet environment.
 * Puppet options preset to match modules and hiera folders.
 
+## Docker
+The only assumption that Opskelaton makes is that the target host will have Pupppet installed, this enables us to create docker images from our sandboxes quite easily:
+
+```bash
+$ opsk package
+# creates the Dockerfile
+$ opsk dockerize
+# builds <sandbox>/<version> image
+$ sudo ./build_docker.sh
+```
