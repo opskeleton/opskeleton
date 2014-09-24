@@ -12,9 +12,8 @@ module Opsk
 	template("templates/#{type_of}/docker/#{os_type}_docker.erb", 'Dockerfile')
     end
 
-    def docker_build
-	template("templates/docker_build.erb", 'docker_build.sh')
-	chmod('docker_build.sh', 0755)
+    def fig
+	template("templates/fig.yml.erb", 'fig.yml')
     end
 
   end
