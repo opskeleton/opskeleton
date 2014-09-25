@@ -1,4 +1,5 @@
-<%=@name%>:
+<% machines.each do |m| %><%=m%>:
   build: .
   ports: 
-  volumes: 
+  volumes:
+<% end %>

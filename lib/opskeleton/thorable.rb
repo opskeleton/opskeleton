@@ -33,6 +33,14 @@ module Opsk
 	"pkg/#{name}-#{meta.version}"
     end
 
+    def machines
+	machines = %x{vagrant status --machine-readable 2>&1}	
+	unless $? == 0
+        $stderr.puts "failed to parse vagrant machines #{machines}"
+	  exit 1 
+	end
+	machines.split('\n').collect {|line| line.split(',')[1]}.find_all{|v| v}
+    end
 
   end
 end
