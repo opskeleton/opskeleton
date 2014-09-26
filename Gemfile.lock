@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    opskeleton (0.6.9)
+    opskeleton (0.7.0)
       bintray_deploy
       thor
 
