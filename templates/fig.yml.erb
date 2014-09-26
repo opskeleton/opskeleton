@@ -1,5 +1,5 @@
 <% machines.each do |m| %><%=m%>:
-  build: .
-  ports: 
-  volumes:
+  build: dockerfiles/<%=m%> 
+  #ports: 
+  #volumes:
 <% end %>

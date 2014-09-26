@@ -1,3 +1,5 @@
+require 'fileutils'
+
 module  Opsk
   class Package < Thor::Group
     include Thorable, Thor::Actions
@@ -39,6 +41,20 @@ module  Opsk
 	input = artifact
 	inside('pkg') do
 	  run("tar --exclude=#{excludes} -czf #{tar} #{input} >> /dev/null" , :verbose => false) 
+	end
+
+    end
+
+    def dockercopy
+	tar = "#{artifact}.tar.gz"
+	if(File.exists?('dockerfiles'))
+	  images = Dir['dockerfiles/*'].select{|file| File.ftype(file) == 'directory'}
+	  images.each do |path|
+	    if(File.ftype(path) == 'directory')
+		empty_directory "#{path}/pkg"
+		FileUtils.copy "pkg/#{tar}", "#{path}/pkg/#{tar}"
+	    end
+	  end
 	end
     end
 
