@@ -3,9 +3,11 @@
   name: <%= name %>
   includes: 
     - Puppetfile
+    - Puppetfile.lock
     - modules
     - manifests
     - hieradata
+    - hiera.yaml
     - static-modules
     - Gemfile
     - Gemfile.lock
