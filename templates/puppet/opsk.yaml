@@ -3,7 +3,6 @@
   name: <%= name %>
   includes: 
     - Puppetfile
-    - Puppetfile.lock
     - modules
     - manifests
     - hieradata
