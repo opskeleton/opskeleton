@@ -36,6 +36,7 @@ module  Opsk
 	ignored = IO.readlines('.gitignore').map(&:chomp)
 	ignored.delete('modules')
 	ignored.delete('cookbooks')
+	ignored = ignored.select {|ig| !meta.includes.include?(ig)}
 	excludes = ignored.map{|f| "'#{f}'"}.join(" --exclude=") << ' --exclude-backups --exclude-vcs --exclude=pkg'
 	tar = "#{artifact}.tar.gz"
 	input = artifact
