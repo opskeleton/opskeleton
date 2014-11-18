@@ -1,6 +1,7 @@
 ---
 :backends:
  - yaml
+ - module_data
 :logger: console
 :hierarchy:  
  - '%{::virtual}'
