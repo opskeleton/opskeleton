@@ -8,8 +8,12 @@ module Opsk
 
     desc 'Creates a docker image using the current opsk sandbox'
 
-    def create_dockerfile
-	template("templates/#{type_of}/docker/#{os_type}_docker.erb", 'Dockerfile')
+    def create_dockerfiles
+	empty_directory('dockerfiles')
+	machines.each {|m|
+	  empty_directory("dockerfiles/#{m}/")
+	  template("templates/#{type_of}/docker/#{os_type}_docker.erb", "dockerfiles/#{m}/Dockerfile")
+	}
     end
 
     def fig
