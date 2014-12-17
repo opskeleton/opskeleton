@@ -56,4 +56,46 @@ namespace :serverspec do
   end
 end
 
-task :default => 'serverspec:minimal'
+<% if(@options[:bench_enable]) %>
+require 'gruff'
+require 'json'
+
+PLOTS = 'plots'
+
+namespace :plot do
+
+  directory PLOTS
+
+  task :hosts => [PLOTS] do
+    hosts = IO.readlines('benchmark.json').map {|b| 
+	JSON.parse(b,{:symbolize_names => true })
+    }.group_by {|m|
+	m[:host]
+    }
+
+    g = Gruff::Line.new
+    g.title = 'All Hosts side by side'
+    g.labels = Hash[hosts.keys.each_with_index.map {|i,h| [h , i]}]
+    g.labels.each_pair {|i, l|
+	g.data(l, hosts[l].map {|h| h[:total] })
+    }
+    g.write("#{PLOTS}/all_hosts.png") 	
+  end
+
+  task :per_host => [PLOTS] do
+    hosts = IO.readlines('benchmark.json').map {|b| 
+	JSON.parse(b,{:symbolize_names => true })
+    }.group_by {|m|
+	m[:host]
+    }
+
+    hosts.each_pair {|h,data|
+	g = Gruff::Line.new
+	g.title = h
+	g.labels = {0 => h}
+	g.data(h, data.map {|d| d[:total] })
+	g.write("#{PLOTS}/#{h}.png") 	
+    }
+  end
+end
+<% end %>

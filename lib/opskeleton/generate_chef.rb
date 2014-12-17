@@ -6,6 +6,7 @@ module Opsk
     argument :box, :type => :string, :desc => 'Vagrant box type'
     class_option :box_url, :type=> :string, :desc => 'vagrant box url'
     class_option :os_type, :type=> :string, :desc => 'Operating system type (bsd/linux)'
+    class_option :bench_enable, :type=> :boolean, :desc => 'Control if to enable benchmarking support'
 
     desc 'Generate a Vagrant, Chef librarian and fpm project'
 
@@ -19,11 +20,11 @@ module Opsk
     end
 
     def create_gemfile
-	copy_file('templates/chef/gemfile', "#{path}/Gemfile")
+	template('templates/chef/Gemfile.erb', "#{path}/Gemfile")
     end
 
     def create_rakefile
-	copy_file('templates/chef/Rakefile', "#{path}/Rakefile")
+	template('templates/chef/Rakefile.erb', "#{path}/Rakefile")
     end
 
     def create_version
@@ -44,7 +45,7 @@ module Opsk
     def create_chef_base
 	empty_directory("#{path}/static-cookbooks/")
 	copy_file('templates/chef/Cheffile', "#{path}/Cheffile")
-      empty_directory("#{path}/roles/")
+	empty_directory("#{path}/roles/")
 	template('templates/chef/roles.erb', "#{path}/roles/#{name}.rb")
 	template('templates/chef/dna.json.erb', "#{path}/dna.json")
 	copy_file('templates/chef/run.sh', "#{path}/run.sh")
@@ -64,7 +65,9 @@ module Opsk
     end
 
     def server_spec
-	directory('templates/parent/spec', "#{path}/spec")
+	empty_directory("#{path}/spec")
+	template('templates/parent/spec/spec_helper.erb', "#{path}/spec/spec_helper.rb")
+	directory('templates/parent/spec/default', "#{path}/spec/default")
     end
 
     def git

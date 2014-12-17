@@ -1,0 +1,21 @@
+source "https://rubygems.org"
+
+# base
+gem 'chef'
+
+group :testing do
+  gem 'serverspec', '~> 1.14.0'
+  gem 'test-kitchen'
+end
+
+group :build do
+  gem 'rake'
+  gem 'foodcritic'
+  gem 'librarian-chef'
+  gem 'opskeleton'
+end
+
+<% if(@options[:bench_enable]) %>
+gem 'gruff', :group => :benchmark
+<% end %>
+

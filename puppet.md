@@ -127,9 +127,33 @@ Opskeleton generates a Vagrant file with couple of enhancements:
 The only assumption that Opskelaton makes is that the target host will have Pupppet installed, this enables us to create docker images from our sandboxes quite easily:
 
 ```bash
-$ opsk package
-# creates the Dockerfile
+# creates dockerfiles/<host> and fig.yml
 $ opsk dockerize
-# builds <sandbox>/<version> image
-$ sudo ./build_docker.sh
+$ opsk package
+# grabs the opsk tar file
+$ sudo fig build
 ```
+
+## Benchmarking
+Tracking the speed of our provisioning code is important for keeping a consistent level of service with the produced sandboxes, enabling benchmarking:
+
+```bash 
+$ opsk generate_puppet redis ubuntu-14.04 --bench-enable
+# install imagemagic before bundle install
+$ sudo apt-get install imagemagick libmagickwand-dev
+$ rake serverspec:redis
+# with each run more result lines will be recorded
+$ cat benchmark.json
+{"total":656,"host":"redis","revision":"5d03a41ade9fc3dd5296d4119ccb0b0ad8290b9e","time":"2014-12-17 02:57:45 +0200"}
+# add it to git for tracking
+$ git add benchmark.json
+```
+
+Now after a number of runs we could plot and view the results of a single host or of all the hosts side by side:
+
+```bash 
+$ rake plot:hosts plot:per_hosts
+# resulting png files 
+$ google-chrome plots
+```
+

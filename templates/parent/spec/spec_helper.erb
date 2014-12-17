@@ -12,6 +12,21 @@ def run(cmd)
   end
 end
 
+<% if(options[:bench_enable]) -%>
+class StopWatch
+  attr_accessor :total
+  def stop
+    @total = Time.now - @start
+  end
+
+  def reset
+    @start = Time.now	
+  end
+end
+
+WATCH = StopWatch.new
+<% end -%>
+
 RSpec.configure do |c|
   c.before :suite do
     c.host  = ENV['TARGET_HOST']
@@ -19,6 +34,9 @@ RSpec.configure do |c|
     options = Net::SSH::Config.for(c.host)
     if(!ENV['LOCAL'])
 	run("vagrant destroy #{c.host} -f")
+      <% if(options[:bench_enable]) %>
+      WATCH.reset
+      <% end %>
 	run("vagrant up #{c.host}")
       config = `vagrant ssh-config #{c.host}`
       sshhost =  sshuser = ''
@@ -44,6 +62,14 @@ RSpec.configure do |c|
 
   c.after :suite do
     c.host  = ENV['TARGET_HOST']
+    <% if(options[:bench_enable]) %>
+    WATCH.stop
+    rev = %x{git rev-parse HEAD}.chomp
+    File.open('benchmark.json', 'a') { |f| 
+	json = {:total => WATCH.total.to_i, :host => c.host, :revision => rev, :time => Time.now}.to_json
+	f.write("#{json}\n") 
+    }
+    <% end %>
     run("vagrant destroy #{c.host} -f")
   end
 end
