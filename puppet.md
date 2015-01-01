@@ -38,7 +38,7 @@ Creating new (static) modules is easy as:
 $ opsk module foo
 ```
 
-Each generated module will contain puppet-rspec with matching Rakefile (see [testing](https://github.com/opskeleton/opskeleton#testing)).
+Each generated module will contain puppet-rspec with matching Rakefile. 
 
 ## Testing
 
