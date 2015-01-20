@@ -1,3 +1,8 @@
+# Changes to opskeleton in version 0.8.1
+ 
+ * supporting rbenv conventions
+ * using bundle exec in boot
+ 
 # Changes to opskeleton in version 0.8.0
 
 * Adding plot/benchmark support.
