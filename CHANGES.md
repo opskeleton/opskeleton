@@ -1,3 +1,7 @@
+# Changes to opskeleton in version 0.8.3
+
+ * openstack support 
+
 # Changes to opskeleton in version 0.8.1
  
  * supporting rbenv conventions
