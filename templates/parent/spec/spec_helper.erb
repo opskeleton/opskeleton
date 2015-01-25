@@ -70,6 +70,6 @@ RSpec.configure do |c|
 	f.write("#{json}\n") 
     }
     <% end %>
-    run("vagrant destroy #{c.host} -f")
+    run("vagrant destroy #{c.host} -f") unless ENV['SKIP_DESTROY']
   end
 end
