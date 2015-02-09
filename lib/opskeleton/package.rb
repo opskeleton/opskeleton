@@ -4,6 +4,10 @@ module  Opsk
   class Package < Thor::Group
     include Thorable, Thor::Actions
 
+    def validate
+	check_root
+    end
+
     def create_build
 	empty_directory(artifact_path)
 	path = Dir.getwd

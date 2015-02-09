@@ -8,6 +8,11 @@ module Opsk
 
     desc 'Creates a docker image using the current opsk sandbox'
 
+    def validate
+	check_root
+    end
+
+
     def create_dockerfiles
 	empty_directory('dockerfiles')
 	machines.each {|m|

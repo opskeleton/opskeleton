@@ -42,5 +42,11 @@ module Opsk
 	machines.split('\n').collect {|line| line.split(',')[1]}.find_all{|v| v}
     end
 
+    def check_root
+	unless File.exist?("#{Dir.pwd}/opsk.yaml")
+	  say('Please run from the root folder of an opskeleton project',:red) 
+	  exit(1)
+	end
+    end
   end
 end

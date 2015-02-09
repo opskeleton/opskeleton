@@ -7,6 +7,11 @@ module  Opsk
 
     desc 'Deploy sandbox into bintray.com'
 
+    def validate
+	check_root
+    end
+
+
     def upload
 	require 'bintray_deploy'
 	pkg = Opsk::Package.new

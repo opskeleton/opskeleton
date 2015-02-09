@@ -4,6 +4,11 @@ module  Opsk
 
     argument :version, :type => :string, :desc => 'new version number'
 
+    def validate
+	check_root
+    end
+
+
     def meta 
 	 OpenStruct.new(YAML.load_file('opsk.yaml'))
     end

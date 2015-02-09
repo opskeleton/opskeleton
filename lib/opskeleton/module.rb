@@ -6,6 +6,11 @@ module Opsk
 
     desc 'Generate an rspec enabled Puppet module'
 
+    def validate
+	check_root
+    end
+
+
     def create_module
 	inside('static-modules') do
 	  run("puppet module generate puppet-#{name}")
