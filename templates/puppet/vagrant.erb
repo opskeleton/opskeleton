@@ -2,8 +2,6 @@
 # vi: set ft=ruby :
 <%if(options['provider'].eql?('openstack')) -%>
 require 'vagrant-openstack-provider'
-require 'yaml'
-AUTH = YAML.load_file("#{ENV['HOME']}/.opsk.yaml")
 <%end -%>
 
 Vagrant.configure("2") do |config|
