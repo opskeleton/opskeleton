@@ -1,3 +1,9 @@
+# Changes to opskeleton in version 0.8.5
+
+ * Misc templates cleanup
+ * Asserting path in which opsk tasks are being run
+ * Vagrant configuration plugin usage
+
 # Changes to opskeleton in version 0.8.3
 
  * openstack support 
