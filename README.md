@@ -26,7 +26,7 @@ Perquisites (on Ubuntu):
 
 * Vagrant 1.6.x
 * RVM
-* Ruby 1.9.x
+* Ruby 2.1.x
 
 ```bash 
  $ rvm use system
