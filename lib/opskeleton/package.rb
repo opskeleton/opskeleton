@@ -20,6 +20,9 @@ module  Opsk
 	    raise Exception.new("#{f} not found please validate opks.yaml includes section")
 	  end
 	}
+
+	meta.excludes.each {|f| remove_file("#{artifact_path}/#{f}") } if(meta.excludes)
+
 	unless(File.exists?("#{artifact_path}/manifests/site.pp"))
 	  template('templates/puppet/site.erb', "#{artifact_path}/manifests/site.pp")
 	end
