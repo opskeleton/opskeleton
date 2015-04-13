@@ -9,7 +9,7 @@ module  Opsk
     include Thorable, Thor::Actions
 
     argument :bucket, :type => :string, :desc => 'bucket'
-    argument :key, :type => :string, :desc => 'key'
+    argument :path, :type => :string, :desc => 'path'
 
     desc 'Deploy sandbox into an s3 bucket' 
 
@@ -26,11 +26,15 @@ module  Opsk
 	if(File.exists?(tar))
 	  begin
 	    conf = Configuration.for 's3'
-	    s3 = AWS::S3.new(:access_key_id => conf.access_key, :secret_access_key => conf.secret_key)
-	    s3.buckets[bucket].objects[key].write(:file => tar)
-	    say("deployed #{base} to #{bucket}/#{key}")
+	    Aws.config.update({
+		region: conf.region,
+		credentials: Aws::Credentials.new(conf.access_key, conf.secret_key),
+	    })
+	    s3 = Aws::S3::Resource.new
+	    s3.bucket(bucket).object("#{path}/#{base}").upload_file(tar)
+	    say("deployed #{base} to #{bucket}/#{path}/#{base}")
 	  rescue Exception => e
-          say("failed to deploy due to #{e}")
+	    say("failed to deploy due to #{e}")
 	  end
 	else
 	  say('package is missing please run opsk package first')
