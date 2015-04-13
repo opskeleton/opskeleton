@@ -10,6 +10,7 @@ require 'opskeleton/clean'
 require 'opskeleton/bump'
 require 'opskeleton/generate_puppet'
 require 'opskeleton/generate_chef'
-require 'opskeleton/deploy'
+require 'opskeleton/deploy_bintray'
+require 'opskeleton/deploy_s3'
 require 'opskeleton/module'
 

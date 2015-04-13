@@ -22,7 +22,8 @@ module Opsk
     register Opsk::Dockerize, 'dockerize', 'dockerize [from] [os_type]', 'Creates a docker image from the current sandbox'
     register Opsk::Clean, 'clean', 'clean', 'cleans up packaging products'
     register Opsk::Bump, 'bump', 'bump', 'bumps up version (clearing old version also)'
-    register Opsk::Deploy, 'deploy', 'deploy [bintray repo]', 'deploy packge into bintray.com'
+    register Opsk::DeployBintray, 'deploy_bintray', 'deploy_bintray [repo]', 'deploy packge into bintray.com'
+    register Opsk::DeployS3, 'deploy_s3', 'deploy_s3 [bucket] [key]', 'deploy packge into s3'
 
     desc 'version', 'print opsk version'  
     def version

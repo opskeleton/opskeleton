@@ -1,6 +1,6 @@
 
 module  Opsk
-  class Deploy < Thor::Group
+  class DeployBintray < Thor::Group
     include Thorable, Thor::Actions
 
     argument :repo, :type => :string, :desc => 'bintray repo'

@@ -9,10 +9,19 @@ GEM
   remote: https://rubygems.org/
   specs:
     CFPropertyList (2.2.7)
+    aws-sdk (2.0.38)
+      aws-sdk-resources (= 2.0.38)
+    aws-sdk-core (2.0.38)
+      builder (~> 3.0)
+      jmespath (~> 1.0)
+      multi_json (~> 1.0)
+    aws-sdk-resources (2.0.38)
+      aws-sdk-core (= 2.0.38)
     bintray_deploy (0.0.4)
       configuration
       rest-client
       thor
+    builder (3.2.2)
     chef (11.6.2)
       erubis (~> 2.7)
       highline (~> 1.6, >= 1.6.9)
@@ -37,6 +46,8 @@ GEM
       json_pure
     highline (1.6.21)
     ipaddress (0.8.0)
+    jmespath (1.0.2)
+      multi_json (~> 1.0)
     json (1.7.7)
     json_pure (1.8.1)
     metaclass (0.0.4)
@@ -50,6 +61,7 @@ GEM
     mixlib-shellout (1.4.0)
     mocha (1.0.0)
       metaclass (~> 0.0.1)
+    multi_json (1.11.0)
     net-ssh (2.9.1)
     net-ssh-gateway (1.2.0)
       net-ssh (>= 2.6.5)
@@ -101,6 +113,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  aws-sdk (~> 2)
   chef
   opskeleton!
   pry
