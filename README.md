@@ -24,7 +24,7 @@ Opskeleton comes to solve these issues by introducing a decentralized developmen
 
 Perquisites (on Ubuntu):
 
-* Vagrant 1.6.x
+* Vagrant 1.7.x
 * RVM
 * Ruby 2.1.x
 
