@@ -10,7 +10,7 @@ The packaged tar files can be consumed using any tool and protocol (http, s3 etc
      deployed foo-sandbox-0.0.1.tar.gz to http://dl.bintray.com/narkisr/<bintray-repo>/foo-sandbox-0.0.1.tar.gz
 ```
 
-  Make sure to  [configure](https://github.com/narkisr/bintray-deploy#usage) configure the bintray API key.
+  Make sure to  [configure](https://github.com/narkisr/bintray-deploy#usage) the bintray API key.
 
 * S3:
 
