@@ -94,15 +94,7 @@ An external node classifier based runner is also available under scripts/run.sh,
 
 ## Deployment
 
-The packaged tar files can be consumed using any tool and protocol however http is recommended, opsk has built in support for deploying public sandboxes into bintray:
-
-```bash 
-$ opsk package
-$ opsk deploy <bintray-repo>
-deployed foo-sandbox-0.0.1.tar.gz to http://dl.bintray.com/narkisr/<bintray-repo>/foo-sandbox-0.0.1.tar.gz
-```
-
-Make sure to  [configure](https://github.com/narkisr/bintray-deploy#usage) configure the bintray API key.
+ See [deploy](deploy.md)
 
 ## Updating
 Keeping you box up to date with latest opsk version is easy, just re-generate it again and resolve conflicts by answering y/n:
