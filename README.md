@@ -33,7 +33,7 @@ Perquisites (on Ubuntu):
  $ sudo gem install opskeleton
 ``` 
 
-Now Follow either [Chef](chef.md) or [Puppet](puppet.md).
+Now Follow either [Chef](docs/chef.md) or [Puppet](docs/puppet.md).
 
 # Boxes
 Opskeleton recommends the use of [box-cutter](https://github.com/box-cutter) in order to create Vagrant boxes in a consistent manner (as no free hosting solution currently exist):
