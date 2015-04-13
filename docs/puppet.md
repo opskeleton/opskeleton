@@ -94,7 +94,7 @@ An external node classifier based runner is also available under scripts/run.sh,
 
 ## Deployment
 
- See [deploy](docs/deploy.md)
+ See [deploy](deploy.md)
 
 ## Updating
 Keeping you box up to date with latest opsk version is easy, just re-generate it again and resolve conflicts by answering y/n:

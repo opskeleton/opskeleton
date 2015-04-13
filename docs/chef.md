@@ -101,7 +101,7 @@ $ sudo ./run.sh dev
 
 ## Deployment
 
- See [deploy](docs/deploy.md)
+ See [deploy](deploy.md)
 
 ## Updating
 
