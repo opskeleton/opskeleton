@@ -9,7 +9,6 @@ module  Opsk
     include Thorable, Thor::Actions
 
     argument :dest, :type => :string, :desc => 'dest'
-    argument :path, :type => :string, :desc => 'path'
 
     desc 'Deploy sandbox into a remote ssh server'
 
@@ -26,7 +25,7 @@ module  Opsk
 	if(File.exists?(tar))
 	  begin
 	    conf = Configuration.for('scp')[name]
-          Net::SCP.upload!(conf.host, conf.user, tar, path)
+	    Net::SCP.upload!(conf.host, conf.user, tar, conf.path)
 	    say("deployed #{base} to #{bucket}/#{path}/#{base}")
 	  rescue Exception => e
 	    say("failed to deploy due to #{e}")
