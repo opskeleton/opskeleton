@@ -1,8 +1,10 @@
 PATH
   remote: .
   specs:
-    opskeleton (0.8.7)
+    opskeleton (0.8.8)
+      aws-sdk (~> 2)
       bintray_deploy
+      net-scp
       thor
 
 GEM
@@ -173,7 +175,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  aws-sdk (~> 2)
   chef
   opskeleton!
   pry
