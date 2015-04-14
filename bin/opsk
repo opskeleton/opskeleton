@@ -24,6 +24,7 @@ module Opsk
     register Opsk::Bump, 'bump', 'bump', 'bumps up version (clearing old version also)'
     register Opsk::DeployBintray, 'deploy_bintray', 'deploy_bintray [repo]', 'deploy packge into bintray.com'
     register Opsk::DeployS3, 'deploy_s3', 'deploy_s3 [bucket] [path]', 'deploy packge into s3 bucket under path folder'
+    register Opsk::DeployScp, 'deploy_scp', 'deploy_scp [to] [path]', 'deploy packge using scp into to host under path'
 
     desc 'version', 'print opsk version'  
     def version

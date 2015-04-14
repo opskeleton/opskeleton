@@ -12,5 +12,6 @@ require 'opskeleton/generate_puppet'
 require 'opskeleton/generate_chef'
 require 'opskeleton/deploy_bintray'
 require 'opskeleton/deploy_s3'
+require 'opskeleton/deploy_scp'
 require 'opskeleton/module'
 
