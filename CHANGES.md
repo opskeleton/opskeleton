@@ -1,3 +1,11 @@
+# Changes to opskeleton in version 0.8.8
+
+Supporting scp deployment.
+
+# Changes to opskeleton in version 0.8.7
+
+Supporting s3 deployment.
+
 # Changes to opskeleton in version 0.8.5
 
  * Misc templates cleanup
