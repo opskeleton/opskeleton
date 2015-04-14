@@ -24,9 +24,9 @@ module  Opsk
 	base = File.basename(tar)
 	if(File.exists?(tar))
 	  begin
-	    conf = Configuration.for('scp')[name]
-	    Net::SCP.upload!(conf.host, conf.user, tar, conf.path)
-	    say("deployed #{base} to #{bucket}/#{path}/#{base}")
+	    conf = Configuration.for('scp').send(dest.to_sym)
+	    Net::SCP.upload!(conf.host, conf.user, tar, conf.dest)
+	    say("deployed #{base} to #{conf.user}@#{conf.host}:#{conf.dest}")
 	  rescue Exception => e
 	    say("failed to deploy due to #{e}")
 	  end
