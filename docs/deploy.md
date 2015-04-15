@@ -43,8 +43,8 @@ The packaged tar files can be consumed using any tool and protocol (http, s3 etc
      host '1.2.3.4'
      user 'zigi'
      dest '/var/boxes'
-   }
-  }
+    }
+ }
  ```
 
 
