@@ -32,14 +32,14 @@ The packaged tar files can be consumed using any tool and protocol (http, s3 etc
 * Scp:
    ```bash 
    $ opsk package
-   $ opsk deploy_scp <host>
+   $ opsk deploy_scp <alias>
      deployed foo-sandbox-0.0.1.tar.gz to foo@opsk-boxes:/var/boxes
   ```
  Make sure to configure scp section under ~/.configuration.rb:
 
  ```ruby
   Configuration.for('scp') {
-   <host> {
+    qa {
      host '1.2.3.4'
      user 'zigi'
      dest '/var/boxes'
