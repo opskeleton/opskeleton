@@ -40,8 +40,8 @@ The packaged tar files can be consumed using any tool and protocol (http, s3 etc
  ```ruby
   Configuration.for('scp') {
     qa {
-     host '1.2.3.4'
-     user 'zigi'
+     host 'opsk-boxes'
+     user 'foo'
      dest '/var/boxes'
     }
  }
