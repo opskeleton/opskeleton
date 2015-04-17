@@ -43,6 +43,8 @@ The packaged tar files can be consumed using any tool and protocol (http, s3 etc
      host 'opsk-boxes'
      user 'foo'
      dest '/var/boxes'
+     # optional
+     port 2222
     }
  }
  ```
