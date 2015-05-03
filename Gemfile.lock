@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    opskeleton (0.8.8)
+    opskeleton (0.8.9)
       aws-sdk (~> 2)
       bintray_deploy
       net-scp
@@ -11,14 +11,14 @@ GEM
   remote: https://rubygems.org/
   specs:
     CFPropertyList (2.2.8)
-    aws-sdk (2.0.38)
-      aws-sdk-resources (= 2.0.38)
-    aws-sdk-core (2.0.38)
+    aws-sdk (2.0.39)
+      aws-sdk-resources (= 2.0.39)
+    aws-sdk-core (2.0.39)
       builder (~> 3.0)
       jmespath (~> 1.0)
       multi_json (~> 1.0)
-    aws-sdk-resources (2.0.38)
-      aws-sdk-core (= 2.0.38)
+    aws-sdk-resources (2.0.39)
+      aws-sdk-core (= 2.0.39)
     bintray_deploy (0.0.4)
       configuration
       rest-client
@@ -55,7 +55,7 @@ GEM
     coderay (1.1.0)
     configuration (1.3.4)
     diff-lcs (1.2.5)
-    domain_name (0.5.23)
+    domain_name (0.5.24)
       unf (>= 0.0.5, < 1.0.0)
     erubis (2.7.0)
     facter (2.4.3)
@@ -65,7 +65,7 @@ GEM
       ffi (~> 1.5)
       libyajl2 (~> 1.2)
     hashie (2.1.2)
-    hiera (1.3.4)
+    hiera (2.0.0)
       json_pure
     highline (1.7.1)
     http-cookie (1.0.2)
@@ -113,14 +113,14 @@ GEM
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
-    puppet (3.7.5)
-      facter (> 1.6, < 3)
-      hiera (~> 1.0)
+    puppet (4.0.0)
+      facter (> 2.0, < 4)
+      hiera (>= 2.0, < 3)
       json_pure
     puppet-lint (1.1.0)
     puppet-syntax (2.0.0)
       rake
-    puppetlabs_spec_helper (0.10.1)
+    puppetlabs_spec_helper (0.10.2)
       mocha
       puppet-lint
       puppet-syntax
@@ -160,14 +160,14 @@ GEM
       rspec-its
       specinfra (~> 2.25)
     slop (3.6.0)
-    specinfra (2.28.1)
+    specinfra (2.28.4)
       net-scp
       net-ssh
     systemu (2.6.5)
     thor (0.19.1)
     unf (0.1.4)
       unf_ext
-    unf_ext (0.0.6)
+    unf_ext (0.0.7.1)
     uuidtools (2.1.5)
     wmi-lite (1.0.0)
 

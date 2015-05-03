@@ -25,7 +25,10 @@ module  Opsk
 	if(File.exists?(tar))
 	  begin
 	    conf = Configuration.for('scp').send(dest.to_sym)
-	    Net::SCP.upload!(conf.host, conf.user, tar, conf.dest)
+          port = conf.port || '22'
+	    Net::SSH.start(conf.host, conf.user, :port => port) do |session|
+            session.scp.upload!(tar, conf.dest)
+          end
 	    say("deployed #{base} to #{conf.user}@#{conf.host}:#{conf.dest}")
 	  rescue Exception => e
 	    say("failed to deploy due to #{e}")
