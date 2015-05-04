@@ -1,8 +1,5 @@
 
-require 'configuration'
-conf = "#{ENV['HOME']}/.configuration.rb"
-raise "#{conf} not found, please create a conf file with a s3 section" unless File.exists?(conf)
-require conf
+
 
 module  Opsk
   class DeployS3 < Thor::Group
@@ -17,6 +14,12 @@ module  Opsk
 	check_root
     end
 
+    def load_conf
+	require 'configuration'
+	conf = "#{ENV['HOME']}/.configuration.rb"
+	raise "#{conf} not found, please create a conf file with a s3 section" unless File.exists?(conf)
+	require conf   	
+    end
 
     def upload
 	require 'aws-sdk'
