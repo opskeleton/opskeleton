@@ -41,6 +41,7 @@ module  Opsk
 	  end
 	else
 	  say('package is missing please run opsk package first')
+	  exit(1)
 	end
     end
 
