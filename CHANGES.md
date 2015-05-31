@@ -1,3 +1,11 @@
+# Changes to opskeleton in version 0.8.11
+
+exit 1 when package is missing on different deploy options.
+
+# Changes to opskeleton in version 0.8.10 
+
+Skip destroy fix in spec template.
+
 # Changes to opskeleton in version 0.8.9
 
 Scp custom port support.
