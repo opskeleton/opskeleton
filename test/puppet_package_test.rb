@@ -46,4 +46,5 @@ class PuppetPackageTest < MiniTest::Unit::TestCase
 	assert_equal(f.read , 'my script')
     } 	
   end
+
 end
