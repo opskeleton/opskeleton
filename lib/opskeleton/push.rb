@@ -1,8 +1,9 @@
 
 def add_writable(g,with)
-  readonly = g.remotes.first.url
+  readonly = g.remotes.find{|r|r.name.eql?('origin')}.url
   writable = readonly.gsub(/git\:\/\/*\//,with)
-  unless readonly.eql?(writable)
+  remote_exists = g.remotes.map {|r| r.name}.include?('writable')
+  unless readonly.eql?(writable) or remote_exists
     g.add_remote('writable',writable) 
   end
 end
@@ -24,7 +25,7 @@ module  Opsk
 	  if File.exists?("#{d}/.git")
 	    g = Git.init(d)
 	    add_writable(g,options['writable_remote'])
-	    if !options['dry'] and g.diff('writable').stats[:files].keys.length > 0
+	    if !options['dry'] and g.diff('origin').stats[:files].keys.length > 0
 	      g.push('writable') 
 	    end
 	  end
