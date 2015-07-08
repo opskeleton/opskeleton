@@ -15,6 +15,7 @@ class CommitTest < MiniTest::Unit::TestCase
     mkdir_p(ROOT)
     mkdir_p("#{SANDBOX}-sandbox/modules/non-git")
     g = Git.init(ROOT)
+    g.add_remote('origin','git://github.com/foo/bar.git') 
     touch("#{ROOT}/bla.txt")
     g.add('bla.txt')
     g.commit_all('message')
@@ -37,5 +38,13 @@ class CommitTest < MiniTest::Unit::TestCase
     end 	
     g = Git.init(ROOT)
     assert g.show.include? 'some message'
+  end
+
+  def test_writeable
+    with_cwd "#{SANDBOX}-sandbox" do
+	 Opsk::Root.start ['push', '--writable_remote', 'true']
+    end 	
+    g = Git.init(ROOT)
+    assert g.remotes.length == 2
   end
 end

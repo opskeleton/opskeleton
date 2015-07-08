@@ -16,4 +16,5 @@ require 'opskeleton/deploy_s3'
 require 'opskeleton/deploy_scp'
 require 'opskeleton/module'
 require 'opskeleton/commit'
+require 'opskeleton/push'
 

@@ -21,6 +21,7 @@ module Opsk
     register Opsk::Package, 'package', 'package', 'packages current module for celestial'
     register Opsk::Dockerize, 'dockerize', 'dockerize [from] [os_type]', 'Creates a docker image from the current sandbox'
     register Opsk::Commit, 'commit', 'commit [message]', 'commit each changed puppet module under modules folder'
+    register Opsk::Push, 'push', 'push [writable_remote]', 'push each changed puppet module under modules folder'
     register Opsk::Clean, 'clean', 'clean', 'cleans up packaging products'
     register Opsk::Bump, 'bump', 'bump', 'bumps up version (clearing old version also)'
     register Opsk::DeployBintray, 'deploy_bintray', 'deploy_bintray [repo]', 'deploy packge into bintray.com'
