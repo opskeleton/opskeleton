@@ -5,24 +5,23 @@ require_relative 'test_helper'
 require 'fileutils'
 require 'git'
 
-ROOT = 'foo-sandbox/modules/foo'
-class PuppetPackageTest < MiniTest::Unit::TestCase
+SANDBOX = 'commit'
+ROOT = "#{SANDBOX}-sandbox/modules/foo"
+class CommitTest < MiniTest::Unit::TestCase
   include FileUtils
 
   def setup
-    Opsk::Root.start ['generate_puppet', 'foo', 'bar']
-    FileUtils.mkdir_p(ROOT)
-    @g = Git.init(ROOT)
-    FileUtils.touch("#{ROOT}/bla.txt")
-    @g.add('bla.txt')
-    @g.commit_all('message')
-    open("#{ROOT}/bla.txt", 'a') { |f|
-	 f.puts "Hello, world."
-    }
+    Opsk::Root.start ['generate_puppet', 'commit', 'bar']
+    mkdir_p(ROOT)
+    g = Git.init(ROOT)
+    touch("#{ROOT}/bla.txt")
+    g.add('bla.txt')
+    g.commit_all('message')
+    open("#{ROOT}/bla.txt", 'a') { |f| f.puts 'Hello, world.'}
   end
 
   def teardown 
-    rm_rf 'foo-sandbox'
+    rm_rf "#{SANDBOX}-sandbox"
   end
 
   def with_cwd(dir)
@@ -32,9 +31,10 @@ class PuppetPackageTest < MiniTest::Unit::TestCase
   end
 
   def test_commit
-    with_cwd 'foo-sandbox' do
+    with_cwd "#{SANDBOX}-sandbox" do
 	 Opsk::Root.start ['commit','some message']
     end 	
-    assert @g.show.include? 'some message'
+    g = Git.init(ROOT)
+    assert g.show.include? 'some message'
   end
 end
