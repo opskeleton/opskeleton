@@ -10,14 +10,19 @@ module  Opsk
 
     def commit
 	Dir["modules/*"].reject{|o| not File.directory?(o)}.each do |d|
-	  g = Git.init(d)
-	  if g.status.changed.keys.length > 0
-	   if message
-	     g.commit_all(message) 
-	   else 
-	     puts 'please provide commit message'
-	     g.commit_all(gets) 
-	   end
+	  if File.exists?("#{d}/.git")
+	    g = Git.init(d)
+	    if g.status.changed.keys.length > 0
+		puts "Changes found for #{d}:\n\n"
+		puts "#{g.show}\n"
+		g.checkout('master')
+		if options['message']
+		  g.commit_all(options['message']) 
+		else 
+		  puts 'Please provide commit message:'
+		  g.commit_all(STDIN.gets.chomp) 
+		end
+	    end
 	  end
 	end
     end
