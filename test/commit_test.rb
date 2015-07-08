@@ -42,7 +42,7 @@ class CommitTest < MiniTest::Unit::TestCase
 
   def test_writeable
     with_cwd "#{SANDBOX}-sandbox" do
-	 Opsk::Root.start ['push', '--writable_remote', 'true']
+	 Opsk::Root.start ['push', '--dry', 'true']
     end 	
     g = Git.init(ROOT)
     assert g.remotes.length == 2
