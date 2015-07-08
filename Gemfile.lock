@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    opskeleton (0.8.11)
+    opskeleton (0.8.12)
       aws-sdk (~> 2)
       bintray_deploy
       git
@@ -32,8 +32,8 @@ GEM
       rest-client
       thor
     builder (3.2.2)
-    chef (12.4.0)
-      chef-config (= 12.4.0)
+    chef (12.4.1)
+      chef-config (= 12.4.1)
       chef-zero (~> 4.2, >= 4.2.2)
       diff-lcs (~> 1.2, >= 1.2.4)
       erubis (~> 2.7)
@@ -55,7 +55,7 @@ GEM
       serverspec (~> 2.7)
       specinfra (~> 2.10)
       syslog-logger (~> 1.6)
-    chef-config (12.4.0)
+    chef-config (12.4.1)
       mixlib-config (~> 2.0)
       mixlib-shellout (~> 2.0)
     chef-zero (4.2.3)
@@ -193,7 +193,7 @@ GEM
       specinfra (~> 2.35)
     sfl (2.2)
     slop (3.6.0)
-    specinfra (2.36.17)
+    specinfra (2.37.0)
       net-scp
       net-ssh
       net-telnet
@@ -221,3 +221,6 @@ DEPENDENCIES
   puppet (= 3.7.5)
   puppetlabs_spec_helper (>= 0.1.0)
   rspec-puppet
+
+BUNDLED WITH
+   1.10.5
