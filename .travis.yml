@@ -2,6 +2,8 @@ language: ruby
 rvm:
   - 2.1.2
 script:
+  - "git config --global user.email 'you@example.com'"
+  - "git config --global user.name 'Your Name'"
   - "touch ~/.configuration.rb"
   - "bundle install"
   - "bundle exec rake test"
