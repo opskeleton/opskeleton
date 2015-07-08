@@ -13,6 +13,7 @@ class CommitTest < MiniTest::Unit::TestCase
   def setup
     Opsk::Root.start ['generate_puppet', 'commit', 'bar']
     mkdir_p(ROOT)
+    mkdir_p("#{SANDBOX}-sandbox/modules/non-git")
     g = Git.init(ROOT)
     touch("#{ROOT}/bla.txt")
     g.add('bla.txt')
@@ -32,7 +33,7 @@ class CommitTest < MiniTest::Unit::TestCase
 
   def test_commit
     with_cwd "#{SANDBOX}-sandbox" do
-	 Opsk::Root.start ['commit','some message']
+	 Opsk::Root.start ['commit', '--message', 'some message']
     end 	
     g = Git.init(ROOT)
     assert g.show.include? 'some message'
