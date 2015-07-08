@@ -2,7 +2,7 @@ module  Opsk
   class Commit < Thor::Group
     include Thorable, Thor::Actions
 
-    argument :message, :type => :string, :desc => 'commit message'
+    class_option :message, :type=> :string, :desc => 'optional commit message'
 
     def validate
 	check_root
