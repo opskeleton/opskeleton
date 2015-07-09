@@ -5,7 +5,6 @@ def report(g)
     g.status.send(state).each do |k,v|
 	say "- #{k}"
     end
-    say "\n"
   end
 end
 
@@ -28,13 +27,13 @@ module  Opsk
 	    if g.status.changed.keys.length > 0
 		say "Listing changes for #{d}:\n\n"
 		report(g)
-		resp = yes? "Commit the changes under #{d}? (y/n)\n\n" unless options['all']
+		resp = yes? "Commit the changes under #{d}? (y/n)" unless options['all']
 		if(options['all'] or resp)
 		  g.checkout('master')
 		  if options['message']
 		    g.commit_all(options['message']) 
 		  else 
-		    say 'Please provide commit message:\n'
+		    say 'Commit message:'
 		    g.commit_all(STDIN.gets.chomp) 
 		  end
 		end
