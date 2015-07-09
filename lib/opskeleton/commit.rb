@@ -1,11 +1,11 @@
 
 def report(g)
   %i(changed added untracked).each do |state|
-    puts "#{state} files:\n\n"
+    say "#{state} files:\n\n"
     g.status.send(state).each do |k,v|
-	puts "- #{k}"
+	say "- #{k}"
     end
-    puts "\n"
+    say "\n"
   end
 end
 
@@ -26,15 +26,15 @@ module  Opsk
 	  if File.exists?("#{d}/.git")
 	    g = Git.init(d)
 	    if g.status.changed.keys.length > 0
-		puts "Listing changes for #{d}:\n\n"
+		say "Listing changes for #{d}:\n\n"
 		report(g)
-		puts "Commit the changes under #{d}? (y/n)\n\n" unless options['all']
-		if(options['all'] or STDIN.gets.chomp.eql?('y'))
+		resp = yes? "Commit the changes under #{d}? (y/n)\n\n" unless options['all']
+		if(options['all'] or resp)
 		  g.checkout('master')
 		  if options['message']
 		    g.commit_all(options['message']) 
 		  else 
-		    puts 'Please provide commit message:\n'
+		    say 'Please provide commit message:\n'
 		    g.commit_all(STDIN.gets.chomp) 
 		  end
 		end
