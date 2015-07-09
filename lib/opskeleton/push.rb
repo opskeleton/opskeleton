@@ -38,6 +38,7 @@ module  Opsk
 	    if !options['dry'] and g.diff('origin').stats[:files].keys.length > 0
 		puts "push #{d}? (y/n)" unless options['all']
 		if(options['all'] or STDIN.gets.chomp.eql?('y'))
+		  puts "Pushing #{d} .."
 		  g.push('writable') 
 		  g.pull
 		end
