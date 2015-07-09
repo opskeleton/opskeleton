@@ -22,6 +22,7 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency('librarian-puppet', '= 2.1.0')
   gem.add_development_dependency('puppetlabs_spec_helper', '>= 0.1.0')
   gem.add_development_dependency('pry')
+  gem.add_development_dependency('asciidoctor')
 
   gem.files         = `git ls-files`.split($/)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
