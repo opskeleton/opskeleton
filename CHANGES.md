@@ -1,3 +1,7 @@
+# Changes to opskeleton in version 0.9.0
+
+Adding support for puppet modules commit and push actions.
+
 # Changes to opskeleton in version 0.8.11
 
 exit 1 when package is missing on different deploy options.
