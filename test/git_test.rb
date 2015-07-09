@@ -7,7 +7,7 @@ require 'git'
 
 SANDBOX = 'commit'
 ROOT = "#{SANDBOX}-sandbox/modules/foo"
-class CommitTest < MiniTest::Unit::TestCase
+class GitTest < MiniTest::Unit::TestCase
   include FileUtils
 
   def setup
@@ -34,7 +34,7 @@ class CommitTest < MiniTest::Unit::TestCase
 
   def test_commit
     with_cwd "#{SANDBOX}-sandbox" do
-	 Opsk::Root.start ['commit', '--message', 'some message']
+	 Opsk::Root.start ['commit', '--message', 'some message', '--all', 'true']
     end 	
     g = Git.init(ROOT)
     assert g.show.include? 'some message'
