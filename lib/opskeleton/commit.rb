@@ -1,4 +1,14 @@
 
+def report(g)
+  %i(changed added untracked).each do |state|
+    puts "#{state} files:\n\n"
+    g.status.send(state).each do |k,v|
+	puts "- #{k}"
+    end
+    puts "\n"
+  end
+end
+
 module  Opsk
   class Commit < Thor::Group
     include Thorable, Thor::Actions
@@ -17,7 +27,7 @@ module  Opsk
 	    g = Git.init(d)
 	    if g.status.changed.keys.length > 0
 		puts "Listing changes for #{d}:\n\n"
-		puts "#{g.show}\n\n"
+		report(g)
 		puts "Commit the changes under #{d}? (y/n)\n\n" unless options['all']
 		if(options['all'] or STDIN.gets.chomp.eql?('y'))
 		  g.checkout('master')
@@ -28,8 +38,6 @@ module  Opsk
 		    g.commit_all(STDIN.gets.chomp) 
 		  end
 		end
-	    else
-		puts 'no changes detected'
 	    end
 	  end
 	end
