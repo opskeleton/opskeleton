@@ -37,7 +37,10 @@ module  Opsk
 	    add_writable(g,options['protocol'].to_sym)
 	    if !options['dry'] and g.diff('origin').stats[:files].keys.length > 0
 		puts "push #{d}? (y/n)" unless options['all']
-		g.push('writable') if(options['all'] or STDIN.gets.chomp.eql?('y'))
+		if(options['all'] or STDIN.gets.chomp.eql?('y'))
+		  g.push('writable') 
+		  g.pull
+		end
 	    end
 	  end
 	end
