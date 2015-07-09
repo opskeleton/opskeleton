@@ -36,9 +36,9 @@ module  Opsk
 	    g = Git.init(d)
 	    add_writable(g,options['protocol'].to_sym)
 	    if !options['dry'] and g.diff('origin').stats[:files].keys.length > 0
-		resp = yes?("push #{d}? (y/n)") unless options['all']
+		resp = yes?("Push #{d}? (y/n)") unless options['all']
 		if(options['all'] or resp)
-		  say "Pushing #{d} .."
+		  say "pushing #{d} .."
 		  g.push('writable') 
 		  g.pull
 		end
