@@ -28,6 +28,8 @@ module  Opsk
 		    g.commit_all(STDIN.gets.chomp) 
 		  end
 		end
+	    else
+		puts 'no changes detected'
 	    end
 	  end
 	end
