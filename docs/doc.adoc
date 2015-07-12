@@ -23,9 +23,6 @@ Opskelaton is an opinionated bootstrap tool for local Sandbox projects, it aims 
  
 Opskeleton comes to solve these issues by introducing a decentralized development work flow with pre-defined layout, packaging and dependency management.
 
-
-== Usage
-
 Currently Opskeleton supports Puppet and Chef, this guide is segmented to common functionality the respective separate sections for Puppet and Chef.
 
 === Installation
@@ -43,7 +40,7 @@ Perquisites (on Ubuntu):
 
 === Boxes
 
-Opskeleton recommends the use of [box-cutter](https://github.com/box-cutter) in order to create Vagrant boxes in a consistent manner (as no free hosting solution currently exist):
+Opskeleton recommends the use of https://github.com/box-cutter[box-cutter] in order to create Vagrant boxes in a consistent manner (as no free hosting solution currently exist):
 ```bash
 # make sure to have latest packer
 $ packer version
@@ -76,9 +73,9 @@ Opskeleton supports the creation of Puppet based projects supporting dependency 
 
 Opskeleton generates the complete folder structure for projects:
 
-image:https://raw.githubusercontent.com/opskeleton/opskeleton/master/img/puppet-layout.png[width=40%,hight=50%]
+image:https://raw.githubusercontent.com/opskeleton/opskeleton/master/img/puppet-layout.png[width=30%,hight=50%]
 
-==== module lifecycle
+==== lifecycle
 
 Opskelaton defines a module life cycle:
 
@@ -103,7 +100,7 @@ Each generated module will contain puppet-rspec with matching Rakefile.
 Opskelaton supports two levels of testing:
 
 * Static module testing that includes rspec and linting.
-* Integration testing using [serverspec](http://serverspec.org/) and Vagrant.
+* Integration testing using http://serverspec.org/[serverspec]and Vagrant.
 
 ```bash
 # linting all static modules
@@ -148,11 +145,6 @@ $ sudo ./run.sh
 ```
 
 An external node classifier based runner is also available under scripts/run.sh, this runner expects to get a <hostname>.yaml input file with the required node classes.
-
-
-=== Deployment
-
- See [deploy](deploy.md)
 
 === Updating
 Keeping you box up to date with latest opsk version is easy, just re-generate it again and resolve conflicts by answering y/n:
@@ -205,5 +197,172 @@ Now after a number of runs we could plot and view the results of a single host o
 $ rake plot:hosts plot:per_hosts
 # resulting png files 
 $ google-chrome plots
+```
+
+== Chef
+
+=== Introduction
+Opskelaton fully supports Chef based projects it offers similar features to the Puppet based sandboxes with additional support for roles, environments and cookbooks.
+
+Creating out first sandbox
+
+```bash
+$ opsk generate_chef redis ubuntu-14.04
+$ cd redis-sandbox
+```
+
+=== Structure
+
+==== layout
+Opskelaton creates the complete folder structure fine tuned to match best practices:
+
+Folder layout:
+
+image:https://raw.githubusercontent.com/opskeleton/opskeleton/master/img/chef-layout.png[width='30%',hight='50%']
+
+==== lifecycle
+
+Opskelaton defines a simple cookbook life cycle:
+
+ 1. Internal non reusable cookbooks (usually specific to a client site) go under static-cookbooks
+ 2. If we create a general reusable cookbook which is ready for prime time we pull out to a new git repository.
+ 3. The extracted cookbook is added back as a third party (using [librarian-chef](https://github.com/applicationsonline/librarian-chef) thatd will place them under cookbooks folder).
+
+Life cycle scheme:
+
+image:https://raw.githubusercontent.com/opskeleton/opskeleton/master/img/chef-cycle.png[width='40%',hight='50%']
+
+Creating new cookbooks is easy as:
+
+```bash
+$ opsk cookbook foo
+```
+
+=== Testing
+
+Opskelaton supports testing/linting:
+
+* Static cookbook testing that includes rspec and food-critic. (TBD)
+* Integration testing using [serverspec](http://serverspec.org/) and Vagrant.
+
+```bash
+# running serverspec
+$ rake spec
+```
+
+=== Packaging 
+Opskelaton fully supports deployment and portable execution of sandboxes on non Vagrant environments:
+
+```bash
+$ opsk generate_chef foo ubuntu-14.04.
+$ cd foo-sandbox
+# The package version file
+$ cat opsk.yaml
+
+--- 
+  version: '0.0.1'
+  name: redis
+  includes: 
+    - Cheffile
+    - cookbooks
+    - static-cookbooks
+    - dna.json
+    - environments
+    - Gemfile
+    - Gemfile.lock
+    - opsk.yaml
+    - roles
+    - LICENSE-2.0.txt
+    - run.sh
+    - boot.sh
+    - solo.rb
+
+# post bundle and gem install ..
+$ opsk package
+	create  pkg/foo-sandbox-0.0.1
+	create  pkg/foo-sandbox-0.0.1/scripts
+	create  pkg/foo-sandbox-0.0.1/scripts/lookup.rb
+	 chmod  pkg/foo-sandbox-0.0.1/scripts/lookup.rb
+	create  pkg/foo-sandbox-0.0.1/scripts/run.sh
+	 chmod  pkg/foo-sandbox-0.0.1/scripts/run.sh
+	 exist  pkg
+$ ls pkg
+foo-sandbox-0.0.1  foo-sandbox-0.0.1.tar.gz
+```
+The packaging process creates a portable tar file that can be run on any machine with chef-solo installed via the bundled run.sh:
+
+```bash 
+$ tar -xvzf foo-sandbox-0.0.1.tar.gz
+$ cd foo-sandbox-0.0.1 
+# expects to get the chef environment
+$ sudo ./run.sh dev
+```
+
+=== Updating
+
+Keeping you box up to date with latest opsk version is easy, just re-generate it again and resolve conflicts by answering y/n:
+```bash
+# Moving to latest opsk
+$ gem update opskeleton
+# foo box already exists
+$ opsk generate_chef foo <vagrant-box>
+ exist  foo-sandbox
+    conflict  foo-sandbox/Vagrantfile
+Overwrite /home/ronen/code/foo-sandbox/Vagrantfile? (enter "h" for help) [Ynaqdh]
+```
+
+=== Vagrant
+Opskeleton generates a Vagrant file with couple of enhancements:
+ 
+* CHEF_ENV (default dev) for setting chef environment.
+* Default role (sandbox name) created under roles/{type}.rb
+* static-cookbooks/cookbooks roles/environments folders are set.
+
+== Deployment
+
+The packaged tar files can be consumed using any tool and protocol (http, s3 etc),  opsk has built in support for deploying public sandboxes into:
+
+* Bintray (make sure to  https://github.com/narkisr/bintray-deploy#usage[configure] the bintray API key):
+
+```bash 
+$ opsk package
+$ opsk deploy_bintray <bintray-repo>
+   deployed foo-sandbox-0.0.1.tar.gz to http://dl.bintray.com/narkisr/<bintray-repo>/foo-sandbox-0.0.1.tar.gz
+```
+
+* S3 (Make sure to configure s3 section under ~/.configuration.rb):
+
+```bash 
+$ opsk package
+$ opsk deploy_s3 <bucket> <path>
+   deployed foo-sandbox-0.0.1.tar.gz to opsk-boxes/foo/foo-sandbox-0.0.1.tar.gz
+```
+
+```ruby
+Configuration.for('s3') {
+  access_key ''
+  secret_key ''
+  region ''
+}
+```
+
+* Scp (Make sure to configure scp section under ~/.configuration.rb):
+
+```bash 
+$ opsk package
+$ opsk deploy_scp bar
+   deployed foo-sandbox-0.0.1.tar.gz to foo@opsk-boxes:/var/boxes
+```
+
+```ruby
+Configuration.for('scp') {
+  bar {
+   host 'opsk-boxes'
+   user 'foo'
+   dest '/var/boxes'
+   # optional
+   port 2222
+ }
+}
 ```
 
