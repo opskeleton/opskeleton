@@ -89,6 +89,20 @@
 <li><a href="#usage">Usage</a>
 <ul class="sectlevel2">
 <li><a href="#installation">Installation</a></li>
+<li><a href="#boxes">Boxes</a></li>
+</ul>
+</li>
+<li><a href="#puppet">Puppet</a>
+<ul class="sectlevel2">
+<li><a href="#introduction-2">Introduction</a></li>
+<li><a href="#structure">Structure</a></li>
+<li><a href="#testing">Testing</a></li>
+<li><a href="#packaging">Packaging</a></li>
+<li><a href="#deployment">Deployment</a></li>
+<li><a href="#updating">Updating</a></li>
+<li><a href="#vagrant">Vagrant</a></li>
+<li><a href="#docker">Docker</a></li>
+<li><a href="#benchmarking">Benchmarking</a></li>
 </ul>
 </li>
 </ul>
@@ -139,14 +153,280 @@
 </div>
 <div class="sect2">
 <h3 id="installation"><a class="link" href="#installation">Installation</a></h3>
+<div class="paragraph">
+<p>Perquisites (on Ubuntu):</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Vagrant 1.7.x</p>
+</li>
+<li>
+<p>RVM</p>
+</li>
+<li>
+<p>Ruby 2.1.x</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="bash"> <span class="tok-nv">$ </span>rvm use system
+ <span class="tok-nv">$ </span>sudo gem install opskeleton</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="boxes"><a class="link" href="#boxes">Boxes</a></h3>
+<div class="paragraph">
+<p>Opskeleton recommends the use of [box-cutter](<a href="https://github.com/box-cutter" class="bare">https://github.com/box-cutter</a>) in order to create Vagrant boxes in a consistent manner (as no free hosting solution currently exist):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="bash"><span class="tok-c"># make sure to have latest packer</span>
+<span class="tok-nv">$ </span>packer version
+Packer v0.6.0
+<span class="tok-nv">$ </span>git clone git@github.com:box-cutter/ubuntu-vm.git
+<span class="tok-nv">$ </span><span class="tok-nb">cd </span>ubuntu-vm
+<span class="tok-c"># Edit Makefile.local</span>
+<span class="tok-nv">$ </span>cat Makefile.local
+<span class="tok-c"># Makefile.local</span>
+CM :<span class="tok-o">=</span> puppet
+CM_VERSION :<span class="tok-o">=</span> 3.6.1
+<span class="tok-nv">$ </span>make virtualbox/ubuntu1404</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>A useful convention for Box names:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="bash">ubuntu-14.04_puppet-3.6.1 <span class="tok-o">([</span>os<span class="tok-o">]</span>-<span class="tok-o">[</span>version<span class="tok-o">]</span>_<span class="tok-o">[</span>provisioner<span class="tok-o">]</span>-<span class="tok-o">[</span>version<span class="tok-o">])</span></code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="puppet"><a class="link" href="#puppet">Puppet</a></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="introduction-2"><a class="link" href="#introduction-2">Introduction</a></h3>
+<div class="paragraph">
+<p>Opskeleton supports the creation of Puppet based projects supporting dependency management (using librarian-puppet), linting and testing.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="structure"><a class="link" href="#structure">Structure</a></h3>
+<div class="sect3">
+<h4 id="layout"><a class="link" href="#layout">layout</a></h4>
+<div class="paragraph">
+<p>Opskeleton generates the complete folder structure for projects:</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="https://raw.githubusercontent.com/opskeleton/opskeleton/master/img/puppet-layout.png" alt="puppet-layout" width="40%"></span></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="module-lifecycle"><a class="link" href="#module-lifecycle">module lifecycle</a></h4>
+<div class="paragraph">
+<p>Opskelaton defines a module life cycle:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Internal non reusable modules (usually specific to a client site) go under static-modules</p>
+</li>
+<li>
+<p>If we create a general reusable module which is ready for prime time we pull out to a new git repository.</p>
+</li>
+<li>
+<p>The extracted module is added back as a third party (using [librarian-puppet](<a href="https://github.com/rodjek/librarian-puppet" class="bare">https://github.com/rodjek/librarian-puppet</a>) module which resides under modules folder.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Life cycle scheme:</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="https://raw.githubusercontent.com/opskeleton/opskeleton/master/img/puppet-cycle.png" alt="puppet-cycle" width="40%"></span></p>
+</div>
+<div class="paragraph">
+<p>Creating new (static) modules is easy as:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="bash"><span class="tok-nv">$ </span>opsk module foo</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Each generated module will contain puppet-rspec with matching Rakefile.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="testing"><a class="link" href="#testing">Testing</a></h3>
+<div class="paragraph">
+<p>Opskelaton supports two levels of testing:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Static module testing that includes rspec and linting.</p>
+</li>
+<li>
+<p>Integration testing using [serverspec](<a href="http://serverspec.org/" class="bare">http://serverspec.org/</a>) and Vagrant.</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="bash"><span class="tok-c"># linting all static modules</span>
+<span class="tok-nv">$ </span>rake lint
+<span class="tok-c"># rspecing</span>
+<span class="tok-nv">$ </span>rake modspec
+<span class="tok-c"># running serverspec</span>
+<span class="tok-nv">$ </span>rake spec</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="packaging"><a class="link" href="#packaging">Packaging</a></h3>
+<div class="paragraph">
+<p>Opskelaton fully supports deployment and portable execution of sandboxes on non Vagrant environments:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="bash"><span class="tok-nv">$ </span>opsk generate_puppet foo ubuntu-13.10
+<span class="tok-nv">$ </span><span class="tok-nb">cd </span>foo-sandbox
+<span class="tok-c"># The package version file</span>
+<span class="tok-nv">$ </span>cat opsk.yaml
+---
+  version: <span class="tok-s1">&#39;0.0.1&#39;</span>
+  name: foo
 
+<span class="tok-c"># post bundle and gem install ..</span>
+<span class="tok-nv">$ </span>opsk package
+      create  pkg/foo-sandbox-0.0.1
+      create  pkg/foo-sandbox-0.0.1/scripts
+      create  pkg/foo-sandbox-0.0.1/scripts/lookup.rb
+       chmod  pkg/foo-sandbox-0.0.1/scripts/lookup.rb
+      create  pkg/foo-sandbox-0.0.1/scripts/run.sh
+       chmod  pkg/foo-sandbox-0.0.1/scripts/run.sh
+      create  pkg/foo-sandbox-0.0.1/manifests/site.pp
+       exist  pkg
+<span class="tok-nv">$ </span>ls pkg
+foo-sandbox-0.0.1  foo-sandbox-0.0.1.tar.gz</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The packaging process creates a portable tar file that can be run on any machine with puppet installed via the bundled run.sh:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="bash"><span class="tok-nv">$ </span>tar -xvzf foo-sandbox-0.0.1.tar.gz
+<span class="tok-nv">$ </span><span class="tok-nb">cd </span>foo-sandbox-0.0.1
+<span class="tok-nv">$ </span>sudo ./run.sh</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>An external node classifier based runner is also available under scripts/run.sh, this runner expects to get a &lt;hostname&gt;.yaml input file with the required node classes.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="deployment"><a class="link" href="#deployment">Deployment</a></h3>
+<div class="literalblock">
+<div class="content">
+<pre>See [deploy](deploy.md)</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="updating"><a class="link" href="#updating">Updating</a></h3>
+<div class="paragraph">
+<p>Keeping you box up to date with latest opsk version is easy, just re-generate it again and resolve conflicts by answering y/n:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="bash"><span class="tok-c"># Moving to latest opsk</span>
+<span class="tok-nv">$ </span>gem update opskeleton
+<span class="tok-c"># foo box already exists</span>
+<span class="tok-nv">$ </span>opsk generate foo &lt;vagrant-box&gt;
+ exist  foo-sandbox
+    conflict  foo-sandbox/Vagrantfile
+Overwrite /home/ronen/code/foo-sandbox/Vagrantfile? <span class="tok-o">(</span>enter <span class="tok-s2">&quot;h&quot;</span> <span class="tok-k">for</span> <span class="tok-nb">help</span><span class="tok-o">)</span> <span class="tok-o">[</span>Ynaqdh<span class="tok-o">]</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="vagrant"><a class="link" href="#vagrant">Vagrant</a></h3>
+<div class="paragraph">
+<p>Opskeleton generates a Vagrant file with couple of enhancements:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>VAGRANT_BRIDGE (default eth0) for setting up public bridge on the go.</p>
+</li>
+<li>
+<p>PUPPET_ENV (default dev) for setting puppet environment.</p>
+</li>
+<li>
+<p>Puppet options preset to match modules and hiera folders.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="docker"><a class="link" href="#docker">Docker</a></h3>
+<div class="paragraph">
+<p>The only assumption that Opskelaton makes is that the target host will have Pupppet installed, this enables us to create docker images from our sandboxes quite easily:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="bash"><span class="tok-c"># creates dockerfiles/&lt;host&gt; and fig.yml</span>
+<span class="tok-nv">$ </span>opsk dockerize
+<span class="tok-nv">$ </span>opsk package
+<span class="tok-c"># grabs the opsk tar file</span>
+<span class="tok-nv">$ </span>sudo fig build</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="benchmarking"><a class="link" href="#benchmarking">Benchmarking</a></h3>
+<div class="paragraph">
+<p>Tracking the speed of our provisioning code is important for keeping a consistent level of service with the produced sandboxes, enabling benchmarking:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="bash"><span class="tok-nv">$ </span>opsk generate_puppet redis ubuntu-14.04 --bench-enable
+<span class="tok-c"># install imagemagic before bundle install</span>
+<span class="tok-nv">$ </span>sudo apt-get install imagemagick libmagickwand-dev
+<span class="tok-nv">$ </span>rake serverspec:redis
+<span class="tok-c"># with each run more result lines will be recorded</span>
+<span class="tok-nv">$ </span>cat benchmark.json
+<span class="tok-o">{</span><span class="tok-s2">&quot;total&quot;</span>:656,<span class="tok-s2">&quot;host&quot;</span>:<span class="tok-s2">&quot;redis&quot;</span>,<span class="tok-s2">&quot;revision&quot;</span>:<span class="tok-s2">&quot;5d03a41ade9fc3dd5296d4119ccb0b0ad8290b9e&quot;</span>,<span class="tok-s2">&quot;time&quot;</span>:<span class="tok-s2">&quot;2014-12-17 02:57:45 +0200&quot;</span><span class="tok-o">}</span>
+<span class="tok-c"># add it to git for tracking</span>
+<span class="tok-nv">$ </span>git add benchmark.json</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now after a number of runs we could plot and view the results of a single host or of all the hosts side by side:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="bash"><span class="tok-nv">$ </span>rake plot:hosts plot:per_hosts
+<span class="tok-c"># resulting png files</span>
+<span class="tok-nv">$ </span>google-chrome plots</code></pre>
+</div>
+</div>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-07-12 16:46:34 IDT
+Last updated 2015-07-12 19:20:08 IDT
 </div>
 </div>
 </body>
