@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 1.5.2">
 <meta name="author" content="Ronen Narkis, &lt;narkisr@gmail.com&gt;">
-<title>Opskeleton - Devop lifecycle management done right</title>
+<title>Opskeleton</title>
 <style>
 .listingblock .pygments .hll { background-color: #ffffcc }
 .listingblock .pygments  { background: #f0f0f0; }
@@ -77,7 +77,7 @@
 </head>
 <body class="article toc2 toc-left">
 <div id="header">
-<h1>Opskeleton - Devop lifecycle management done right</h1>
+<h1>Opskeleton</h1>
 <div class="details">
 <span id="author" class="author">Ronen Narkis, &lt;narkisr@gmail.com&gt;</span><br>
 <span id="revdate">v0.9.2</span>
@@ -86,6 +86,11 @@
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
 <li><a href="#introduction">Introduction</a></li>
+<li><a href="#usage">Usage</a>
+<ul class="sectlevel2">
+<li><a href="#installation">Installation</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
@@ -94,14 +99,54 @@
 <h2 id="introduction"><a class="link" href="#introduction">Introduction</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Opskeleton is a tool and methodology for creating and maintaining Devops projects it comes to solve the following issues:</p>
+<p>Opskelaton is an opinionated bootstrap tool for local Sandbox projects, it aims to solve the following common issues:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Developing Puppet/Chef modules/cookbooks on master machines which results with 'It works on my master/server' approach.</p>
+</li>
+<li>
+<p>Large monolithic Puppet/Chef code bases, code isn&#8217;t modular or reusable.</p>
+</li>
+<li>
+<p>Implicit/Missing dependencies including: Ruby version, OS, gems, modules/cookbooks.</p>
+</li>
+<li>
+<p>Manual steps in setting up and maintaining such projects.</p>
+</li>
+<li>
+<p>Non standard layout, projects missing README and LICENSE files, no clear separation between developed and dependant code.</p>
+</li>
+<li>
+<p>Lacking development guidelines (for example extracting general modules and exporting them).</p>
+</li>
+<li>
+<p>No continues build, linting and testing, provisioning code is second class citizen.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Opskeleton comes to solve these issues by introducing a decentralized development work flow with pre-defined layout, packaging and dependency management.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="usage"><a class="link" href="#usage">Usage</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Currently Opskeleton supports Puppet and Chef, this guide is segmented to common functionality the respective separate sections for Puppet and Chef.</p>
+</div>
+<div class="sect2">
+<h3 id="installation"><a class="link" href="#installation">Installation</a></h3>
+
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-07-09 18:14:34 IDT
+Last updated 2015-07-12 16:46:34 IDT
 </div>
 </div>
 </body>
