@@ -25,6 +25,8 @@ Opskeleton comes to solve these issues by introducing a decentralized developmen
 
 Currently Opskeleton supports Puppet and Chef, this guide is segmented to common functionality the respective separate sections for Puppet and Chef.
 
+== Usage
+
 === Installation
 
 Perquisites (on Ubuntu):
