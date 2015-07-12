@@ -1,0 +1,32 @@
+= Opskeleton 
+Ronen Narkis, <narkisr@gmail.com>
+v0.9.2
+:toc: left
+:!numbered:
+:idseparator: -
+:idprefix:
+:source-highlighter: pygments
+:pygments-style: friendly
+:sectlinks:
+
+== Introduction
+
+Opskelaton is an opinionated bootstrap tool for local Sandbox projects, it aims to solve the following common issues:
+
+* Developing Puppet/Chef modules/cookbooks on master machines which results with 'It works on my master/server' approach.
+* Large monolithic Puppet/Chef code bases, code isn't modular or reusable.
+* Implicit/Missing dependencies including: Ruby version, OS, gems, modules/cookbooks.
+* Manual steps in setting up and maintaining such projects.
+* Non standard layout, projects missing README and LICENSE files, no clear separation between developed and dependant code.
+* Lacking development guidelines (for example extracting general modules and exporting them).
+* No continues build, linting and testing, provisioning code is second class citizen.
+ 
+Opskeleton comes to solve these issues by introducing a decentralized development work flow with pre-defined layout, packaging and dependency management.
+
+
+== Usage
+
+Currently Opskeleton supports Puppet and Chef, this guide is segmented to common functionality the respective separate sections for Puppet and Chef.
+
+=== Installation
+

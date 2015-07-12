@@ -140,6 +140,7 @@ GEM
       systemu (~> 2.6.4)
       wmi-lite (~> 1.0)
     plist (3.1.0)
+    posix-spawn (0.3.11)
     pry (0.10.1)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
@@ -159,6 +160,9 @@ GEM
       puppet-syntax
       rake
       rspec-puppet
+    pygments.rb (0.6.3)
+      posix-spawn (~> 0.3.6)
+      yajl-ruby (~> 1.2.0)
     rack (1.6.4)
     rake (10.4.2)
     rest-client (1.8.0)
@@ -210,6 +214,7 @@ GEM
     unf_ext (0.0.7.1)
     uuidtools (2.1.5)
     wmi-lite (1.0.0)
+    yajl-ruby (1.2.1)
 
 PLATFORMS
   ruby
@@ -222,4 +227,5 @@ DEPENDENCIES
   pry
   puppet (= 3.7.5)
   puppetlabs_spec_helper (>= 0.1.0)
+  pygments.rb
   rspec-puppet
