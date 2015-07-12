@@ -85,8 +85,7 @@
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#introduction">Introduction</a></li>
-<li><a href="#usage">Usage</a>
+<li><a href="#introduction">Introduction</a>
 <ul class="sectlevel2">
 <li><a href="#installation">Installation</a></li>
 <li><a href="#boxes">Boxes</a></li>
@@ -98,13 +97,23 @@
 <li><a href="#structure">Structure</a></li>
 <li><a href="#testing">Testing</a></li>
 <li><a href="#packaging">Packaging</a></li>
-<li><a href="#deployment">Deployment</a></li>
 <li><a href="#updating">Updating</a></li>
 <li><a href="#vagrant">Vagrant</a></li>
 <li><a href="#docker">Docker</a></li>
 <li><a href="#benchmarking">Benchmarking</a></li>
 </ul>
 </li>
+<li><a href="#chef">Chef</a>
+<ul class="sectlevel2">
+<li><a href="#introduction-3">Introduction</a></li>
+<li><a href="#structure-2">Structure</a></li>
+<li><a href="#testing-2">Testing</a></li>
+<li><a href="#packaging-2">Packaging</a></li>
+<li><a href="#updating-2">Updating</a></li>
+<li><a href="#vagrant-2">Vagrant</a></li>
+</ul>
+</li>
+<li><a href="#deployment">Deployment</a></li>
 </ul>
 </div>
 </div>
@@ -143,11 +152,6 @@
 <div class="paragraph">
 <p>Opskeleton comes to solve these issues by introducing a decentralized development work flow with pre-defined layout, packaging and dependency management.</p>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="usage"><a class="link" href="#usage">Usage</a></h2>
-<div class="sectionbody">
 <div class="paragraph">
 <p>Currently Opskeleton supports Puppet and Chef, this guide is segmented to common functionality the respective separate sections for Puppet and Chef.</p>
 </div>
@@ -179,7 +183,7 @@
 <div class="sect2">
 <h3 id="boxes"><a class="link" href="#boxes">Boxes</a></h3>
 <div class="paragraph">
-<p>Opskeleton recommends the use of [box-cutter](<a href="https://github.com/box-cutter" class="bare">https://github.com/box-cutter</a>) in order to create Vagrant boxes in a consistent manner (as no free hosting solution currently exist):</p>
+<p>Opskeleton recommends the use of <a href="https://github.com/box-cutter">box-cutter</a> in order to create Vagrant boxes in a consistent manner (as no free hosting solution currently exist):</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -224,11 +228,11 @@ CM_VERSION :<span class="tok-o">=</span> 3.6.1
 <p>Opskeleton generates the complete folder structure for projects:</p>
 </div>
 <div class="paragraph">
-<p><span class="image"><img src="https://raw.githubusercontent.com/opskeleton/opskeleton/master/img/puppet-layout.png" alt="puppet-layout" width="40%"></span></p>
+<p><span class="image"><img src="https://raw.githubusercontent.com/opskeleton/opskeleton/master/img/puppet-layout.png" alt="puppet-layout" width="30%"></span></p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="module-lifecycle"><a class="link" href="#module-lifecycle">module lifecycle</a></h4>
+<h4 id="lifecycle"><a class="link" href="#lifecycle">lifecycle</a></h4>
 <div class="paragraph">
 <p>Opskelaton defines a module life cycle:</p>
 </div>
@@ -275,7 +279,7 @@ CM_VERSION :<span class="tok-o">=</span> 3.6.1
 <p>Static module testing that includes rspec and linting.</p>
 </li>
 <li>
-<p>Integration testing using [serverspec](<a href="http://serverspec.org/" class="bare">http://serverspec.org/</a>) and Vagrant.</p>
+<p>Integration testing using <a href="http://serverspec.org/">serverspec</a>and Vagrant.</p>
 </li>
 </ul>
 </div>
@@ -331,14 +335,6 @@ foo-sandbox-0.0.1  foo-sandbox-0.0.1.tar.gz</code></pre>
 </div>
 <div class="paragraph">
 <p>An external node classifier based runner is also available under scripts/run.sh, this runner expects to get a &lt;hostname&gt;.yaml input file with the required node classes.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="deployment"><a class="link" href="#deployment">Deployment</a></h3>
-<div class="literalblock">
-<div class="content">
-<pre>See [deploy](deploy.md)</pre>
-</div>
 </div>
 </div>
 <div class="sect2">
@@ -423,10 +419,263 @@ Overwrite /home/ronen/code/foo-sandbox/Vagrantfile? <span class="tok-o">(</span>
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="chef"><a class="link" href="#chef">Chef</a></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="introduction-3"><a class="link" href="#introduction-3">Introduction</a></h3>
+<div class="paragraph">
+<p>Opskelaton fully supports Chef based projects it offers similar features to the Puppet based sandboxes with additional support for roles, environments and cookbooks.</p>
+</div>
+<div class="paragraph">
+<p>Creating out first sandbox</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="bash"><span class="tok-nv">$ </span>opsk generate_chef redis ubuntu-14.04
+<span class="tok-nv">$ </span><span class="tok-nb">cd </span>redis-sandbox</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="structure-2"><a class="link" href="#structure-2">Structure</a></h3>
+<div class="sect3">
+<h4 id="layout-2"><a class="link" href="#layout-2">layout</a></h4>
+<div class="paragraph">
+<p>Opskelaton creates the complete folder structure fine tuned to match best practices:</p>
+</div>
+<div class="paragraph">
+<p>Folder layout:</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="https://raw.githubusercontent.com/opskeleton/opskeleton/master/img/chef-layout.png" alt="chef-layout" width="30%"></span></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="lifecycle-2"><a class="link" href="#lifecycle-2">lifecycle</a></h4>
+<div class="paragraph">
+<p>Opskelaton defines a simple cookbook life cycle:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Internal non reusable cookbooks (usually specific to a client site) go under static-cookbooks</p>
+</li>
+<li>
+<p>If we create a general reusable cookbook which is ready for prime time we pull out to a new git repository.</p>
+</li>
+<li>
+<p>The extracted cookbook is added back as a third party (using [librarian-chef](<a href="https://github.com/applicationsonline/librarian-chef" class="bare">https://github.com/applicationsonline/librarian-chef</a>) thatd will place them under cookbooks folder).</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Life cycle scheme:</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="https://raw.githubusercontent.com/opskeleton/opskeleton/master/img/chef-cycle.png" alt="chef-cycle" width="40%"></span></p>
+</div>
+<div class="paragraph">
+<p>Creating new cookbooks is easy as:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="bash"><span class="tok-nv">$ </span>opsk cookbook foo</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="testing-2"><a class="link" href="#testing-2">Testing</a></h3>
+<div class="paragraph">
+<p>Opskelaton supports testing/linting:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Static cookbook testing that includes rspec and food-critic. (TBD)</p>
+</li>
+<li>
+<p>Integration testing using [serverspec](<a href="http://serverspec.org/" class="bare">http://serverspec.org/</a>) and Vagrant.</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="bash"><span class="tok-c"># running serverspec</span>
+<span class="tok-nv">$ </span>rake spec</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="packaging-2"><a class="link" href="#packaging-2">Packaging</a></h3>
+<div class="paragraph">
+<p>Opskelaton fully supports deployment and portable execution of sandboxes on non Vagrant environments:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="bash"><span class="tok-nv">$ </span>opsk generate_chef foo ubuntu-14.04.
+<span class="tok-nv">$ </span><span class="tok-nb">cd </span>foo-sandbox
+<span class="tok-c"># The package version file</span>
+<span class="tok-nv">$ </span>cat opsk.yaml
+
+---
+  version: <span class="tok-s1">&#39;0.0.1&#39;</span>
+  name: redis
+  includes:
+    - Cheffile
+    - cookbooks
+    - static-cookbooks
+    - dna.json
+    - environments
+    - Gemfile
+    - Gemfile.lock
+    - opsk.yaml
+    - roles
+    - LICENSE-2.0.txt
+    - run.sh
+    - boot.sh
+    - solo.rb
+
+<span class="tok-c"># post bundle and gem install ..</span>
+<span class="tok-nv">$ </span>opsk package
+	create  pkg/foo-sandbox-0.0.1
+	create  pkg/foo-sandbox-0.0.1/scripts
+	create  pkg/foo-sandbox-0.0.1/scripts/lookup.rb
+	 chmod  pkg/foo-sandbox-0.0.1/scripts/lookup.rb
+	create  pkg/foo-sandbox-0.0.1/scripts/run.sh
+	 chmod  pkg/foo-sandbox-0.0.1/scripts/run.sh
+	 exist  pkg
+<span class="tok-nv">$ </span>ls pkg
+foo-sandbox-0.0.1  foo-sandbox-0.0.1.tar.gz</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The packaging process creates a portable tar file that can be run on any machine with chef-solo installed via the bundled run.sh:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="bash"><span class="tok-nv">$ </span>tar -xvzf foo-sandbox-0.0.1.tar.gz
+<span class="tok-nv">$ </span><span class="tok-nb">cd </span>foo-sandbox-0.0.1
+<span class="tok-c"># expects to get the chef environment</span>
+<span class="tok-nv">$ </span>sudo ./run.sh dev</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="updating-2"><a class="link" href="#updating-2">Updating</a></h3>
+<div class="paragraph">
+<p>Keeping you box up to date with latest opsk version is easy, just re-generate it again and resolve conflicts by answering y/n:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="bash"><span class="tok-c"># Moving to latest opsk</span>
+<span class="tok-nv">$ </span>gem update opskeleton
+<span class="tok-c"># foo box already exists</span>
+<span class="tok-nv">$ </span>opsk generate_chef foo &lt;vagrant-box&gt;
+ exist  foo-sandbox
+    conflict  foo-sandbox/Vagrantfile
+Overwrite /home/ronen/code/foo-sandbox/Vagrantfile? <span class="tok-o">(</span>enter <span class="tok-s2">&quot;h&quot;</span> <span class="tok-k">for</span> <span class="tok-nb">help</span><span class="tok-o">)</span> <span class="tok-o">[</span>Ynaqdh<span class="tok-o">]</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="vagrant-2"><a class="link" href="#vagrant-2">Vagrant</a></h3>
+<div class="paragraph">
+<p>Opskeleton generates a Vagrant file with couple of enhancements:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>CHEF_ENV (default dev) for setting chef environment.</p>
+</li>
+<li>
+<p>Default role (sandbox name) created under roles/{type}.rb</p>
+</li>
+<li>
+<p>static-cookbooks/cookbooks roles/environments folders are set.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="deployment"><a class="link" href="#deployment">Deployment</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The packaged tar files can be consumed using any tool and protocol (http, s3 etc),  opsk has built in support for deploying public sandboxes into:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Bintray (make sure to  <a href="https://github.com/narkisr/bintray-deploy#usage">configure</a> the bintray API key):</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="bash"><span class="tok-nv">$ </span>opsk package
+<span class="tok-nv">$ </span>opsk deploy_bintray &lt;bintray-repo&gt;
+   deployed foo-sandbox-0.0.1.tar.gz to http://dl.bintray.com/narkisr/&lt;bintray-repo&gt;/foo-sandbox-0.0.1.tar.gz</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>S3 (Make sure to configure s3 section under ~/.configuration.rb):</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="bash"><span class="tok-nv">$ </span>opsk package
+<span class="tok-nv">$ </span>opsk deploy_s3 &lt;bucket&gt; &lt;path&gt;
+   deployed foo-sandbox-0.0.1.tar.gz to opsk-boxes/foo/foo-sandbox-0.0.1.tar.gz</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="ruby"><span class="tok-no">Configuration</span><span class="tok-o">.</span><span class="tok-n">for</span><span class="tok-p">(</span><span class="tok-s1">&#39;s3&#39;</span><span class="tok-p">)</span> <span class="tok-p">{</span>
+  <span class="tok-n">access_key</span> <span class="tok-s1">&#39;&#39;</span>
+  <span class="tok-n">secret_key</span> <span class="tok-s1">&#39;&#39;</span>
+  <span class="tok-n">region</span> <span class="tok-s1">&#39;&#39;</span>
+<span class="tok-p">}</span></code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Scp (Make sure to configure scp section under ~/.configuration.rb):</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="bash"><span class="tok-nv">$ </span>opsk package
+<span class="tok-nv">$ </span>opsk deploy_scp bar
+   deployed foo-sandbox-0.0.1.tar.gz to foo@opsk-boxes:/var/boxes</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="ruby"><span class="tok-no">Configuration</span><span class="tok-o">.</span><span class="tok-n">for</span><span class="tok-p">(</span><span class="tok-s1">&#39;scp&#39;</span><span class="tok-p">)</span> <span class="tok-p">{</span>
+  <span class="tok-n">bar</span> <span class="tok-p">{</span>
+   <span class="tok-n">host</span> <span class="tok-s1">&#39;opsk-boxes&#39;</span>
+   <span class="tok-n">user</span> <span class="tok-s1">&#39;foo&#39;</span>
+   <span class="tok-n">dest</span> <span class="tok-s1">&#39;/var/boxes&#39;</span>
+   <span class="tok-c1"># optional</span>
+   <span class="tok-n">port</span> <span class="tok-mi">2222</span>
+ <span class="tok-p">}</span>
+<span class="tok-p">}</span></code></pre>
+</div>
+</div>
+</div>
+</div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-07-12 19:20:08 IDT
+Last updated 2015-07-12 19:51:51 IDT
 </div>
 </div>
 </body>
