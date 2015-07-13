@@ -229,7 +229,7 @@ CM_VERSION :<span class="tok-o">=</span> 3.6.1
 <div class="sect2">
 <h3 id="structure"><a class="link" href="#structure">Structure</a></h3>
 <div class="sect3">
-<h4 id="layout"><a class="link" href="#layout">layout</a></h4>
+<h4 id="layout"><a class="link" href="#layout">Layout</a></h4>
 <div class="paragraph">
 <p>Opskeleton generates the complete folder structure for projects:</p>
 </div>
@@ -238,7 +238,7 @@ CM_VERSION :<span class="tok-o">=</span> 3.6.1
 </div>
 </div>
 <div class="sect3">
-<h4 id="lifecycle"><a class="link" href="#lifecycle">lifecycle</a></h4>
+<h4 id="lifecycle"><a class="link" href="#lifecycle">Lifecycle</a></h4>
 <div class="paragraph">
 <p>Opskelaton defines a module life cycle:</p>
 </div>
@@ -251,7 +251,7 @@ CM_VERSION :<span class="tok-o">=</span> 3.6.1
 <p>If we create a general reusable module which is ready for prime time we pull out to a new git repository.</p>
 </li>
 <li>
-<p>The extracted module is added back as a third party (using [librarian-puppet](<a href="https://github.com/rodjek/librarian-puppet" class="bare">https://github.com/rodjek/librarian-puppet</a>) module which resides under modules folder.</p>
+<p>The extracted module is added back as a third party (using <a href="https://github.com/rodjek/librarian-puppet">librarian-puppet</a> module which resides under modules folder.</p>
 </li>
 </ol>
 </div>
@@ -271,6 +271,61 @@ CM_VERSION :<span class="tok-o">=</span> 3.6.1
 </div>
 <div class="paragraph">
 <p>Each generated module will contain puppet-rspec with matching Rakefile.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="pushing-changes"><a class="link" href="#pushing-changes">Pushing changes</a></h4>
+<div class="paragraph">
+<p>Making changes to third party modules is quite easy once librarian-puppet installed them locally (you can push only git based modules):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="ruby"><span class="tok-n">forge</span> <span class="tok-s2">&quot;https://forgeapi.puppetlabs.com&quot;</span>
+
+<span class="tok-n">mod</span> <span class="tok-s1">&#39;puppetlabs/stdlib&#39;</span>
+<span class="tok-n">mod</span> <span class="tok-s1">&#39;puppetlabs/apt&#39;</span>
+
+<span class="tok-n">mod</span> <span class="tok-s1">&#39;strings/artifactory&#39;</span><span class="tok-p">,</span>
+   <span class="tok-ss">:git</span> <span class="tok-o">=&gt;</span> <span class="tok-s1">&#39;git://github.com/pulling-strings/puppet-artifactory.git&#39;</span>
+
+<span class="tok-n">mod</span> <span class="tok-s1">&#39;rip/module-data&#39;</span><span class="tok-p">,</span>
+  <span class="tok-ss">:git</span> <span class="tok-o">=&gt;</span> <span class="tok-s1">&#39;git://github.com/ripienaar/puppet-module-data.git&#39;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Its best practice to use git protocol (which is read only), still pushing changes from multiple modules it can be tedious, Opskeleton fixes that:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="bash"><span class="tok-c"># We hacked a number of submodules, now we commit</span>
+<span class="tok-nv">$ </span>opsk commit
+Listing changes <span class="tok-k">for</span> modules/artifactory:
+
+changed files:
+
+- metadata.json
+
+added files:
+
+untracked files:
+
+Commit the changes under modules/artifactory? <span class="tok-o">(</span>y/n<span class="tok-o">)</span> y
+Commit message:
+This is a nice change</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Running opsk commit will scan the modules folder for changed repositories asking the user for commit message.</p>
+</div>
+<div class="paragraph">
+<p>Once commits are made we can push the changes, Opskeleton will add a writable repository from the read only origin url:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="bash"><span class="tok-nv">$ </span>opsk push
+Push modules/artifactory? <span class="tok-o">(</span>y/n<span class="tok-o">)</span> y
+pushing modules/artifactory ..</code></pre>
+</div>
 </div>
 </div>
 </div>
@@ -681,7 +736,7 @@ Overwrite /home/ronen/code/foo-sandbox/Vagrantfile? <span class="tok-o">(</span>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-07-12 19:53:08 IDT
+Last updated 2015-07-13 16:04:55 IDT
 </div>
 </div>
 </body>
