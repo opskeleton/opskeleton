@@ -71,19 +71,19 @@ Opskeleton supports the creation of Puppet based projects supporting dependency 
 
 === Structure
 
-==== layout
+==== Layout
 
 Opskeleton generates the complete folder structure for projects:
 
 image:https://raw.githubusercontent.com/opskeleton/opskeleton/master/img/puppet-layout.png[width=30%,hight=50%]
 
-==== lifecycle
+==== Lifecycle
 
 Opskelaton defines a module life cycle:
 
 1. Internal non reusable modules (usually specific to a client site) go under static-modules
 2. If we create a general reusable module which is ready for prime time we pull out to a new git repository.
-3. The extracted module is added back as a third party (using [librarian-puppet](https://github.com/rodjek/librarian-puppet) module which resides under modules folder.
+3. The extracted module is added back as a third party (using link:https://github.com/rodjek/librarian-puppet[librarian-puppet] module which resides under modules folder.
 
 Life cycle scheme:
 
@@ -96,6 +96,55 @@ $ opsk module foo
 ```
 
 Each generated module will contain puppet-rspec with matching Rakefile. 
+
+==== Pushing changes
+
+Making changes to third party modules is quite easy once librarian-puppet installed them locally (you can push only git based modules):
+
+```ruby
+forge "https://forgeapi.puppetlabs.com"
+
+mod 'puppetlabs/stdlib'
+mod 'puppetlabs/apt'
+
+mod 'strings/artifactory', 
+   :git => 'git://github.com/pulling-strings/puppet-artifactory.git'
+
+mod 'rip/module-data',
+  :git => 'git://github.com/ripienaar/puppet-module-data.git'
+```
+
+Its best practice to use git protocol (which is read only), still pushing changes from multiple modules it can be tedious, Opskeleton fixes that:
+
+
+```bash
+# We hacked a number of submodules, now we commit
+$ opsk commit
+Listing changes for modules/artifactory:
+
+changed files:
+
+- metadata.json
+
+added files:
+
+untracked files:
+
+Commit the changes under modules/artifactory? (y/n) y
+Commit message:
+This is a nice change
+```
+
+Running opsk commit will scan the modules folder for changed repositories asking the user for commit message.
+
+Once commits are made we can push the changes, Opskeleton will add a writable repository from the read only origin url:
+
+```bash
+$ opsk push
+Push modules/artifactory? (y/n) y
+pushing modules/artifactory ..
+```
+
 
 === Testing
 
