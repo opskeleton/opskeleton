@@ -114,7 +114,7 @@ mod 'rip/module-data',
   :git => 'git://github.com/ripienaar/puppet-module-data.git'
 ```
 
-Its best practice to use git protocol (which is read only), still pushing changes from multiple modules it can be tedious, Opskeleton fixes that:
+Its best practice to use git protocol (read only) which makes pushing changes from multiple modules a bit tedious, Opskeleton fixes that:
 
 
 ```bash
