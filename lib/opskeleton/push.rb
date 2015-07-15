@@ -32,17 +32,21 @@ module  Opsk
 
     def push
 	Dir["modules/*"].reject{|o| not File.directory?(o)}.each do |d|
-	  if File.exists?("#{d}/.git")
-	    g = Git.init(d)
-	    add_writable(g,options['protocol'].to_sym)
-	    if !options['dry'] and g.diff('origin').stats[:files].keys.length > 0
-		resp = yes?("Push #{d}? (y/n)") unless options['all']
-		if(options['all'] or resp)
-		  say "pushing #{d} .."
-		  g.push('writable') 
-		  g.pull
+	  begin
+	    if File.exists?("#{d}/.git")
+		g = Git.init(d)
+		add_writable(g,options['protocol'].to_sym)
+		if !options['dry'] and g.diff('origin').stats[:files].keys.length > 0
+		  resp = yes?("Push #{d}? (y/n)") unless options['all']
+		  if(options['all'] or resp)
+		    say "pushing #{d} .."
+		    g.push('writable') 
+		    g.pull
+		  end
 		end
 	    end
+	  rescue => e
+	    say "Failed to push #{d} due to #{e}"
 	  end
 	end
     end
