@@ -295,6 +295,26 @@ CM_VERSION :<span class="tok-o">=</span> 3.6.1
 <div class="paragraph">
 <p>Its best practice to use git protocol (read only) which makes pushing changes from multiple modules a bit tedious, Opskeleton fixes that:</p>
 </div>
+<div class="paragraph">
+<p>We can list the changes:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="bash"><span class="tok-nv">$ </span>opsk uncommited
+Listing changes <span class="tok-k">for</span> modules/artifactory:
+
+changed files:
+
+- metadata.json
+
+added files:
+
+untracked files:</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>We can commit them (providing a commit message per module or --message for all):</p>
+</div>
 <div class="listingblock">
 <div class="content">
 <pre class="pygments highlight"><code data-lang="bash"><span class="tok-c"># We hacked a number of submodules, now we commit</span>
@@ -315,10 +335,7 @@ This is a nice change</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Running opsk commit will scan the modules folder for changed repositories asking the user for commit message.</p>
-</div>
-<div class="paragraph">
-<p>Once commits are made we can push the changes, Opskeleton will add a writable repository from the read only origin url:</p>
+<p>Once commits are made we can push the changes:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -736,7 +753,7 @@ Overwrite /home/ronen/code/foo-sandbox/Vagrantfile? <span class="tok-o">(</span>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-07-13 16:10:22 IDT
+Last updated 2015-07-15 17:50:02 IDT
 </div>
 </div>
 </body>
