@@ -335,6 +335,23 @@ This is a nice change</code></pre>
 </div>
 </div>
 <div class="paragraph">
+<p>For more commit options:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="bash"><span class="tok-nv">$ </span>opsk <span class="tok-nb">help </span>commit
+
+Usage:
+  opsk commit <span class="tok-o">[</span>message<span class="tok-o">]</span>
+
+Options:
+  <span class="tok-o">[</span>--message<span class="tok-o">=</span>MESSAGE<span class="tok-o">]</span>  <span class="tok-c"># optional commit message</span>
+  <span class="tok-o">[</span>--all<span class="tok-o">]</span>, <span class="tok-o">[</span>--no-all<span class="tok-o">]</span>  <span class="tok-c"># commit all</span>
+
+commit each changed puppet module under modules folder</code></pre>
+</div>
+</div>
+<div class="paragraph">
 <p>Once commits are made we can push the changes:</p>
 </div>
 <div class="listingblock">
@@ -343,6 +360,9 @@ This is a nice change</code></pre>
 Push modules/artifactory? <span class="tok-o">(</span>y/n<span class="tok-o">)</span> y
 pushing modules/artifactory ..</code></pre>
 </div>
+</div>
+<div class="paragraph">
+<p>Opsk will add a remote writable repository for each submodule substituting the readonly protocol with a write enabled one, the default protocol is ssh (customizable by using --protocol).</p>
 </div>
 <div class="paragraph">
 <p>For more options:</p>
@@ -360,18 +380,7 @@ Options:
   <span class="tok-o">[</span>--dry<span class="tok-o">]</span>, <span class="tok-o">[</span>--no-dry<span class="tok-o">]</span>    <span class="tok-c"># dry mode</span>
   <span class="tok-o">[</span>--all<span class="tok-o">]</span>, <span class="tok-o">[</span>--no-all<span class="tok-o">]</span>    <span class="tok-c"># push all without asking</span>
 
-push each changed puppet module under modules folder
-
-<span class="tok-nv">$ </span>opsk <span class="tok-nb">help </span>commit
-
-Usage:
-  opsk commit <span class="tok-o">[</span>message<span class="tok-o">]</span>
-
-Options:
-  <span class="tok-o">[</span>--message<span class="tok-o">=</span>MESSAGE<span class="tok-o">]</span>  <span class="tok-c"># optional commit message</span>
-  <span class="tok-o">[</span>--all<span class="tok-o">]</span>, <span class="tok-o">[</span>--no-all<span class="tok-o">]</span>  <span class="tok-c"># commit all</span>
-
-commit each changed puppet module under modules folder</code></pre>
+push each changed puppet module under modules folder</code></pre>
 </div>
 </div>
 </div>
@@ -783,7 +792,7 @@ Overwrite /home/ronen/code/foo-sandbox/Vagrantfile? <span class="tok-o">(</span>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-07-15 18:49:10 IDT
+Last updated 2015-07-15 19:13:38 IDT
 </div>
 </div>
 </body>
