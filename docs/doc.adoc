@@ -160,7 +160,33 @@ Push modules/artifactory? (y/n) y
 pushing modules/artifactory ..
 ```
 
+For more options: 
 
+```bash 
+$ opsk help push
+
+Usage:
+  opsk push
+
+Options:
+  [--protocol=PROTOCOL]  # remote ssh protocol (https or ssh)
+                         # Default: ssh
+  [--dry], [--no-dry]    # dry mode
+  [--all], [--no-all]    # push all without asking
+
+push each changed puppet module under modules folder
+
+$ opsk help commit
+
+Usage:
+  opsk commit [message]
+
+Options:
+  [--message=MESSAGE]  # optional commit message
+  [--all], [--no-all]  # commit all
+
+commit each changed puppet module under modules folder
+```
 === Testing
 
 Opskelaton supports two levels of testing:
