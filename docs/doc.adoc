@@ -83,7 +83,7 @@ Opskelaton defines a module life cycle:
 
 1. Internal non reusable modules (usually specific to a client site) go under static-modules
 2. If we create a general reusable module which is ready for prime time we pull out to a new git repository.
-3. The extracted module is added back as a third party (using link:https://github.com/rodjek/librarian-puppet[librarian-puppet] module which resides under modules folder.
+3. The extracted module is added (using link:https://github.com/rodjek/librarian-puppet[librarian-puppet]) back as a third party module under modules folder.
 
 Life cycle scheme:
 
@@ -318,7 +318,7 @@ Opskelaton defines a simple cookbook life cycle:
 
  1. Internal non reusable cookbooks (usually specific to a client site) go under static-cookbooks
  2. If we create a general reusable cookbook which is ready for prime time we pull out to a new git repository.
- 3. The extracted cookbook is added back as a third party (using [librarian-chef](https://github.com/applicationsonline/librarian-chef) thatd will place them under cookbooks folder).
+ 3. The extracted cookbook is added back as a third party (using link:https://github.com/applicationsonline/librarian-chef[librarian-chef]) cookbook under cookbooks folder).
 
 Life cycle scheme:
 
