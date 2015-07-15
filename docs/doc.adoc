@@ -117,6 +117,22 @@ mod 'rip/module-data',
 Its best practice to use git protocol (read only) which makes pushing changes from multiple modules a bit tedious, Opskeleton fixes that:
 
 
+We can list the changes:
+
+```bash 
+$ opsk uncommited
+Listing changes for modules/artifactory:
+
+changed files:
+
+- metadata.json
+
+added files:
+
+untracked files:
+```
+
+We can commit them (providing a commit message per module or --message for all):
 ```bash
 # We hacked a number of submodules, now we commit
 $ opsk commit
@@ -135,9 +151,8 @@ Commit message:
 This is a nice change
 ```
 
-Running opsk commit will scan the modules folder for changed repositories asking the user for commit message.
 
-Once commits are made we can push the changes, Opskeleton will add a writable repository from the read only origin url:
+Once commits are made we can push the changes:
 
 ```bash
 $ opsk push
