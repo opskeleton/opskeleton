@@ -344,6 +344,36 @@ Push modules/artifactory? <span class="tok-o">(</span>y/n<span class="tok-o">)</
 pushing modules/artifactory ..</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p>For more options:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="bash"><span class="tok-nv">$ </span>opsk <span class="tok-nb">help </span>push
+
+Usage:
+  opsk push
+
+Options:
+  <span class="tok-o">[</span>--protocol<span class="tok-o">=</span>PROTOCOL<span class="tok-o">]</span>  <span class="tok-c"># remote ssh protocol (https or ssh)</span>
+                         <span class="tok-c"># Default: ssh</span>
+  <span class="tok-o">[</span>--dry<span class="tok-o">]</span>, <span class="tok-o">[</span>--no-dry<span class="tok-o">]</span>    <span class="tok-c"># dry mode</span>
+  <span class="tok-o">[</span>--all<span class="tok-o">]</span>, <span class="tok-o">[</span>--no-all<span class="tok-o">]</span>    <span class="tok-c"># push all without asking</span>
+
+push each changed puppet module under modules folder
+
+<span class="tok-nv">$ </span>opsk <span class="tok-nb">help </span>commit
+
+Usage:
+  opsk commit <span class="tok-o">[</span>message<span class="tok-o">]</span>
+
+Options:
+  <span class="tok-o">[</span>--message<span class="tok-o">=</span>MESSAGE<span class="tok-o">]</span>  <span class="tok-c"># optional commit message</span>
+  <span class="tok-o">[</span>--all<span class="tok-o">]</span>, <span class="tok-o">[</span>--no-all<span class="tok-o">]</span>  <span class="tok-c"># commit all</span>
+
+commit each changed puppet module under modules folder</code></pre>
+</div>
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -753,7 +783,7 @@ Overwrite /home/ronen/code/foo-sandbox/Vagrantfile? <span class="tok-o">(</span>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-07-15 17:50:02 IDT
+Last updated 2015-07-15 18:41:42 IDT
 </div>
 </div>
 </body>
