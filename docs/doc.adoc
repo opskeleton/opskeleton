@@ -151,6 +151,20 @@ Commit message:
 This is a nice change
 ```
 
+For more commit options:
+
+```bash
+$ opsk help commit
+
+Usage:
+  opsk commit [message]
+
+Options:
+  [--message=MESSAGE]  # optional commit message
+  [--all], [--no-all]  # commit all
+
+commit each changed puppet module under modules folder
+```
 
 Once commits are made we can push the changes:
 
@@ -159,6 +173,8 @@ $ opsk push
 Push modules/artifactory? (y/n) y
 pushing modules/artifactory ..
 ```
+
+Opsk will add a remote writable repository for each submodule substituting the readonly protocol with a write enabled one, the default protocol is ssh (customizable by using --protocol).
 
 For more options: 
 
@@ -175,17 +191,6 @@ Options:
   [--all], [--no-all]    # push all without asking
 
 push each changed puppet module under modules folder
-
-$ opsk help commit
-
-Usage:
-  opsk commit [message]
-
-Options:
-  [--message=MESSAGE]  # optional commit message
-  [--all], [--no-all]  # commit all
-
-commit each changed puppet module under modules folder
 ```
 === Testing
 
