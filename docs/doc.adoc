@@ -33,7 +33,7 @@ Perquisites (on Ubuntu):
 
 * Vagrant 1.7.x
 * RVM
-* Ruby 2.1.x
+* Ruby >= 2.1.2
 
 ```bash 
  $ rvm use system
