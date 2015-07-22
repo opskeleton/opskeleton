@@ -5,6 +5,7 @@ PATH
       aws-sdk (~> 2)
       bintray_deploy
       git
+      git_clone_url
       net-scp
       thor
 
@@ -22,12 +23,12 @@ GEM
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
     asciidoctor (1.5.2)
-    aws-sdk (2.1.3)
-      aws-sdk-resources (= 2.1.3)
-    aws-sdk-core (2.1.3)
+    aws-sdk (2.1.7)
+      aws-sdk-resources (= 2.1.7)
+    aws-sdk-core (2.1.7)
       jmespath (~> 1.0)
-    aws-sdk-resources (2.1.3)
-      aws-sdk-core (= 2.1.3)
+    aws-sdk-resources (2.1.7)
+      aws-sdk-core (= 2.1.7)
     bintray_deploy (0.0.4)
       configuration
       rest-client
@@ -80,6 +81,8 @@ GEM
       libyajl2 (~> 1.2)
     formatador (0.2.5)
     git (1.2.9.1)
+    git_clone_url (0.1.0)
+      uri-ssh_git
     guard (2.12.8)
       formatador (>= 0.2.4)
       listen (>= 2.7, <= 4.0)
@@ -241,6 +244,7 @@ GEM
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.7.1)
+    uri-ssh_git (0.1.1)
     uuidtools (2.1.5)
     wmi-lite (1.0.0)
     yajl-ruby (1.2.1)

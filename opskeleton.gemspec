@@ -16,6 +16,7 @@ Gem::Specification.new do |gem|
   gem.add_dependency('aws-sdk', '~> 2')
   gem.add_dependency('net-scp')
   gem.add_dependency('git')
+  gem.add_dependency('git_clone_url')
   gem.add_development_dependency('puppet','=3.7.5')
   gem.add_development_dependency('chef')
   gem.add_development_dependency('rspec-puppet')
