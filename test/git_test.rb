@@ -47,4 +47,14 @@ class GitTest < MiniTest::Unit::TestCase
     g = Git.init(ROOT)
     assert g.remotes.length == 2
   end
+
+  def test_urls
+    readonly = 'git://github.com/pulling-strings/puppet-jdk.git'
+    norm = normalize_url(readonly,{})
+    assert norm == 'ssh://github.com/pulling-strings/puppet-jdk.git'
+    norm = normalize_url(readonly,{'protocol' => 'https','port' => '1234'})
+    assert norm == 'https://github.com:1234/pulling-strings/puppet-jdk.git' 
+    norm = normalize_url(readonly,{'user' => 'ronen', 'protocol' => 'ssh','port' => '1234'})
+    assert norm == 'ssh://ronen@github.com:1234/pulling-strings/puppet-jdk.git' 
+  end
 end
