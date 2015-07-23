@@ -49,12 +49,13 @@ class GitTest < MiniTest::Unit::TestCase
   end
 
   def test_urls
+    git = Opsk::Git.new('.',nil)
     readonly = 'git://github.com/pulling-strings/puppet-jdk.git'
-    norm = normalize_url(readonly,{})
+    norm = git.normalize_url(readonly,{})
     assert norm == 'ssh://github.com/pulling-strings/puppet-jdk.git'
-    norm = normalize_url(readonly,{'protocol' => 'https','port' => '1234'})
+    norm = git.normalize_url(readonly,{'protocol' => 'https','port' => '1234'})
     assert norm == 'https://github.com:1234/pulling-strings/puppet-jdk.git' 
-    norm = normalize_url(readonly,{'user' => 'ronen', 'protocol' => 'ssh','port' => '1234'})
+    norm = git.normalize_url(readonly,{'user' => 'ronen', 'protocol' => 'ssh','port' => '1234'})
     assert norm == 'ssh://ronen@github.com:1234/pulling-strings/puppet-jdk.git' 
   end
 end

@@ -18,4 +18,5 @@ require 'opskeleton/module'
 require 'opskeleton/commit'
 require 'opskeleton/uncommited'
 require 'opskeleton/push'
+require 'opskeleton/git'
 

@@ -1,27 +1,4 @@
 
-require 'git_clone_url'
-
-def normalize_url(readonly,options)
-  url = GitCloneUrl.parse(readonly)
-  proto = options['protocol'] || 'ssh'
-  port = options['port']? ":#{options['port']}" : ''
-  user = options['user']? "#{options['user']}@" : ''
-  "#{proto}://#{user}#{url.host}#{port}#{url.path}"
-end
-
-def add_writable(g,options)
-  readonly = g.remotes.find{|r|r.name.eql?('origin')}.url
-  writable = normalize_url(readonly,options)
-  remote_exists = g.remotes.map {|r| r.name}.include?('writable')
-  unless readonly.eql?(writable) or remote_exists
-    g.add_remote('writable',writable) 
-  end
-end
-
-# ruby-git cannot do this (lame)
-def local_ahead?(d)
-  %x{git --git-dir=#{d}/.git --work-tree=#{d}}.include?('ahead')
-end
 
 module  Opsk
   class Push < Thor::Group
@@ -42,14 +19,14 @@ module  Opsk
 	Dir["modules/*"].reject{|o| not File.directory?(o)}.each do |d|
 	  begin
 	    if File.exists?("#{d}/.git")
-		g = Git.open(d)
-		add_writable(g,options)
-		if !options['dry'] and local_ahead?(d)
+		git = Opsk::Git.new(d,self)
+		git.add_writable(options)
+		if !options['dry'] and git.local_ahead?
 		  resp = yes?("Push #{d}? (y/n)") unless options['all']
 		  if(options['all'] or resp)
 		    say "pushing #{d} .."
-		    g.push('writable') 
-		    g.pull
+		    git.push('writable') 
+		    git.pull
 		  end
 		end
 	    end
