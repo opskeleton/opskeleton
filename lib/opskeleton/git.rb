@@ -2,10 +2,11 @@ require 'git_clone_url'
 
 module  Opsk
   class Git
-    extend Forwardable
+    extend ::Forwardable
 
 
     def initialize(d,thor)
+	@d = d
 	@g = ::Git.open(d)
 	@thor = thor
     end
@@ -14,7 +15,7 @@ module  Opsk
     def_delegator :@g, :pull, :pull
 
     def changed?
-	@g.status.changed.keys.length > 0
+	git_run('status').include?('modified')
     end
 
     def report
@@ -27,10 +28,18 @@ module  Opsk
 	end
     end
 
-    def master_commit(d,options)
-	resp = @thor.yes? "Commit the changes under #{d}? (y/n)" unless options['all']
+    def remaster
+	Dir.chdir @d do
+	  git_run('stash','.')
+	  git_run('checkout master','.')
+	  git_run('stash apply stash@\{0\}','.')
+	end
+    end
+
+    def master_commit(options)
+	resp = @thor.yes? "Commit the changes under #{@d}? (y/n)" unless options['all']
 	if(options['all'] or resp)
-	  @g.checkout('master')
+	  remaster
 	  if options['message']
 	    @g.commit_all(options['message']) 
 	  else 
@@ -60,7 +69,16 @@ module  Opsk
 
     # ruby-git cannot do this (lame)
     def local_ahead?
-	%x{git --git-dir=#{@d}/.git --work-tree=#{@d}}.include?('ahead')
+	git_run('status').include?('ahead')
+    end
+
+    def git_run(cmd,parent=nil)
+	dir = parent || @d
+	res = %x{git --git-dir=#{dir}/.git --work-tree=#{dir} #{cmd}}
+	if $? != 0	
+	  raise Exception.new("Failed to run #{cmd} due to #{res}")
+	end
+	res
     end
   end
 end
