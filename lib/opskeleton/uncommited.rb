@@ -49,7 +49,7 @@ module  Opsk
 	Dir["modules/*"].reject{|o| not File.directory?(o)}.each do |d|
 	  if File.exists?("#{d}/.git")
 	    begin
-		cg = Opsk::CommitGit.new(d,options,self)
+		cg = Opsk::Git.new(d,self)
 		if cg.changed?
 		  say "Listing changes for #{d}:\n\n"
 		  cg.report
