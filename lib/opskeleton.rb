@@ -1,4 +1,5 @@
 require 'opskeleton/version'
+require 'forwardable'
 require 'thor'
 require 'thor/group'
 require 'yaml'
