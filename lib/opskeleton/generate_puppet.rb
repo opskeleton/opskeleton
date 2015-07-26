@@ -85,9 +85,9 @@ module Opsk
 	if(!File.exists?("#{path}/.git"))
 	  copy_file('templates/gitignore', "#{path}/.gitignore")
 	  inside(path) do
-	    run('git init .')
-	    run('git add -A')
-	    run("git commit -m 'initial sandbox import'")
+	    run('git init .', :verbose => false, :catpure => true)
+	    run('git add -A',  :verbose => false, :catpure => true)
+	    run("git commit -m 'initial sandbox import'", :verbose => false, :catpure => true)
 	  end
 	end
     end
