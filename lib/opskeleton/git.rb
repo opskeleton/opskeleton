@@ -15,16 +15,20 @@ module  Opsk
     def_delegator :@g, :pull, :pull
 
     def changed?
-	git_run('status').include?('modified')
+	res = git_run('status')
+	%w(modified deleted untracked).detect{|c| res.include?(c)}
     end
 
     def report
-	%i(changed added untracked).each do |state|
-	  @thor.say "#{state} files:\n\n"
-	  @g.status.send(state).each do |k,v|
-	    @thor.say "- #{k}"
+	%i(changed added untracked deleted).each do |state|
+	  res = @g.status.send(state)
+	  if(res.length > 0)
+	    @thor.say "#{state} files:\n\n"
+	    res.each do |k,v|
+		@thor.say "- #{k}"
+	    end
+	    @thor.say "\n"
 	  end
-	  @thor.say "\n"
 	end
     end
 
