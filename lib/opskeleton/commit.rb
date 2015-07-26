@@ -20,7 +20,7 @@ module  Opsk
 		if git.changed?
 		  say "Listing changes for #{d}:\n\n"
 		  git.report
-		  git.master_commit(d,options)
+		  git.master_commit(options)
 		end
 	    rescue => e 
 		say "Failed to commit #{d} due to #{e}"
