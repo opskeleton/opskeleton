@@ -1,0 +1,11 @@
+#compdef opsk
+#autoload
+
+local lines words
+
+words=(${(f)"$(opsk | grep opsk | cut -d " " -f 4)"} )
+lines=(${(f)"$(opsk  | grep opsk | cut -d '#'  -f 2)"})
+
+compadd -l -d lines -a -- words
+
+# compadd `opsk | grep opsk | cut -d " " -f 4`
