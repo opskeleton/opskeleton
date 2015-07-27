@@ -40,6 +40,27 @@ Perquisites (on Ubuntu):
  $ sudo gem install opskeleton
 ``` 
 
+=== Autocompletion
+
+Both zsh and bash are supported just copy the macthing file from the project https://github.com/opskeleton/opskeleton/tree/master/autocomplete[autocomplete] folder.
+
+```bash
+$ opsk dockerize
+ Creates a docker image from the curren...
+ Describe available commands or one spe...
+ bumps up version (clearing old version...
+ cleans up packaging products
+ deploy packge into bintray.com
+ deploy packge into s3 bucket under pat...
+ deploy packge using scp to host
+ generate an rspec ready Puppet module
+ generates a Chef based project 
+ generates a Puppet based project 
+ packages current module for celestial
+ print opsk version
+
+```
+
 === Boxes
 
 Opskeleton recommends the use of https://github.com/box-cutter[box-cutter] in order to create Vagrant boxes in a consistent manner (as no free hosting solution currently exist):
