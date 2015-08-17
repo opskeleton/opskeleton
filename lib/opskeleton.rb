@@ -20,4 +20,5 @@ require 'opskeleton/commit'
 require 'opskeleton/uncommited'
 require 'opskeleton/push'
 require 'opskeleton/git'
+require 'opskeleton/update'
 
