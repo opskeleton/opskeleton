@@ -14,7 +14,7 @@ module  Opsk
 	meta.includes.each {|f| 
 	  if(File.directory?("#{path}/#{f}"))
 	    directory "#{path}/#{f}", "#{artifact_path}/#{f}", :verbose => false
-	  elsif(File.exists?("#{path}/#{f}"))
+	  elsif(File.exist?("#{path}/#{f}"))
 	    copy_file "#{path}/#{f}", "#{artifact_path}/#{f}"
 	  else
 	    raise Exception.new("#{f} not found please validate opks.yaml includes section")
@@ -23,7 +23,7 @@ module  Opsk
 
 	meta.excludes.each {|f| remove_file("#{artifact_path}/#{f}") } if(meta.excludes)
 
-	unless(File.exists?("#{artifact_path}/manifests/site.pp"))
+	unless(File.exist?("#{artifact_path}/manifests/site.pp"))
 	  template('templates/puppet/site.erb', "#{artifact_path}/manifests/site.pp")
 	end
     end
@@ -32,7 +32,7 @@ module  Opsk
 	empty_directory("#{artifact_path}/scripts")
 	files = {:puppet => %w(lookup.rb run.sh) }
 	files[type_of].each  do |s|
-	  unless(File.exists?("#{artifact_path}/scripts/#{s}"))
+	  unless(File.exist?("#{artifact_path}/scripts/#{s}"))
 	    template("templates/#{type_of}/scripts/#{s}", "#{artifact_path}/scripts/#{s}")
 	    chmod("#{artifact_path}/scripts/#{s}", 0755)
 	  end
