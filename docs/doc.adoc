@@ -1,6 +1,6 @@
 = Opskeleton 
 Ronen Narkis, <narkisr@gmail.com>
-v0.9.2
+v0.9.9
 :toc: left
 :!numbered:
 :idseparator: -
@@ -81,7 +81,7 @@ $ make virtualbox/ubuntu1604
 A useful convention for Box names:
 
 ```bash
-ubuntu-{ubuntuversion}_puppet-3.6.1 ([os]-[version]_[provisioner]-[version])
+ubuntu-16.04_puppet-3.8.7 ([os]-[version]_[provisioner]-[version])
 ```
 
 == Puppet
