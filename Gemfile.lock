@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    opskeleton (0.9.8)
+    opskeleton (0.9.9)
       aws-sdk (~> 2)
       bintray_deploy
       git
@@ -265,3 +265,6 @@ DEPENDENCIES
   puppetlabs_spec_helper (>= 0.1.0)
   pygments.rb
   rspec-puppet
+
+BUNDLED WITH
+   1.14.3
