@@ -16,7 +16,6 @@ module Opsk
   class Root < Thor
 
     register Opsk::GeneratePuppet, 'generate_puppet', "generate_puppet [name] [box]", 'generates a Puppet based project '
-    register Opsk::GenerateChef, 'generate_chef', "generate_chef [name] [box]", 'generates a Chef based project '
     register Opsk::Analyze, 'analyze', "profile [file]", 'analyze the output of a puppet run'
     register Opsk::Module, 'module', 'module [name]', 'generate an rspec ready Puppet module'
     register Opsk::Package, 'package', 'package', 'packages current module for celestial'
@@ -39,7 +38,6 @@ end
 
 # not sure that this is the cleanest way
 Opsk::Root.tasks['generate_puppet'].options = Opsk::GeneratePuppet.class_options 
-Opsk::Root.tasks['generate_chef'].options = Opsk::GenerateChef.class_options 
 Opsk::Root.tasks['push'].options = Opsk::Push.class_options 
 Opsk::Root.tasks['commit'].options = Opsk::Commit.class_options 
 Opsk::Root.tasks['analyze'].options = Opsk::Analyze.class_options 

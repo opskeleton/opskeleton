@@ -7,7 +7,9 @@ v0.9.2
 :idprefix:
 :source-highlighter: pygments
 :pygments-style: friendly
+:ubuntuversion: 16.04
 :sectlinks:
+
 
 == Introduction
 
@@ -31,7 +33,7 @@ Currently Opskeleton supports Puppet and Chef, this guide is segmented to common
 
 Perquisites (on Ubuntu):
 
-* Vagrant 1.7.x
+* Vagrant 1.8.x
 * RVM
 * Ruby >= 2.1.2
 
@@ -45,8 +47,7 @@ Perquisites (on Ubuntu):
 Both zsh and bash are supported just copy the macthing file from the project https://github.com/opskeleton/opskeleton/tree/master/autocomplete[autocomplete] folder.
 
 ```bash
-$ opsk dockerize
- Creates a docker image from the curren...
+$ opsk help
  Describe available commands or one spe...
  bumps up version (clearing old version...
  cleans up packaging products
@@ -68,19 +69,19 @@ Opskeleton recommends the use of https://github.com/box-cutter[box-cutter] in or
 # make sure to have latest packer
 $ packer version
 Packer v0.6.0
-$ git clone git@github.com:box-cutter/ubuntu-vm.git
+$ git clone git://github.com/box-cutter/ubuntu-vm.git
 $ cd ubuntu-vm
 # Edit Makefile.local
 $ cat Makefile.local
 # Makefile.local
 CM := puppet
 CM_VERSION := 3.6.1
-$ make virtualbox/ubuntu1404
+$ make virtualbox/ubuntu1604
 ```
 A useful convention for Box names:
 
 ```bash
-ubuntu-14.04_puppet-3.6.1 ([os]-[version]_[provisioner]-[version])
+ubuntu-{ubuntuversion}_puppet-3.6.1 ([os]-[version]_[provisioner]-[version])
 ```
 
 == Puppet
@@ -283,22 +284,11 @@ Opskeleton generates a Vagrant file with couple of enhancements:
 * PUPPET_ENV (default dev) for setting puppet environment.
 * Puppet options preset to match modules and hiera folders.
 
-=== Docker
-The only assumption that Opskelaton makes is that the target host will have Pupppet installed, this enables us to create docker images from our sandboxes quite easily:
-
-```bash
-# creates dockerfiles/<host> and fig.yml
-$ opsk dockerize
-$ opsk package
-# grabs the opsk tar file
-$ sudo fig build
-```
-
 === Benchmarking
 Tracking the speed of our provisioning code is important for keeping a consistent level of service with the produced sandboxes, enabling benchmarking:
 
 ```bash 
-$ opsk generate_puppet redis ubuntu-14.04 --bench-enable
+$ opsk generate_puppet redis ubuntu-16.04 --bench-enable
 # install imagemagic before bundle install
 $ sudo apt-get install imagemagick libmagickwand-dev
 $ rake serverspec:redis
@@ -316,125 +306,6 @@ $ rake plot:hosts plot:per_hosts
 # resulting png files 
 $ google-chrome plots
 ```
-
-== Chef
-
-=== Introduction
-Opskelaton fully supports Chef based projects it offers similar features to the Puppet based sandboxes with additional support for roles, environments and cookbooks.
-
-Creating out first sandbox
-
-```bash
-$ opsk generate_chef redis ubuntu-14.04
-$ cd redis-sandbox
-```
-
-=== Structure
-
-==== layout
-Opskelaton creates the complete folder structure fine tuned to match best practices:
-
-Folder layout:
-
-image:https://raw.githubusercontent.com/opskeleton/opskeleton/master/img/chef-layout.png[width='30%',hight='50%']
-
-==== lifecycle
-
-Opskelaton defines a simple cookbook life cycle:
-
- 1. Internal non reusable cookbooks (usually specific to a client site) go under static-cookbooks
- 2. If we create a general reusable cookbook which is ready for prime time we pull out to a new git repository.
- 3. The extracted cookbook is added back as a third party (using link:https://github.com/applicationsonline/librarian-chef[librarian-chef]) cookbook under cookbooks folder).
-
-Life cycle scheme:
-
-image:https://raw.githubusercontent.com/opskeleton/opskeleton/master/img/chef-cycle.png[width='40%',hight='50%']
-
-Creating new cookbooks is easy as:
-
-```bash
-$ opsk cookbook foo
-```
-
-=== Testing
-
-Opskelaton supports testing/linting:
-
-* Static cookbook testing that includes rspec and food-critic. (TBD)
-* Integration testing using [serverspec](http://serverspec.org/) and Vagrant.
-
-```bash
-# running serverspec
-$ rake spec
-```
-
-=== Packaging 
-Opskelaton fully supports deployment and portable execution of sandboxes on non Vagrant environments:
-
-```bash
-$ opsk generate_chef foo ubuntu-14.04.
-$ cd foo-sandbox
-# The package version file
-$ cat opsk.yaml
-
---- 
-  version: '0.0.1'
-  name: redis
-  includes: 
-    - Cheffile
-    - cookbooks
-    - static-cookbooks
-    - dna.json
-    - environments
-    - Gemfile
-    - Gemfile.lock
-    - opsk.yaml
-    - roles
-    - LICENSE-2.0.txt
-    - run.sh
-    - boot.sh
-    - solo.rb
-
-# post bundle and gem install ..
-$ opsk package
-	create  pkg/foo-sandbox-0.0.1
-	create  pkg/foo-sandbox-0.0.1/scripts
-	create  pkg/foo-sandbox-0.0.1/scripts/lookup.rb
-	 chmod  pkg/foo-sandbox-0.0.1/scripts/lookup.rb
-	create  pkg/foo-sandbox-0.0.1/scripts/run.sh
-	 chmod  pkg/foo-sandbox-0.0.1/scripts/run.sh
-	 exist  pkg
-$ ls pkg
-foo-sandbox-0.0.1  foo-sandbox-0.0.1.tar.gz
-```
-The packaging process creates a portable tar file that can be run on any machine with chef-solo installed via the bundled run.sh:
-
-```bash 
-$ tar -xvzf foo-sandbox-0.0.1.tar.gz
-$ cd foo-sandbox-0.0.1 
-# expects to get the chef environment
-$ sudo ./run.sh dev
-```
-
-=== Updating
-
-Keeping you box up to date with latest opsk version is easy, just re-generate it again and resolve conflicts by answering y/n:
-```bash
-# Moving to latest opsk
-$ gem update opskeleton
-# foo box already exists
-$ opsk generate_chef foo <vagrant-box>
- exist  foo-sandbox
-    conflict  foo-sandbox/Vagrantfile
-Overwrite /home/ronen/code/foo-sandbox/Vagrantfile? (enter "h" for help) [Ynaqdh]
-```
-
-=== Vagrant
-Opskeleton generates a Vagrant file with couple of enhancements:
- 
-* CHEF_ENV (default dev) for setting chef environment.
-* Default role (sandbox name) created under roles/{type}.rb
-* static-cookbooks/cookbooks roles/environments folders are set.
 
 == Deployment
 

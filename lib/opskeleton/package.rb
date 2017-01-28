@@ -30,7 +30,7 @@ module  Opsk
 
     def scripts
 	empty_directory("#{artifact_path}/scripts")
-	files = {:puppet => %w(lookup.rb run.sh) , :chef => [] }
+	files = {:puppet => %w(lookup.rb run.sh) }
 	files[type_of].each  do |s|
 	  unless(File.exists?("#{artifact_path}/scripts/#{s}"))
 	    template("templates/#{type_of}/scripts/#{s}", "#{artifact_path}/scripts/#{s}")
@@ -42,7 +42,6 @@ module  Opsk
     def package
 	ignored = IO.readlines('.gitignore').map(&:chomp)
 	ignored.delete('modules')
-	ignored.delete('cookbooks')
 	ignored = ignored.select {|ig| !meta.includes.include?(ig)}
 	excludes = ignored.map{|f| "'#{f}'"}.join(" --exclude=") << ' --exclude-backups --exclude-vcs --exclude=pkg'
 	tar = "#{artifact}.tar.gz"
@@ -51,19 +50,6 @@ module  Opsk
 	  run("tar --exclude=#{excludes} -czf #{tar} #{input} >> /dev/null" , :verbose => false) 
 	end
 
-    end
-
-    def dockercopy
-	tar = "#{artifact}.tar.gz"
-	if(File.exists?('dockerfiles'))
-	  images = Dir['dockerfiles/*'].select{|file| File.ftype(file) == 'directory'}
-	  images.each do |path|
-	    if(File.ftype(path) == 'directory')
-		empty_directory "#{path}/pkg"
-		FileUtils.copy "pkg/#{tar}", "#{path}/pkg/#{tar}"
-	    end
-	  end
-	end
     end
 
   end

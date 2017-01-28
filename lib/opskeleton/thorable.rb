@@ -17,8 +17,7 @@ module Opsk
 
     def type_of
 	return :puppet if meta.includes.include?('Puppetfile')
-	return :chef if meta.includes.include?('Cheffile')
-	raise Exception.new('no matching provisoner type found, make sure to include Cheffile or Pupppetfile in opsk.yaml')
+	raise Exception.new('no matching provisoner type found, make sure to include Pupppetfile in opsk.yaml')
     end
 
     def name 

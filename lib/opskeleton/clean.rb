@@ -17,14 +17,6 @@ module  Opsk
 
     def cleanup
 	remove_dir('pkg')
-	if(File.exists?('dockerfiles'))
-	  images = Dir['dockerfiles/*'].select{|file| File.ftype(file) == 'directory'}
-	  images.each do |path|
-	    if(File.ftype(path) == 'directory')
-		remove_dir("#{path}/pkg")
-	    end
-	  end
-	end
     end
 
   end

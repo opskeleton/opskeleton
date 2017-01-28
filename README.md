@@ -4,9 +4,9 @@
 
 Opskelaton is an opinionated bootstrap tool for local Sandbox projects, it aims to solve the following common issues:
 
-* Developing Puppet/Chef modules/cookbooks on master machines which results with 'It works on my master/server' approach.
-* Large monolithic Puppet/Chef code bases, code isn't modular or reusable.
-* Implicit/Missing dependencies including: Ruby version, OS, gems, modules/cookbooks.
+* Developing Puppet modules on master machines which results with 'It works on my master' approach.
+* Large monolithic Puppet code bases, code isn't modular or reusable.
+* Implicit/Missing dependencies including: Ruby version, OS, gems, modules.
 * Manual steps in setting up and maintaining such projects.
 * Non standard layout, projects missing README and LICENSE files, no clear separation between developed and dependant code.
 * Lacking development guidelines (for example extracting general modules and exporting them).
