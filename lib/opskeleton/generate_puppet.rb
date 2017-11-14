@@ -6,7 +6,7 @@ module Opsk
     argument :box, :type => :string, :desc => 'Vagrant box type'
     class_option :box_url, :type=> :string, :desc => 'vagrant box url'
     class_option :os_type, :type=> :string, :desc => 'Operating system type (bsd/linux)'
-    class_option :provider, :type=> :string, :desc => 'Vagrant provider be it virtualbox, openstack etc..', :default => 'virtualbox'
+    class_option :provider, :type=> :string, :desc => 'Vagrant provider be it virtualbox, openstack etc..', :default => 'libvirt'
     class_option :bench_enable, :type=> :boolean, :desc => 'Control if to enable benchmarking support'
 
     desc 'Generate a Vagrant, Puppet librarian and fpm project'

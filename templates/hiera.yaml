@@ -1,10 +1,13 @@
 ---
-:backends:
- - yaml
- - module_data
-:logger: console
-:hierarchy:  
- - '%{::virtual}'
- - common
-:yaml:
-   :datadir: hieradata
+version: 5
+
+defaults:
+  datadir: /vagrant/hieradata-dev
+  data_hash: yaml_data
+hierarchy:
+ - name : 'virtual type'
+   path: "%{::virtual}.yaml"
+ - name : 'by hostname'
+   path: "%{::hostname}.yaml"
+ - name: 'common data'
+   path: 'common.yaml'

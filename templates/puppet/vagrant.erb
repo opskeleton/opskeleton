@@ -1,50 +1,36 @@
-# -*- mode: ruby -*-
-# vi: set ft=ruby :
-<%if(options['provider'].eql?('openstack')) -%>
-require 'vagrant-openstack-provider'
-<%end -%>
-
 Vagrant.configure("2") do |config|
 
   config.vm.define :<%=name%> do |node|
-<%if(options['provider'].eql?('virtualbox')) -%>
-    bridge = ENV['VAGRANT_BRIDGE']
-    bridge ||= 'eth0'
-<%end -%>
-
-    env  = ENV['PUPPET_ENV']
-    env ||= 'dev'
+    bridge = ENV['VAGRANT_BRIDGE']|| 'eth0'
 
 <%if(options['box_url']) -%>
-    <%="node.vm.box_url = '#{options['box_url']}'" -%> 
+    <%="node.vm.box_url = '#{options['box_url']}'" -%>
 <%end -%>
 <%if(options['provider'].eql?('virtualbox')) -%>
-    node.vm.box = '<%=box%>' 
+    node.vm.box = '<%=box%>'
     node.vm.network :public_network, :bridge => bridge
     node.vm.hostname = '<%=name%>.local'
-  
+
     node.vm.provider :virtualbox do |vb|
       vb.customize ['modifyvm', :id, '--memory', 2048, '--cpus', 2]
     end
-<%elsif(options['provider'].eql?('openstack')) -%>
-    node.vm.box       = 'openstack'
-    node.ssh.username = 'ubuntu'
+<%elsif(options['provider'].eql?('libvirt')) -%>
+    pool = ENV['VAGRANT_POOL']
 
-    node.vm.provider :openstack do |os|
-      os.openstack_auth_url = 'http://hostname/tokens'
-      os.username           = config.configuration.os_username
-      os.password           = config.configuration.os_password
-      os.tenant_name        = ''
-      os.flavor             = 'm1.small'
-      os.image              = ''
-      os.floating_ip_pool   = ''
+    config.vm.provider :libvirt do |domain, override|
+       override.vm.network :public_network, :bridge => device , :dev => device
+       domain.uri = 'qemu+unix:///system'
+       domain.memory = 2048
+       domain.cpus = 2
+       domain.storage_pool_name = pool if pool
+       override.vm.synced_folder './', '/vagrant', type: 'nfs', nfs_udp: false, nfs_version: 4
     end
     <%end -%>
 
     node.vm.provision :puppet do |puppet|
       puppet.manifests_path = 'manifests'
       puppet.manifest_file  = 'default.pp'
-      puppet.options = "--modulepath=/vagrant/modules:/vagrant/static-modules --hiera_config /vagrant/hiera_vagrant.yaml --environment=#{env}"
+      puppet.options = "--modulepath=/vagrant/modules:/vagrant/static-modules --hiera_config /vagrant/hiera_vagrant.yaml"
     end
   end
 
