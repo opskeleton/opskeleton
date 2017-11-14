@@ -17,7 +17,7 @@ Gem::Specification.new do |gem|
   gem.add_dependency('net-scp')
   gem.add_dependency('git')
   gem.add_dependency('git_clone_url', '~> 1.0')
-  gem.add_development_dependency('puppet','=3.8.7')
+  gem.add_development_dependency('puppet','=4.10.8')
   gem.add_development_dependency('rspec-puppet')
   gem.add_development_dependency('librarian-puppet', '= 2.1.0')
   gem.add_development_dependency('puppetlabs_spec_helper', '>= 0.1.0')
