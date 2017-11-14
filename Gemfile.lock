@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    opskeleton (0.10.0)
+    opskeleton (0.10.1)
       aws-sdk (~> 2)
       bintray_deploy
       git
